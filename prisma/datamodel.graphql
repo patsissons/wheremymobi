@@ -1,0 +1,27 @@
+type User {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+}
+
+type Station {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  latitude: Float!
+  longitude: Float!
+  status: [StationStatus!]!
+}
+
+type StationStatus {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  station: Station!
+  operative: Boolean!
+  total: Int!
+  free: Int!
+  bikes: Int!
+}

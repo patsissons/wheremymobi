@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "graphql-cli": "^2.16.7",
+    "prisma": "^1.15.3"
+  },
+  "dependencies": {
+    "graphql": "^14.0.0",
+    "prisma-binding": "^2.1.5"
+  }
+}
