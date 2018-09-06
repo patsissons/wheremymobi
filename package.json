@@ -1,5 +1,5 @@
 {
-  "name": "where-my-mobi",
+  "name": "wheremymobi",
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "npm-run-all --parallel start playground",

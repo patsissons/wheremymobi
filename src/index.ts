@@ -1,18 +1,58 @@
 import { GraphQLServer } from "graphql-yoga";
 import { importSchema } from "graphql-import";
-import { Prisma } from "./generated/prisma";
+import { Prisma, Station } from "./generated/prisma";
 import { Context } from "./utils";
+
+const StationWithStatusFragment =
+  "{ id, createdAt, updatedAt, name, lat, lng, status(last: 1) { id, createdAt, updatedAt, operative, total, free, bikes } }";
+
+function stationWithStatus(station: Station) {
+  const { status, ...stationInfo } = station;
+
+  return {
+    ...stationInfo,
+    status: status[0]
+  };
+}
 
 const resolvers = {
   Query: {
-    stations(parent, args, context: Context, info) {
-      return context.db.query.stations({}, info);
+    async stations(parent, args, context: Context, info) {
+      const stations = await context.db.query.stations(
+        {},
+        StationWithStatusFragment
+      );
+
+      return stations.map(stationWithStatus);
+    },
+    async station(parent, { id }, context: Context, info) {
+      const station = await context.db.query.station(
+        { where: { id } },
+        StationWithStatusFragment
+      );
+
+      return stationWithStatus(station);
+    },
+    stationHistory(parent, { id }, context: Context, info) {
+      return context.db.query.station({ where: { id } }, info);
     }
   },
   Mutation: {
-    createStation(parent, { name, lat, lng }, context: Context, info) {
+    createStation(
+      parent,
+      { name, lat, lng, operative, total, free, bikes },
+      context: Context,
+      info
+    ) {
       return context.db.mutation.createStation(
-        { data: { name, lat, lng } },
+        {
+          data: {
+            name,
+            lat,
+            lng,
+            status: { create: { operative, total, free, bikes } }
+          }
+        },
         info
       );
     },

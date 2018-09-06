@@ -1,13 +1,37 @@
-# import Station from "./generated/prisma.graphql"
-# import StationStatus from "./generated/prisma.graphql"
+# import Station, StationStatus from './generated/prisma.graphql'
+
+type StationWithStatus {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  lat: Float!
+  lng: Float!
+  status: StationStatus!
+}
 
 type Query {
-  stations: [Station!]!
+  stations: [StationWithStatus!]!
+  station(id: ID!): StationWithStatus
+  stationHistory(id: ID!): Station
 }
 
 type Mutation {
-  createStation(name: String!, lat: Float!, lng: Float!): Station
-  updateStation(id: ID!, name: String!, lat: Float!, lng: Float!): Station
+  createStation(
+    name: String!
+    lat: Float!
+    lng: Float!
+    operative: Boolean!
+    total: Int!
+    free: Int!
+    bikes: Int!
+  ): StationWithStatus
+  updateStationLocation(
+    id: ID!
+    name: String!
+    lat: Float!
+    lng: Float!
+  ): Station
   publishStationStatus(
     id: ID!
     operative: Boolean!
