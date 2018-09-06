@@ -3,7 +3,10 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "npm-run-all --parallel start playground",
-    "playground": "graphql playground"
+    "playground": "graphql playground",
+    "deploy": "prisma deploy",
+    "reset": "yarn prisma seed --reset",
+    "reset:hard": "yarn prisma reset --force && yarn deploy"
   },
   "dependencies": {
     "graphql-import": "0.6.0",

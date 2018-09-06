@@ -1,25 +1,12 @@
 mutation {
-  first: createPost(data: {
-    title: "Hello World 👋"
-    text: "I like turtles."
-    isPublished: true
-  }) {
-    id
-  }
-  
-  second: createPost(data: {
-    title: "Join us at GraphQL Europe 🇪🇺 "
-    text: "Get a 10%-discount with this promo code on graphql-europe.org: gql-boilerplates"
-    isPublished: true
-  }) {
-    id
-  }
-  
-  third: createPost(data: {
-    title: "Solving world hunger"
-    text: "This is a draft..."
-    isPublished: false
-  }) {
+  station: createStation(
+    data: {
+      name: "test station"
+      lat: 0
+      lng: 0
+      status: { create: { operative: true, total: 10, free: 5, bikes: 5 } }
+    }
+  ) {
     id
   }
 }

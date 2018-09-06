@@ -1,13 +1,18 @@
-# import Post from "./generated/prisma.graphql"
+# import Station from "./generated/prisma.graphql"
+# import StationStatus from "./generated/prisma.graphql"
 
 type Query {
-  feed: [Post!]!
-  drafts: [Post!]!
-  post(id: ID!): Post
+  stations: [Station!]!
 }
 
 type Mutation {
-  createDraft(title: String!, text: String): Post
-  deletePost(id: ID!): Post
-  publish(id: ID!): Post
+  createStation(name: String!, lat: Float!, lng: Float!): Station
+  updateStation(id: ID!, name: String!, lat: Float!, lng: Float!): Station
+  publishStationStatus(
+    id: ID!
+    operative: Boolean!
+    total: Int!
+    free: Int!
+    bikes: Int!
+  ): StationStatus
 }

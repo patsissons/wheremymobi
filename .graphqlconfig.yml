@@ -1,11 +1,20 @@
 projects:
   app:
     schemaPath: src/schema.graphql
+    includes:
+      - "src/**/*.graphql"
+    excludes:
+      - "src/generated/*"
+      - "src/schema.graphql"
     extensions:
       endpoints:
         default: http://localhost:4000
   database:
     schemaPath: src/generated/prisma.graphql
+    includes:
+      - "database/seed.graphql"
+    excludes:
+      - "database/datamodel.graphql"
     extensions:
       prisma: database/prisma.yml
       codegen:
