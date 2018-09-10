@@ -1,11 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "lib": ["esnext", "dom"],
     "moduleResolution": "node",
     "module": "commonjs",
-    "sourceMap": true,
-    "rootDir": "src",
     "outDir": "dist",
-    "lib": ["esnext", "dom"]
+    "plugins": [
+      {
+        "name": "@divyenduz/ts-graphql-plugin"
+      }
+    ],
+    "rootDir": "src",
+    "sourceMap": true,
+    "target": "es5"
   }
 }

@@ -2,9 +2,21 @@ type Station {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
+  """
+  Station name
+  """
   name: String!
+  """
+  Latitude
+  """
   lat: Float!
+  """
+  Longitude
+  """
   lng: Float!
+  """
+  Status history
+  """
   status: [StationStatus!]!
 }
 
@@ -13,9 +25,21 @@ type StationStatus {
   createdAt: DateTime!
   updatedAt: DateTime!
   station: Station!
+  """
+  Is the station operative?
+  """
   operative: Boolean!
+  """
+  Total slots at the station
+  """
   total: Int!
+  """
+  Slots available at the station
+  """
   free: Int!
+  """
+  Bikes parked at the station
+  """
   bikes: Int!
 }
 
