@@ -1,4 +1,5 @@
 const config = require('./package.json');
+// import config from './package.json';
 
 export const siteMetadata = {
   title: config.name,

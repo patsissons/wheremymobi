@@ -10,7 +10,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": false,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "preserveConstEnums": true
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "./*.ts"]
 }
