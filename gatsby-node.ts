@@ -1,8 +1,8 @@
-const fs = require('fs');
-const {printSchema} = require('gatsby/graphql');
-const path = require('path');
+import fs from 'fs';
+import {printSchema} from 'graphql';
+import path from 'path';
 
-exports.onCreateWebpackConfig = ({actions}) => {
+export function onCreateWebpackConfig({actions}: any) {
   actions.setWebpackConfig({
     module: {
       rules: [
@@ -13,9 +13,9 @@ exports.onCreateWebpackConfig = ({actions}) => {
       ],
     },
   });
-};
+}
 
-exports.onPostBootstrap = ({store}) => {
+export function onPostBootstrap({store}: any) {
   try {
     const {schema} = store.getState();
 
@@ -26,9 +26,9 @@ exports.onPostBootstrap = ({store}) => {
   } catch (e) {
     console.log('Failed to write schema: ', e);
   }
-};
+}
 
-exports.onCreateNode = ({node, actions, getNode}) => {
+export function onCreateNode({node, actions, getNode}: any) {
   const {createNodeField} = actions;
 
   // Sometimes, optional fields tend to get not picked up by the GraphQL
@@ -37,7 +37,7 @@ exports.onCreateNode = ({node, actions, getNode}) => {
   // trip up. An empty string is still required in replacement to `null`.
 
   switch (node.internal.type) {
-    case 'MarkdownRemark': {
+    case 'MarkdownRemark':
       const {permalink, layout} = node.frontmatter;
       const {relativePath} = getNode(node.parent);
 
@@ -60,11 +60,14 @@ exports.onCreateNode = ({node, actions, getNode}) => {
         name: 'layout',
         value: layout || '',
       });
-    }
-  }
-};
+      break;
 
-exports.createPages = async ({graphql, actions}) => {
+    default:
+      break;
+  }
+}
+
+export async function createPages({graphql, actions}: any) {
   const {createPage} = actions;
 
   const allMarkdown = await graphql(`
@@ -87,7 +90,7 @@ exports.createPages = async ({graphql, actions}) => {
     throw new Error(allMarkdown.errors);
   }
 
-  allMarkdown.data.allMarkdownRemark.edges.forEach(({node}) => {
+  allMarkdown.data.allMarkdownRemark.edges.forEach(({node}: any) => {
     const {slug, layout} = node.fields;
 
     createPage({
@@ -108,4 +111,4 @@ exports.createPages = async ({graphql, actions}) => {
       },
     });
   });
-};
+}
