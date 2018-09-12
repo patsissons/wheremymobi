@@ -3,7 +3,19 @@
   "description": "Find mobi bikes in Vancouver, BC.",
   "version": "1.0.0",
   "private": true,
-  "author": "Pat Sissons <patricksissons@gmail.com>",
+  "author": {
+    "name": "Pat Sissons",
+    "email": "patricksissons@gmail.com",
+    "url": "https://github.com/patsissons"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patsissons/wheremymobi"
+  },
+  "bugs": {
+    "url": "https://github.com/patsissons/wheremymobi/issues"
+  },
+  "homepage": "https://wheremymobi.github.io",
   "keywords": [
     "mobi",
     "bike"
