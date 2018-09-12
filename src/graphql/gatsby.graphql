@@ -236,6 +236,7 @@ input directoryAbsolutePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryAccessTimeQueryString_2 {
@@ -244,6 +245,7 @@ input directoryAccessTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryAtimeMsQueryFloat_2 {
@@ -254,6 +256,7 @@ input directoryAtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input directoryAtimeQueryString_2 {
@@ -262,6 +265,7 @@ input directoryAtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryBaseQueryString_2 {
@@ -270,6 +274,7 @@ input directoryBaseQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryBirthtimeMsQueryFloat_2 {
@@ -280,6 +285,7 @@ input directoryBirthtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input directoryBirthtimeQueryString_2 {
@@ -288,6 +294,7 @@ input directoryBirthtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryBirthTimeQueryString_2 {
@@ -296,6 +303,7 @@ input directoryBirthTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryBlksizeQueryInteger_2 {
@@ -306,6 +314,7 @@ input directoryBlksizeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryBlocksQueryInteger_2 {
@@ -316,6 +325,7 @@ input directoryBlocksQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryChangeTimeQueryString_2 {
@@ -324,6 +334,7 @@ input directoryChangeTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 """A connection to a list of items."""
@@ -344,6 +355,7 @@ input directoryConnectionAbsolutePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionAccessTimeQueryString_2 {
@@ -352,6 +364,7 @@ input directoryConnectionAccessTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionAtimeMsQueryFloat_2 {
@@ -362,6 +375,7 @@ input directoryConnectionAtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input directoryConnectionAtimeQueryString_2 {
@@ -370,6 +384,7 @@ input directoryConnectionAtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionBaseQueryString_2 {
@@ -378,6 +393,7 @@ input directoryConnectionBaseQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionBirthtimeMsQueryFloat_2 {
@@ -388,6 +404,7 @@ input directoryConnectionBirthtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input directoryConnectionBirthtimeQueryString_2 {
@@ -396,6 +413,7 @@ input directoryConnectionBirthtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionBirthTimeQueryString_2 {
@@ -404,6 +422,7 @@ input directoryConnectionBirthTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionBlksizeQueryInteger_2 {
@@ -414,6 +433,7 @@ input directoryConnectionBlksizeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryConnectionBlocksQueryInteger_2 {
@@ -424,6 +444,7 @@ input directoryConnectionBlocksQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryConnectionChangeTimeQueryString_2 {
@@ -432,6 +453,7 @@ input directoryConnectionChangeTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionCtimeMsQueryFloat_2 {
@@ -442,6 +464,7 @@ input directoryConnectionCtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input directoryConnectionCtimeQueryString_2 {
@@ -450,6 +473,7 @@ input directoryConnectionCtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionDevQueryInteger_2 {
@@ -460,6 +484,7 @@ input directoryConnectionDevQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryConnectionDirQueryString_2 {
@@ -468,6 +493,7 @@ input directoryConnectionDirQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionExtensionQueryString_2 {
@@ -476,6 +502,7 @@ input directoryConnectionExtensionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionExtQueryString_2 {
@@ -484,6 +511,7 @@ input directoryConnectionExtQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionGidQueryInteger_2 {
@@ -494,6 +522,7 @@ input directoryConnectionGidQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryConnectionIdQueryString_2 {
@@ -502,6 +531,7 @@ input directoryConnectionIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionInoQueryInteger_2 {
@@ -512,6 +542,7 @@ input directoryConnectionInoQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryConnectionInternalContentDigestQueryString_2 {
@@ -520,6 +551,7 @@ input directoryConnectionInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionInternalDescriptionQueryString_2 {
@@ -528,6 +560,7 @@ input directoryConnectionInternalDescriptionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionInternalInputObject_2 {
@@ -543,6 +576,7 @@ input directoryConnectionInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionInternalTypeQueryString_2 {
@@ -551,6 +585,7 @@ input directoryConnectionInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionModeQueryInteger_2 {
@@ -561,6 +596,7 @@ input directoryConnectionModeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryConnectionModifiedTimeQueryString_2 {
@@ -569,6 +605,7 @@ input directoryConnectionModifiedTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionMtimeMsQueryFloat_2 {
@@ -579,6 +616,7 @@ input directoryConnectionMtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input directoryConnectionMtimeQueryString_2 {
@@ -587,6 +625,7 @@ input directoryConnectionMtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionNameQueryString_2 {
@@ -595,6 +634,7 @@ input directoryConnectionNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionNlinkQueryInteger_2 {
@@ -605,6 +645,7 @@ input directoryConnectionNlinkQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryConnectionPrettySizeQueryString_2 {
@@ -613,6 +654,7 @@ input directoryConnectionPrettySizeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionRdevQueryInteger_2 {
@@ -623,6 +665,7 @@ input directoryConnectionRdevQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryConnectionRelativeDirectoryQueryString_2 {
@@ -631,6 +674,7 @@ input directoryConnectionRelativeDirectoryQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionRelativePathQueryString_2 {
@@ -639,6 +683,7 @@ input directoryConnectionRelativePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionRootQueryString_2 {
@@ -647,6 +692,7 @@ input directoryConnectionRootQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionSizeQueryInteger_2 {
@@ -657,6 +703,7 @@ input directoryConnectionSizeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryConnectionSort {
@@ -717,6 +764,7 @@ input directoryConnectionSourceInstanceNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryConnectionUidQueryInteger_2 {
@@ -727,6 +775,7 @@ input directoryConnectionUidQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryCtimeMsQueryFloat_2 {
@@ -737,6 +786,7 @@ input directoryCtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input directoryCtimeQueryString_2 {
@@ -745,6 +795,7 @@ input directoryCtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryDevQueryInteger_2 {
@@ -755,6 +806,7 @@ input directoryDevQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryDirQueryString_2 {
@@ -763,6 +815,7 @@ input directoryDirQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 enum directoryDistinctEnum {
@@ -825,6 +878,7 @@ input directoryExtensionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryExtQueryString_2 {
@@ -833,6 +887,7 @@ input directoryExtQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryGidQueryInteger_2 {
@@ -843,6 +898,7 @@ input directoryGidQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 """A connection to a list of items."""
@@ -917,6 +973,7 @@ input directoryIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryInoQueryInteger_2 {
@@ -927,6 +984,7 @@ input directoryInoQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryInternalContentDigestQueryString_2 {
@@ -935,6 +993,7 @@ input directoryInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryInternalDescriptionQueryString_2 {
@@ -943,6 +1002,7 @@ input directoryInternalDescriptionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryInternalInputObject_2 {
@@ -958,6 +1018,7 @@ input directoryInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryInternalTypeQueryString_2 {
@@ -966,6 +1027,7 @@ input directoryInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryModeQueryInteger_2 {
@@ -976,6 +1038,7 @@ input directoryModeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryModifiedTimeQueryString_2 {
@@ -984,6 +1047,7 @@ input directoryModifiedTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryMtimeMsQueryFloat_2 {
@@ -994,6 +1058,7 @@ input directoryMtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input directoryMtimeQueryString_2 {
@@ -1002,6 +1067,7 @@ input directoryMtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryNameQueryString_2 {
@@ -1010,6 +1076,7 @@ input directoryNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryNlinkQueryInteger_2 {
@@ -1020,6 +1087,7 @@ input directoryNlinkQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryPrettySizeQueryString_2 {
@@ -1028,6 +1096,7 @@ input directoryPrettySizeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryRdevQueryInteger_2 {
@@ -1038,6 +1107,7 @@ input directoryRdevQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directoryRelativeDirectoryQueryString_2 {
@@ -1046,6 +1116,7 @@ input directoryRelativeDirectoryQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryRelativePathQueryString_2 {
@@ -1054,6 +1125,7 @@ input directoryRelativePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryRootQueryString_2 {
@@ -1062,6 +1134,7 @@ input directoryRootQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directorySizeQueryInteger_2 {
@@ -1072,6 +1145,7 @@ input directorySizeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input directorySourceInstanceNameQueryString_2 {
@@ -1080,6 +1154,7 @@ input directorySourceInstanceNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input directoryUidQueryInteger_2 {
@@ -1090,6 +1165,7 @@ input directoryUidQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input excerptQueryString_3 {
@@ -1098,6 +1174,7 @@ input excerptQueryString_3 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input excerptQueryString_4 {
@@ -1106,6 +1183,7 @@ input excerptQueryString_4 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 type fieldOwners_2 {
@@ -1336,6 +1414,7 @@ input fileAbsolutePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileAccessTimeQueryString_2 {
@@ -1344,6 +1423,7 @@ input fileAccessTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileAtimeMsQueryFloat_2 {
@@ -1354,6 +1434,7 @@ input fileAtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input fileAtimeQueryString_2 {
@@ -1362,6 +1443,7 @@ input fileAtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileBaseQueryString_2 {
@@ -1370,6 +1452,7 @@ input fileBaseQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileBirthtimeMsQueryFloat_2 {
@@ -1380,6 +1463,7 @@ input fileBirthtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input fileBirthtimeQueryString_2 {
@@ -1388,6 +1472,7 @@ input fileBirthtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileBirthTimeQueryString_2 {
@@ -1396,6 +1481,7 @@ input fileBirthTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileBlksizeQueryInteger_2 {
@@ -1406,6 +1492,7 @@ input fileBlksizeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileBlocksQueryInteger_2 {
@@ -1416,6 +1503,7 @@ input fileBlocksQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileChangeTimeQueryString_2 {
@@ -1424,6 +1512,7 @@ input fileChangeTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 """A connection to a list of items."""
@@ -1444,6 +1533,7 @@ input fileConnectionAbsolutePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionAccessTimeQueryString_2 {
@@ -1452,6 +1542,7 @@ input fileConnectionAccessTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionAtimeMsQueryFloat_2 {
@@ -1462,6 +1553,7 @@ input fileConnectionAtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input fileConnectionAtimeQueryString_2 {
@@ -1470,6 +1562,7 @@ input fileConnectionAtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionBaseQueryString_2 {
@@ -1478,6 +1571,7 @@ input fileConnectionBaseQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionBirthtimeMsQueryFloat_2 {
@@ -1488,6 +1582,7 @@ input fileConnectionBirthtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input fileConnectionBirthtimeQueryString_2 {
@@ -1496,6 +1591,7 @@ input fileConnectionBirthtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionBirthTimeQueryString_2 {
@@ -1504,6 +1600,7 @@ input fileConnectionBirthTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionBlksizeQueryInteger_2 {
@@ -1514,6 +1611,7 @@ input fileConnectionBlksizeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileConnectionBlocksQueryInteger_2 {
@@ -1524,6 +1622,7 @@ input fileConnectionBlocksQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileConnectionChangeTimeQueryString_2 {
@@ -1532,6 +1631,7 @@ input fileConnectionChangeTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionCtimeMsQueryFloat_2 {
@@ -1542,6 +1642,7 @@ input fileConnectionCtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input fileConnectionCtimeQueryString_2 {
@@ -1550,6 +1651,7 @@ input fileConnectionCtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionDevQueryInteger_2 {
@@ -1560,6 +1662,7 @@ input fileConnectionDevQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileConnectionDirQueryString_2 {
@@ -1568,6 +1671,7 @@ input fileConnectionDirQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionExtensionQueryString_2 {
@@ -1576,6 +1680,7 @@ input fileConnectionExtensionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionExtQueryString_2 {
@@ -1584,6 +1689,7 @@ input fileConnectionExtQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionGidQueryInteger_2 {
@@ -1594,6 +1700,7 @@ input fileConnectionGidQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileConnectionIdQueryString_2 {
@@ -1602,6 +1709,7 @@ input fileConnectionIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionInoQueryInteger_2 {
@@ -1612,6 +1720,7 @@ input fileConnectionInoQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileConnectionInternalContentDigestQueryString_2 {
@@ -1620,6 +1729,7 @@ input fileConnectionInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionInternalDescriptionQueryString_2 {
@@ -1628,6 +1738,7 @@ input fileConnectionInternalDescriptionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionInternalInputObject_2 {
@@ -1644,6 +1755,7 @@ input fileConnectionInternalMediaTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionInternalOwnerQueryString_2 {
@@ -1652,6 +1764,7 @@ input fileConnectionInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionInternalTypeQueryString_2 {
@@ -1660,6 +1773,7 @@ input fileConnectionInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionModeQueryInteger_2 {
@@ -1670,6 +1784,7 @@ input fileConnectionModeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileConnectionModifiedTimeQueryString_2 {
@@ -1678,6 +1793,7 @@ input fileConnectionModifiedTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionMtimeMsQueryFloat_2 {
@@ -1688,6 +1804,7 @@ input fileConnectionMtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input fileConnectionMtimeQueryString_2 {
@@ -1696,6 +1813,7 @@ input fileConnectionMtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionNameQueryString_2 {
@@ -1704,6 +1822,7 @@ input fileConnectionNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionNlinkQueryInteger_2 {
@@ -1714,6 +1833,7 @@ input fileConnectionNlinkQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileConnectionPrettySizeQueryString_2 {
@@ -1722,6 +1842,7 @@ input fileConnectionPrettySizeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionRdevQueryInteger_2 {
@@ -1732,6 +1853,7 @@ input fileConnectionRdevQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileConnectionRelativeDirectoryQueryString_2 {
@@ -1740,6 +1862,7 @@ input fileConnectionRelativeDirectoryQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionRelativePathQueryString_2 {
@@ -1748,6 +1871,7 @@ input fileConnectionRelativePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionRootQueryString_2 {
@@ -1756,6 +1880,7 @@ input fileConnectionRootQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionSizeQueryInteger_2 {
@@ -1766,6 +1891,7 @@ input fileConnectionSizeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileConnectionSort {
@@ -1829,6 +1955,7 @@ input fileConnectionSourceInstanceNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileConnectionUidQueryInteger_2 {
@@ -1839,6 +1966,7 @@ input fileConnectionUidQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileCtimeMsQueryFloat_2 {
@@ -1849,6 +1977,7 @@ input fileCtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input fileCtimeQueryString_2 {
@@ -1857,6 +1986,7 @@ input fileCtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileDevQueryInteger_2 {
@@ -1867,6 +1997,7 @@ input fileDevQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileDirQueryString_2 {
@@ -1875,6 +2006,7 @@ input fileDirQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 enum fileDistinctEnum {
@@ -1939,6 +2071,7 @@ input fileExtensionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileExtQueryString_2 {
@@ -1947,6 +2080,7 @@ input fileExtQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileGidQueryInteger_2 {
@@ -1957,6 +2091,7 @@ input fileGidQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 """A connection to a list of items."""
@@ -2033,6 +2168,7 @@ input fileIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileInoQueryInteger_2 {
@@ -2043,6 +2179,7 @@ input fileInoQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileInternalContentDigestQueryString_2 {
@@ -2051,6 +2188,7 @@ input fileInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileInternalDescriptionQueryString_2 {
@@ -2059,6 +2197,7 @@ input fileInternalDescriptionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileInternalInputObject_2 {
@@ -2075,6 +2214,7 @@ input fileInternalMediaTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileInternalOwnerQueryString_2 {
@@ -2083,6 +2223,7 @@ input fileInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileInternalTypeQueryString_2 {
@@ -2091,6 +2232,7 @@ input fileInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileModeQueryInteger_2 {
@@ -2101,6 +2243,7 @@ input fileModeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileModifiedTimeQueryString_2 {
@@ -2109,6 +2252,7 @@ input fileModifiedTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileMtimeMsQueryFloat_2 {
@@ -2119,6 +2263,7 @@ input fileMtimeMsQueryFloat_2 {
   lt: Float
   lte: Float
   in: [Float]
+  nin: [Float]
 }
 
 input fileMtimeQueryString_2 {
@@ -2127,6 +2272,7 @@ input fileMtimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileNameQueryString_2 {
@@ -2135,6 +2281,7 @@ input fileNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileNlinkQueryInteger_2 {
@@ -2145,6 +2292,7 @@ input fileNlinkQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input filePrettySizeQueryString_2 {
@@ -2153,6 +2301,7 @@ input filePrettySizeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileRdevQueryInteger_2 {
@@ -2163,6 +2312,7 @@ input fileRdevQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileRelativeDirectoryQueryString_2 {
@@ -2171,6 +2321,7 @@ input fileRelativeDirectoryQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileRelativePathQueryString_2 {
@@ -2179,6 +2330,7 @@ input fileRelativePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileRootQueryString_2 {
@@ -2187,6 +2339,7 @@ input fileRootQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileSizeQueryInteger_2 {
@@ -2197,6 +2350,7 @@ input fileSizeQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input fileSourceInstanceNameQueryString_2 {
@@ -2205,6 +2359,7 @@ input fileSourceInstanceNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input fileUidQueryInteger_2 {
@@ -2215,6 +2370,7 @@ input fileUidQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 """Filter connection on its fields"""
@@ -2365,6 +2521,7 @@ input headingsListElemDepthQueryInt_3 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input headingsListElemDepthQueryInt_4 {
@@ -2375,6 +2532,7 @@ input headingsListElemDepthQueryInt_4 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input headingsListElemTypeName_3 {
@@ -2393,6 +2551,7 @@ input headingsListElemValueQueryString_3 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input headingsListElemValueQueryString_4 {
@@ -2401,6 +2560,7 @@ input headingsListElemValueQueryString_4 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input headingsQueryList_3 {
@@ -2417,6 +2577,7 @@ input htmlQueryString_3 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input htmlQueryString_4 {
@@ -2425,6 +2586,7 @@ input htmlQueryString_4 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 type internal_10 {
@@ -2526,6 +2688,7 @@ input markdownRemarkConnectionFieldsLayoutQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionFieldsSlugQueryString_2 {
@@ -2534,6 +2697,7 @@ input markdownRemarkConnectionFieldsSlugQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionFileAbsolutePathQueryString_2 {
@@ -2542,6 +2706,7 @@ input markdownRemarkConnectionFileAbsolutePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionFrontmatterInputObject_2 {
@@ -2556,6 +2721,7 @@ input markdownRemarkConnectionFrontmatterLayoutQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionFrontmatterParentQueryString_2 {
@@ -2564,6 +2730,7 @@ input markdownRemarkConnectionFrontmatterParentQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionFrontmatterTitleQueryString_2 {
@@ -2572,6 +2739,7 @@ input markdownRemarkConnectionFrontmatterTitleQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionIdQueryString_2 {
@@ -2580,6 +2748,7 @@ input markdownRemarkConnectionIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionInternalContentDigestQueryString_2 {
@@ -2588,6 +2757,7 @@ input markdownRemarkConnectionInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionInternalContentQueryString_2 {
@@ -2596,6 +2766,7 @@ input markdownRemarkConnectionInternalContentQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionInternalFieldOwnersInputObject_2 {
@@ -2609,6 +2780,7 @@ input markdownRemarkConnectionInternalFieldOwnersLayoutQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionInternalFieldOwnersSlugQueryString_2 {
@@ -2617,6 +2789,7 @@ input markdownRemarkConnectionInternalFieldOwnersSlugQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionInternalInputObject_2 {
@@ -2633,6 +2806,7 @@ input markdownRemarkConnectionInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionInternalTypeQueryString_2 {
@@ -2641,6 +2815,7 @@ input markdownRemarkConnectionInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionRawMarkdownBodyQueryString_2 {
@@ -2649,6 +2824,7 @@ input markdownRemarkConnectionRawMarkdownBodyQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkConnectionSort {
@@ -2729,6 +2905,7 @@ input markdownRemarkFieldsLayoutQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkFieldsSlugQueryString_2 {
@@ -2737,6 +2914,7 @@ input markdownRemarkFieldsSlugQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkFileAbsolutePathQueryString_2 {
@@ -2745,6 +2923,7 @@ input markdownRemarkFileAbsolutePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkFrontmatterInputObject_2 {
@@ -2759,6 +2938,7 @@ input markdownRemarkFrontmatterLayoutQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkFrontmatterParentQueryString_2 {
@@ -2767,6 +2947,7 @@ input markdownRemarkFrontmatterParentQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkFrontmatterTitleQueryString_2 {
@@ -2775,6 +2956,7 @@ input markdownRemarkFrontmatterTitleQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 """A connection to a list of items."""
@@ -2826,6 +3008,7 @@ input markdownRemarkIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkInternalContentDigestQueryString_2 {
@@ -2834,6 +3017,7 @@ input markdownRemarkInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkInternalContentQueryString_2 {
@@ -2842,6 +3026,7 @@ input markdownRemarkInternalContentQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkInternalFieldOwnersInputObject_2 {
@@ -2855,6 +3040,7 @@ input markdownRemarkInternalFieldOwnersLayoutQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkInternalFieldOwnersSlugQueryString_2 {
@@ -2863,6 +3049,7 @@ input markdownRemarkInternalFieldOwnersSlugQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkInternalInputObject_2 {
@@ -2879,6 +3066,7 @@ input markdownRemarkInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkInternalTypeQueryString_2 {
@@ -2887,6 +3075,7 @@ input markdownRemarkInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input markdownRemarkRawMarkdownBodyQueryString_2 {
@@ -2895,6 +3084,7 @@ input markdownRemarkRawMarkdownBodyQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 """An object with an id, parent, and children"""
@@ -2966,6 +3156,7 @@ input publicUrlQueryString_3 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input publicUrlQueryString_4 {
@@ -2974,6 +3165,7 @@ input publicUrlQueryString_4 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 type Query {
@@ -3064,6 +3256,7 @@ input siteBuildTimeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteHostQueryString_2 {
@@ -3072,6 +3265,7 @@ input siteHostQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteIdQueryString_2 {
@@ -3080,6 +3274,7 @@ input siteIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteInternalContentDigestQueryString_2 {
@@ -3088,6 +3283,7 @@ input siteInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteInternalInputObject_2 {
@@ -3102,6 +3298,7 @@ input siteInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteInternalTypeQueryString_2 {
@@ -3110,6 +3307,7 @@ input siteInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 type siteMetadata_2 {
@@ -3147,6 +3345,7 @@ input sitePageComponentChunkNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageComponentPathQueryString {
@@ -3155,6 +3354,7 @@ input sitePageComponentPathQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageComponentQueryString {
@@ -3163,6 +3363,7 @@ input sitePageComponentQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 """A connection to a list of items."""
@@ -3183,6 +3384,7 @@ input sitePageConnectionComponentChunkNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionComponentPathQueryString {
@@ -3191,6 +3393,7 @@ input sitePageConnectionComponentPathQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionComponentQueryString {
@@ -3199,6 +3402,7 @@ input sitePageConnectionComponentQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionContextInputObject {
@@ -3211,6 +3415,7 @@ input sitePageConnectionContextSlugQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionIdQueryString_2 {
@@ -3219,6 +3424,7 @@ input sitePageConnectionIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionInternalComponentNameQueryString {
@@ -3227,6 +3433,7 @@ input sitePageConnectionInternalComponentNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionInternalContentDigestQueryString_2 {
@@ -3235,6 +3442,7 @@ input sitePageConnectionInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionInternalDescriptionQueryString {
@@ -3243,6 +3451,7 @@ input sitePageConnectionInternalDescriptionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionInternalInputObject_2 {
@@ -3258,6 +3467,7 @@ input sitePageConnectionInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionInternalTypeQueryString_2 {
@@ -3266,6 +3476,7 @@ input sitePageConnectionInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionJsonNameQueryString {
@@ -3274,6 +3485,7 @@ input sitePageConnectionJsonNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPathQueryString_2 {
@@ -3282,6 +3494,7 @@ input sitePageConnectionPathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorBrowserApIsQueryList {
@@ -3290,6 +3503,7 @@ input sitePageConnectionPluginCreatorBrowserApIsQueryList {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorIdQueryString {
@@ -3298,6 +3512,7 @@ input sitePageConnectionPluginCreatorIdQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorIdQueryString_2 {
@@ -3306,6 +3521,7 @@ input sitePageConnectionPluginCreatorIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorInputObject {
@@ -3329,6 +3545,7 @@ input sitePageConnectionPluginCreatorInternalContentDigestQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorInternalInputObject {
@@ -3343,6 +3560,7 @@ input sitePageConnectionPluginCreatorInternalOwnerQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorInternalTypeQueryString {
@@ -3351,6 +3569,7 @@ input sitePageConnectionPluginCreatorInternalTypeQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorNameQueryString {
@@ -3359,6 +3578,7 @@ input sitePageConnectionPluginCreatorNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorNodeApIsQueryList {
@@ -3367,6 +3587,7 @@ input sitePageConnectionPluginCreatorNodeApIsQueryList {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonDependenciesInputObject {
@@ -3380,6 +3601,7 @@ input sitePageConnectionPluginCreatorPackageJsonDependenciesNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonDependenciesQueryList {
@@ -3392,6 +3614,7 @@ input sitePageConnectionPluginCreatorPackageJsonDependenciesVersionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonDescriptionQueryString {
@@ -3400,6 +3623,7 @@ input sitePageConnectionPluginCreatorPackageJsonDescriptionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonDevDependenciesInputObject {
@@ -3413,6 +3637,7 @@ input sitePageConnectionPluginCreatorPackageJsonDevDependenciesNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonDevDependenciesQueryList {
@@ -3425,6 +3650,7 @@ input sitePageConnectionPluginCreatorPackageJsonDevDependenciesVersionQueryStrin
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonInputObject {
@@ -3445,6 +3671,7 @@ input sitePageConnectionPluginCreatorPackageJsonKeywordsQueryList {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonLicenseQueryString {
@@ -3453,6 +3680,7 @@ input sitePageConnectionPluginCreatorPackageJsonLicenseQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonMainQueryString {
@@ -3461,6 +3689,7 @@ input sitePageConnectionPluginCreatorPackageJsonMainQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonNameQueryString {
@@ -3469,6 +3698,7 @@ input sitePageConnectionPluginCreatorPackageJsonNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonPeerDependenciesInputObject {
@@ -3482,6 +3712,7 @@ input sitePageConnectionPluginCreatorPackageJsonPeerDependenciesNameQueryString 
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonPeerDependenciesQueryList {
@@ -3494,6 +3725,7 @@ input sitePageConnectionPluginCreatorPackageJsonPeerDependenciesVersionQueryStri
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPackageJsonVersionQueryString {
@@ -3502,6 +3734,7 @@ input sitePageConnectionPluginCreatorPackageJsonVersionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorParentQueryString {
@@ -3510,6 +3743,7 @@ input sitePageConnectionPluginCreatorParentQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginFilepathQueryString {
@@ -3518,6 +3752,7 @@ input sitePageConnectionPluginCreatorPluginFilepathQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsInputObject {
@@ -3536,6 +3771,7 @@ input sitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoole
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryInteger {
@@ -3546,6 +3782,7 @@ input sitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryInteger {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsNameQueryString {
@@ -3554,12 +3791,14 @@ input sitePageConnectionPluginCreatorPluginOptionsNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPathCheckQueryBoolean {
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPathQueryString {
@@ -3568,6 +3807,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPathQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPluginsIdQueryString {
@@ -3576,6 +3816,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsIdQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPluginsInputObject {
@@ -3593,6 +3834,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
@@ -3601,6 +3843,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginFilepathQueryStri
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
@@ -3614,6 +3857,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImages
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger {
@@ -3624,6 +3868,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQu
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsQualityQueryInteger {
@@ -3634,6 +3879,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsQualityQue
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
@@ -3642,6 +3888,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperSty
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPluginsQueryList {
@@ -3654,6 +3901,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsResolveQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPluginsVersionQueryString {
@@ -3662,6 +3910,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsVersionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsQualityQueryInteger {
@@ -3672,6 +3921,7 @@ input sitePageConnectionPluginCreatorPluginOptionsQualityQueryInteger {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsSiteUrlQueryString {
@@ -3680,6 +3930,7 @@ input sitePageConnectionPluginCreatorPluginOptionsSiteUrlQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString {
@@ -3688,6 +3939,7 @@ input sitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorResolveQueryString {
@@ -3696,6 +3948,7 @@ input sitePageConnectionPluginCreatorResolveQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorSsrApIsQueryList {
@@ -3704,6 +3957,7 @@ input sitePageConnectionPluginCreatorSsrApIsQueryList {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionPluginCreatorVersionQueryString {
@@ -3712,6 +3966,7 @@ input sitePageConnectionPluginCreatorVersionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageConnectionSort {
@@ -3752,6 +4007,7 @@ input sitePageContextSlugQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 enum sitePageDistinctEnum {
@@ -3832,6 +4088,7 @@ input sitePageIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageInternalComponentNameQueryString {
@@ -3840,6 +4097,7 @@ input sitePageInternalComponentNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageInternalContentDigestQueryString_2 {
@@ -3848,6 +4106,7 @@ input sitePageInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageInternalDescriptionQueryString {
@@ -3856,6 +4115,7 @@ input sitePageInternalDescriptionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageInternalInputObject_2 {
@@ -3871,6 +4131,7 @@ input sitePageInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageInternalTypeQueryString_2 {
@@ -3879,6 +4140,7 @@ input sitePageInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePageJsonNameQueryString {
@@ -3887,6 +4149,7 @@ input sitePageJsonNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePathQueryString_2 {
@@ -3895,6 +4158,7 @@ input sitePagePathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorBrowserApIsQueryList {
@@ -3903,6 +4167,7 @@ input sitePagePluginCreatorBrowserApIsQueryList {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorIdQueryString {
@@ -3911,6 +4176,7 @@ input sitePagePluginCreatorIdQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorIdQueryString_2 {
@@ -3919,6 +4185,7 @@ input sitePagePluginCreatorIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorInputObject {
@@ -3942,6 +4209,7 @@ input sitePagePluginCreatorInternalContentDigestQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorInternalInputObject {
@@ -3956,6 +4224,7 @@ input sitePagePluginCreatorInternalOwnerQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorInternalTypeQueryString {
@@ -3964,6 +4233,7 @@ input sitePagePluginCreatorInternalTypeQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorNameQueryString {
@@ -3972,6 +4242,7 @@ input sitePagePluginCreatorNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorNodeApIsQueryList {
@@ -3980,6 +4251,7 @@ input sitePagePluginCreatorNodeApIsQueryList {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonDependenciesInputObject {
@@ -3993,6 +4265,7 @@ input sitePagePluginCreatorPackageJsonDependenciesNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonDependenciesQueryList {
@@ -4005,6 +4278,7 @@ input sitePagePluginCreatorPackageJsonDependenciesVersionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonDescriptionQueryString {
@@ -4013,6 +4287,7 @@ input sitePagePluginCreatorPackageJsonDescriptionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonDevDependenciesInputObject {
@@ -4026,6 +4301,7 @@ input sitePagePluginCreatorPackageJsonDevDependenciesNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonDevDependenciesQueryList {
@@ -4038,6 +4314,7 @@ input sitePagePluginCreatorPackageJsonDevDependenciesVersionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonInputObject {
@@ -4058,6 +4335,7 @@ input sitePagePluginCreatorPackageJsonKeywordsQueryList {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonLicenseQueryString {
@@ -4066,6 +4344,7 @@ input sitePagePluginCreatorPackageJsonLicenseQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonMainQueryString {
@@ -4074,6 +4353,7 @@ input sitePagePluginCreatorPackageJsonMainQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonNameQueryString {
@@ -4082,6 +4362,7 @@ input sitePagePluginCreatorPackageJsonNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonPeerDependenciesInputObject {
@@ -4095,6 +4376,7 @@ input sitePagePluginCreatorPackageJsonPeerDependenciesNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonPeerDependenciesQueryList {
@@ -4107,6 +4389,7 @@ input sitePagePluginCreatorPackageJsonPeerDependenciesVersionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPackageJsonVersionQueryString {
@@ -4115,6 +4398,7 @@ input sitePagePluginCreatorPackageJsonVersionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorParentQueryString {
@@ -4123,6 +4407,7 @@ input sitePagePluginCreatorParentQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginFilepathQueryString {
@@ -4131,6 +4416,7 @@ input sitePagePluginCreatorPluginFilepathQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginOptionsInputObject {
@@ -4149,6 +4435,7 @@ input sitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePagePluginCreatorPluginOptionsMaxWidthQueryInteger {
@@ -4159,6 +4446,7 @@ input sitePagePluginCreatorPluginOptionsMaxWidthQueryInteger {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePagePluginCreatorPluginOptionsNameQueryString {
@@ -4167,12 +4455,14 @@ input sitePagePluginCreatorPluginOptionsNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginOptionsPathCheckQueryBoolean {
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePagePluginCreatorPluginOptionsPathQueryString {
@@ -4181,6 +4471,7 @@ input sitePagePluginCreatorPluginOptionsPathQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginOptionsPluginsIdQueryString {
@@ -4189,6 +4480,7 @@ input sitePagePluginCreatorPluginOptionsPluginsIdQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginOptionsPluginsInputObject {
@@ -4206,6 +4498,7 @@ input sitePagePluginCreatorPluginOptionsPluginsNameQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
@@ -4214,6 +4507,7 @@ input sitePagePluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
@@ -4227,6 +4521,7 @@ input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginal
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger {
@@ -4237,6 +4532,7 @@ input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsQualityQueryInteger {
@@ -4247,6 +4543,7 @@ input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsQualityQueryInteger 
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
@@ -4255,6 +4552,7 @@ input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryStr
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginOptionsPluginsQueryList {
@@ -4267,6 +4565,7 @@ input sitePagePluginCreatorPluginOptionsPluginsResolveQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginOptionsPluginsVersionQueryString {
@@ -4275,6 +4574,7 @@ input sitePagePluginCreatorPluginOptionsPluginsVersionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginOptionsQualityQueryInteger {
@@ -4285,6 +4585,7 @@ input sitePagePluginCreatorPluginOptionsQualityQueryInteger {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePagePluginCreatorPluginOptionsSiteUrlQueryString {
@@ -4293,6 +4594,7 @@ input sitePagePluginCreatorPluginOptionsSiteUrlQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorPluginOptionsWrapperStyleQueryString {
@@ -4301,6 +4603,7 @@ input sitePagePluginCreatorPluginOptionsWrapperStyleQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorResolveQueryString {
@@ -4309,6 +4612,7 @@ input sitePagePluginCreatorResolveQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorSsrApIsQueryList {
@@ -4317,6 +4621,7 @@ input sitePagePluginCreatorSsrApIsQueryList {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePagePluginCreatorVersionQueryString {
@@ -4325,6 +4630,7 @@ input sitePagePluginCreatorVersionQueryString {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePathPrefixQueryString_2 {
@@ -4333,6 +4639,7 @@ input sitePathPrefixQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 """Node of type SitePlugin"""
@@ -4363,6 +4670,7 @@ input sitePluginBrowserApIsQueryList_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 """A connection to a list of items."""
@@ -4383,6 +4691,7 @@ input sitePluginConnectionBrowserApIsQueryList_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionIdQueryString_2 {
@@ -4391,6 +4700,7 @@ input sitePluginConnectionIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionInternalContentDigestQueryString_2 {
@@ -4399,6 +4709,7 @@ input sitePluginConnectionInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionInternalInputObject_2 {
@@ -4413,6 +4724,7 @@ input sitePluginConnectionInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionInternalTypeQueryString_2 {
@@ -4421,6 +4733,7 @@ input sitePluginConnectionInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionNameQueryString_2 {
@@ -4429,6 +4742,7 @@ input sitePluginConnectionNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionNodeApIsQueryList_2 {
@@ -4437,6 +4751,7 @@ input sitePluginConnectionNodeApIsQueryList_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonDependenciesInputObject_2 {
@@ -4450,6 +4765,7 @@ input sitePluginConnectionPackageJsonDependenciesNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonDependenciesQueryList_2 {
@@ -4462,6 +4778,7 @@ input sitePluginConnectionPackageJsonDependenciesVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonDescriptionQueryString_2 {
@@ -4470,6 +4787,7 @@ input sitePluginConnectionPackageJsonDescriptionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonDevDependenciesInputObject_2 {
@@ -4483,6 +4801,7 @@ input sitePluginConnectionPackageJsonDevDependenciesNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonDevDependenciesQueryList_2 {
@@ -4495,6 +4814,7 @@ input sitePluginConnectionPackageJsonDevDependenciesVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonInputObject_2 {
@@ -4515,6 +4835,7 @@ input sitePluginConnectionPackageJsonKeywordsQueryList_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonLicenseQueryString_2 {
@@ -4523,6 +4844,7 @@ input sitePluginConnectionPackageJsonLicenseQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonMainQueryString_2 {
@@ -4531,6 +4853,7 @@ input sitePluginConnectionPackageJsonMainQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonNameQueryString_2 {
@@ -4539,6 +4862,7 @@ input sitePluginConnectionPackageJsonNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonPeerDependenciesInputObject_2 {
@@ -4552,6 +4876,7 @@ input sitePluginConnectionPackageJsonPeerDependenciesNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonPeerDependenciesQueryList_2 {
@@ -4564,6 +4889,7 @@ input sitePluginConnectionPackageJsonPeerDependenciesVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPackageJsonVersionQueryString_2 {
@@ -4572,6 +4898,7 @@ input sitePluginConnectionPackageJsonVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginFilepathQueryString_2 {
@@ -4580,6 +4907,7 @@ input sitePluginConnectionPluginFilepathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginOptionsInputObject_2 {
@@ -4598,6 +4926,7 @@ input sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 {
@@ -4608,6 +4937,7 @@ input sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePluginConnectionPluginOptionsNameQueryString_2 {
@@ -4616,12 +4946,14 @@ input sitePluginConnectionPluginOptionsNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginOptionsPathCheckQueryBoolean_2 {
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePluginConnectionPluginOptionsPathQueryString_2 {
@@ -4630,6 +4962,7 @@ input sitePluginConnectionPluginOptionsPathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginOptionsPluginsIdQueryString_2 {
@@ -4638,6 +4971,7 @@ input sitePluginConnectionPluginOptionsPluginsIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginOptionsPluginsInputObject_2 {
@@ -4655,6 +4989,7 @@ input sitePluginConnectionPluginOptionsPluginsNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginOptionsPluginsPluginFilepathQueryString_2 {
@@ -4663,6 +4998,7 @@ input sitePluginConnectionPluginOptionsPluginsPluginFilepathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginOptionsPluginsPluginOptionsInputObject_2 {
@@ -4676,6 +5012,7 @@ input sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQ
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
@@ -4686,6 +5023,7 @@ input sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePluginConnectionPluginOptionsPluginsPluginOptionsQualityQueryInteger_2 {
@@ -4696,6 +5034,7 @@ input sitePluginConnectionPluginOptionsPluginsPluginOptionsQualityQueryInteger_2
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 {
@@ -4704,6 +5043,7 @@ input sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryStri
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginOptionsPluginsQueryList_2 {
@@ -4716,6 +5056,7 @@ input sitePluginConnectionPluginOptionsPluginsResolveQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginOptionsPluginsVersionQueryString_2 {
@@ -4724,6 +5065,7 @@ input sitePluginConnectionPluginOptionsPluginsVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginOptionsQualityQueryInteger_2 {
@@ -4734,6 +5076,7 @@ input sitePluginConnectionPluginOptionsQualityQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePluginConnectionPluginOptionsSiteUrlQueryString_2 {
@@ -4742,6 +5085,7 @@ input sitePluginConnectionPluginOptionsSiteUrlQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionPluginOptionsWrapperStyleQueryString_2 {
@@ -4750,6 +5094,7 @@ input sitePluginConnectionPluginOptionsWrapperStyleQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionResolveQueryString_2 {
@@ -4758,6 +5103,7 @@ input sitePluginConnectionResolveQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionSort {
@@ -4810,6 +5156,7 @@ input sitePluginConnectionSsrApIsQueryList_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginConnectionVersionQueryString_2 {
@@ -4818,6 +5165,7 @@ input sitePluginConnectionVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 enum sitePluginDistinctEnum {
@@ -4930,6 +5278,7 @@ input sitePluginIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginInternalContentDigestQueryString_2 {
@@ -4938,6 +5287,7 @@ input sitePluginInternalContentDigestQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginInternalInputObject_2 {
@@ -4952,6 +5302,7 @@ input sitePluginInternalOwnerQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginInternalTypeQueryString_2 {
@@ -4960,6 +5311,7 @@ input sitePluginInternalTypeQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginNameQueryString_2 {
@@ -4968,6 +5320,7 @@ input sitePluginNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginNodeApIsQueryList_2 {
@@ -4976,6 +5329,7 @@ input sitePluginNodeApIsQueryList_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonDependenciesInputObject_2 {
@@ -4989,6 +5343,7 @@ input sitePluginPackageJsonDependenciesNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonDependenciesQueryList_2 {
@@ -5001,6 +5356,7 @@ input sitePluginPackageJsonDependenciesVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonDescriptionQueryString_2 {
@@ -5009,6 +5365,7 @@ input sitePluginPackageJsonDescriptionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonDevDependenciesInputObject_2 {
@@ -5022,6 +5379,7 @@ input sitePluginPackageJsonDevDependenciesNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonDevDependenciesQueryList_2 {
@@ -5034,6 +5392,7 @@ input sitePluginPackageJsonDevDependenciesVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonInputObject_2 {
@@ -5054,6 +5413,7 @@ input sitePluginPackageJsonKeywordsQueryList_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonLicenseQueryString_2 {
@@ -5062,6 +5422,7 @@ input sitePluginPackageJsonLicenseQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonMainQueryString_2 {
@@ -5070,6 +5431,7 @@ input sitePluginPackageJsonMainQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonNameQueryString_2 {
@@ -5078,6 +5440,7 @@ input sitePluginPackageJsonNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonPeerDependenciesInputObject_2 {
@@ -5091,6 +5454,7 @@ input sitePluginPackageJsonPeerDependenciesNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonPeerDependenciesQueryList_2 {
@@ -5103,6 +5467,7 @@ input sitePluginPackageJsonPeerDependenciesVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPackageJsonVersionQueryString_2 {
@@ -5111,6 +5476,7 @@ input sitePluginPackageJsonVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginFilepathQueryString_2 {
@@ -5119,6 +5485,7 @@ input sitePluginPluginFilepathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginOptionsInputObject_2 {
@@ -5137,6 +5504,7 @@ input sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePluginPluginOptionsMaxWidthQueryInteger_2 {
@@ -5147,6 +5515,7 @@ input sitePluginPluginOptionsMaxWidthQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePluginPluginOptionsNameQueryString_2 {
@@ -5155,12 +5524,14 @@ input sitePluginPluginOptionsNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginOptionsPathCheckQueryBoolean_2 {
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePluginPluginOptionsPathQueryString_2 {
@@ -5169,6 +5540,7 @@ input sitePluginPluginOptionsPathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginOptionsPluginsIdQueryString_2 {
@@ -5177,6 +5549,7 @@ input sitePluginPluginOptionsPluginsIdQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginOptionsPluginsInputObject_2 {
@@ -5194,6 +5567,7 @@ input sitePluginPluginOptionsPluginsNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginOptionsPluginsPluginFilepathQueryString_2 {
@@ -5202,6 +5576,7 @@ input sitePluginPluginOptionsPluginsPluginFilepathQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginOptionsPluginsPluginOptionsInputObject_2 {
@@ -5215,6 +5590,7 @@ input sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolea
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
@@ -5225,6 +5601,7 @@ input sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePluginPluginOptionsPluginsPluginOptionsQualityQueryInteger_2 {
@@ -5235,6 +5612,7 @@ input sitePluginPluginOptionsPluginsPluginOptionsQualityQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 {
@@ -5243,6 +5621,7 @@ input sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginOptionsPluginsQueryList_2 {
@@ -5255,6 +5634,7 @@ input sitePluginPluginOptionsPluginsResolveQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginOptionsPluginsVersionQueryString_2 {
@@ -5263,6 +5643,7 @@ input sitePluginPluginOptionsPluginsVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginOptionsQualityQueryInteger_2 {
@@ -5273,6 +5654,7 @@ input sitePluginPluginOptionsQualityQueryInteger_2 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input sitePluginPluginOptionsSiteUrlQueryString_2 {
@@ -5281,6 +5663,7 @@ input sitePluginPluginOptionsSiteUrlQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginPluginOptionsWrapperStyleQueryString_2 {
@@ -5289,6 +5672,7 @@ input sitePluginPluginOptionsWrapperStyleQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginResolveQueryString_2 {
@@ -5297,6 +5681,7 @@ input sitePluginResolveQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginSsrApIsQueryList_2 {
@@ -5305,6 +5690,7 @@ input sitePluginSsrApIsQueryList_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePluginVersionQueryString_2 {
@@ -5313,12 +5699,14 @@ input sitePluginVersionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input sitePolyfillQueryBoolean_2 {
   eq: Boolean
   ne: Boolean
   in: [Boolean]
+  nin: [Boolean]
 }
 
 input sitePortQueryString_2 {
@@ -5327,6 +5715,7 @@ input sitePortQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteSiteMetadataAuthorEmailQueryString_2 {
@@ -5335,6 +5724,7 @@ input siteSiteMetadataAuthorEmailQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteSiteMetadataAuthorInputObject_2 {
@@ -5349,6 +5739,7 @@ input siteSiteMetadataAuthorNameQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteSiteMetadataAuthorUrlQueryString_2 {
@@ -5357,6 +5748,7 @@ input siteSiteMetadataAuthorUrlQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteSiteMetadataDescriptionQueryString_2 {
@@ -5365,6 +5757,7 @@ input siteSiteMetadataDescriptionQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteSiteMetadataInputObject_2 {
@@ -5380,6 +5773,7 @@ input siteSiteMetadataSiteUrlQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input siteSiteMetadataTitleQueryString_2 {
@@ -5388,6 +5782,7 @@ input siteSiteMetadataTitleQueryString_2 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input tableOfContentsQueryString_3 {
@@ -5396,6 +5791,7 @@ input tableOfContentsQueryString_3 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input tableOfContentsQueryString_4 {
@@ -5404,6 +5800,7 @@ input tableOfContentsQueryString_4 {
   regex: String
   glob: String
   in: [String]
+  nin: [String]
 }
 
 input timeToReadQueryInt_3 {
@@ -5414,6 +5811,7 @@ input timeToReadQueryInt_3 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input timeToReadQueryInt_4 {
@@ -5424,6 +5822,7 @@ input timeToReadQueryInt_4 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 type wordCount {
@@ -5440,6 +5839,7 @@ input wordCountParagraphsQueryInt_3 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input wordCountParagraphsQueryInt_4 {
@@ -5450,6 +5850,7 @@ input wordCountParagraphsQueryInt_4 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input wordCountSentencesQueryInt_3 {
@@ -5460,6 +5861,7 @@ input wordCountSentencesQueryInt_3 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input wordCountSentencesQueryInt_4 {
@@ -5470,6 +5872,7 @@ input wordCountSentencesQueryInt_4 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input wordCountTypeName_3 {
@@ -5492,6 +5895,7 @@ input wordCountWordsQueryInt_3 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
 
 input wordCountWordsQueryInt_4 {
@@ -5502,4 +5906,5 @@ input wordCountWordsQueryInt_4 {
   lt: Int
   lte: Int
   in: [Int]
+  nin: [Int]
 }
