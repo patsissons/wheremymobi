@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
-    "lib": ["esnext", "dom"],
-    "moduleResolution": "node",
     "module": "commonjs",
-    "outDir": "dist",
-    "plugins": [
-      {
-        "name": "@divyenduz/ts-graphql-plugin"
-      }
-    ],
-    "rootDir": "src",
-    "sourceMap": true,
-    "target": "es5"
-  }
+    "target": "esnext",
+    "jsx": "preserve",
+    "lib": ["dom", "es2015", "es2017"],
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": true
+  },
+  "include": ["./src/**/*"]
 }
