@@ -1,4 +1,32 @@
+const fs = require('fs');
+const {printSchema} = require('gatsby/graphql');
 const path = require('path');
+
+exports.onCreateWebpackConfig = ({actions}) => {
+  actions.setWebpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.(graphql|gql)$/,
+          loader: 'graphql-tag/loader',
+        },
+      ],
+    },
+  });
+};
+
+exports.onPostBootstrap = ({store}) => {
+  try {
+    const {schema} = store.getState();
+
+    fs.writeFileSync(
+      path.resolve(process.cwd(), 'src', 'graphql', 'gatsby.graphql'),
+      printSchema(schema)
+    );
+  } catch (e) {
+    console.log('Failed to write schema: ', e);
+  }
+};
 
 exports.onCreateNode = ({node, actions, getNode}) => {
   const {createNodeField} = actions;

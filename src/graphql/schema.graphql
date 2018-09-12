@@ -1,0 +1,43 @@
+"""
+Station status
+"""
+type Station {
+  """
+  Station name
+  """
+  name: String!
+  """
+  Latitude, Longitude
+  """
+  coordinates: String!
+  """
+  Total slots at the station
+  """
+  total_slots: Int!
+  """
+  Unused slots at the station
+  """
+  free_slots: Int!
+  """
+  Bikes parked at the station
+  """
+  avl_bikes: Int!
+  """
+  Is the station operative?
+  """
+  operative: Boolean!
+  """
+  Style (unused)
+  """
+  style: String!
+}
+
+"""
+Query root
+"""
+type Query {
+  """
+  Most recent station status list
+  """
+  stations: [Station!]!
+}
