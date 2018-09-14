@@ -14,5 +14,5 @@
     "allowSyntheticDefaultImports": true,
     "preserveConstEnums": true
   },
-  "include": ["./src/**/*", "./*.ts"]
+  "include": ["./config/**/*", "./src/**/*", "./*.ts"]
 }
