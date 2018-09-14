@@ -36,14 +36,19 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
+    "apollo-link": "^1.0.0",
+    "apollo-link-rest": "^0.4.0",
+    "fetch-headers": "^2.0.0",
     "gatsby": "^2.0.0-rc.1",
     "gatsby-plugin-sass": "^2.0.0-rc.1",
     "gatsby-plugin-typescript": "^2.0.0-rc.1",
-    "gatsby-source-filesystem": "^2.0.1-rc.1",
-    "gatsby-transformer-json": "^2.1.1-rc.1",
+    "gatsby-source-graphql": "2.0.0-rc.1",
+    "graphql": "^0.13.0",
+    "graphql-anywhere": "^4.0.0",
     "node-sass": "^4.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "tachyons-sass": "^4.0.0",
     "typescript": "^2.0.0"
   },
   "devDependencies": {
@@ -57,7 +62,6 @@
     "prettier": "^1.0.0",
     "rimraf": "^2.0.0",
     "sass-loader": "^7.0.0",
-    "tachyons-sass": "^4.0.0",
     "ts-node": "^7.0.0",
     "tslint": "^5.0.0",
     "tslint-config-blvd": "^1.0.0",

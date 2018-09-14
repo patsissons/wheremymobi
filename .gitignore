@@ -7,7 +7,7 @@
 
 # Build directory
 public/
-src/graphql/generated/
+build/
 
 # Gatsby cache
 .cache/

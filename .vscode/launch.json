@@ -8,15 +8,21 @@
       "type": "node",
       "request": "launch",
       "name": "Start a dev server",
-      "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/cli.js",
-      "args": ["develop"]
+      "program": "${workspaceRoot}/node_modules/gatsby-cli/lib/index.js",
+      "args": ["develop"],
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "console": "internalConsole",
+      "outputCapture": "console"
     },
     {
       "type": "node",
       "request": "launch",
       "name": "Build a static site",
-      "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/cli.js",
-      "args": ["build"]
+      "program": "${workspaceRoot}/node_modules/gatsby-cli/lib/index.js",
+      "args": ["build"],
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "console": "internalConsole",
+      "outputCapture": "console"
     }
   ]
 }
