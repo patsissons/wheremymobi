@@ -39,5 +39,5 @@ type Query {
   """
   Most recent station status list
   """
-  stations: [Station!]!
+  result: [Station!]!
 }

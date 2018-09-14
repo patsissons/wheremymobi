@@ -15,8 +15,8 @@ export const plugins = [
     options: {
       createLink,
       createSchema,
-      fieldName: 'mobi',
-      typeName: 'MobiStationData',
+      fieldName: 'stations',
+      typeName: 'MobiStations',
     },
   },
 ];
