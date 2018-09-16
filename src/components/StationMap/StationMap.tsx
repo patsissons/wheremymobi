@@ -1,18 +1,18 @@
 import * as React from 'react';
-import {compose, withProps} from 'recompose';
+import {compose, withProps, withStateHandlers} from 'recompose';
 import {
+  BicyclingLayer,
   GoogleMap,
-  Marker,
   withScriptjs,
   WithScriptjsProps,
   withGoogleMap,
   WithGoogleMapProps,
 } from 'react-google-maps';
 import {graphql} from 'gatsby';
+import {StationNode} from '~/source-stations';
+import {StationMarker} from './components';
 
 import * as styles from './StationMap.module.scss';
-
-const {BicyclingLayer} = require('react-google-maps');
 
 export interface Props {
   data: {
@@ -20,19 +20,7 @@ export interface Props {
       totalCount: number;
       edges: [
         {
-          node: {
-            id: string;
-            number: number;
-            name: string;
-            lat: number;
-            lng: number;
-            bikes: number;
-            free: number;
-            total: number;
-            operative: boolean;
-            style: string;
-            valid: boolean;
-          };
+          node: StationNode;
         }
       ];
     };
@@ -41,24 +29,44 @@ export interface Props {
 
 type ComposedProps = Props & WithScriptjsProps & WithGoogleMapProps;
 
-export function StationMap({
-  data: {
-    allStation: {edges},
-  },
-}: ComposedProps) {
-  return (
-    <GoogleMap
-      defaultZoom={13}
-      defaultCenter={{lat: 49.279627, lng: -123.121116}}
-    >
-      <BicyclingLayer autoUpdate />
-      {edges.map(({node}) => {
-        return (
-          <Marker key={node.id} position={{lat: node.lat, lng: node.lng}} />
-        );
-      })}
-    </GoogleMap>
-  );
+export interface State {
+  stations: Map<string, StationNode>;
+  stationInfoId?: number;
+}
+
+export class StationMap extends React.PureComponent<ComposedProps, State> {
+  state: State = {
+    stations: new Map<string, StationNode>(
+      this.props.data.allStation.edges.reduce(
+        (map, {node}) => map.set(node.id, node),
+        new Map<string, StationNode>()
+      )
+    ),
+  };
+
+  get allStations() {
+    return Array.from(this.state.stations.values());
+  }
+
+  renderMarkers = (node: StationNode) => {
+    return (
+      <StationMarker key={node.id} position={{lat: node.lat, lng: node.lng}} />
+    );
+  };
+
+  render() {
+    const {} = this.props;
+
+    return (
+      <GoogleMap
+        defaultZoom={13}
+        defaultCenter={{lat: 49.279627, lng: -123.121116}}
+      >
+        <BicyclingLayer />
+        {this.allStations.map(this.renderMarkers)}
+      </GoogleMap>
+    );
+  }
 }
 
 const key = 'AIzaSyBXrYScIU6sWYUWLLlovYhzq-bLzwTgAoc';

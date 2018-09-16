@@ -8,6 +8,7 @@ const query = graphql`
     site {
       siteMetadata {
         description
+        logo
       }
     }
   }
@@ -15,12 +16,20 @@ const query = graphql`
 
 export interface HeaderProps {
   description: string;
+  logo: string;
 }
 
-export function Header({description}: HeaderProps) {
+export function Header({description, logo}: HeaderProps) {
   return (
     <div className={styles.Header}>
-      <h1 className={styles.HeaderContent}>{description}</h1>
+      <div className={styles.HeaderLogo}>
+        <a href="https://www.mobibikes.ca/en#the-map">
+          <img src={logo} />
+        </a>
+      </div>
+      <div className={styles.HeaderContent}>
+        <h1>{description}</h1>
+      </div>
     </div>
   );
 }
@@ -34,6 +43,7 @@ export interface QueryProps {
     site: {
       siteMetadata: {
         description: string;
+        logo: string;
       };
     };
   };
@@ -45,13 +55,13 @@ export function DefaultLayout({
   children,
   data: {
     site: {
-      siteMetadata: {description},
+      siteMetadata: {description, logo},
     },
   },
 }: ComposedProps) {
   return (
     <div className={styles.Container}>
-      <Header description={description} />
+      <Header description={description} logo={logo} />
       <div className={styles.Content}>{children}</div>
     </div>
   );

@@ -11,7 +11,7 @@
     "module": "commonjs",
     "noEmit": true,
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*", "plugins/*", "config/*"]
     },
     "plugins": [{"name": "@divyenduz/ts-graphql-plugin"}],
     "resolveJsonModule": true,

@@ -1,5 +1,18 @@
 import {createHash, HexBase64Latin1Encoding} from 'crypto';
 
+export interface GatsbyNode {
+  id: string;
+  parent: any;
+  children: any[];
+  internal: {
+    content: string;
+    contentDigest: string;
+    description: string;
+    mediaType: string;
+    type: string;
+  };
+}
+
 export interface StationData {
   name: string;
   coordinates: string;
@@ -22,7 +35,7 @@ export interface StationNodeLatLng {
   error_coordinates?: string;
 }
 
-export interface StationNode
+export interface UnvalidatedStationNode
   extends StationNodeNameAndNumber,
     StationNodeLatLng {
   bikes: number;
@@ -32,9 +45,11 @@ export interface StationNode
   total: number;
 }
 
-export interface ValidatedStationNode extends StationNode {
+export interface ValidatedStationNode extends UnvalidatedStationNode {
   valid: boolean;
 }
+
+export interface StationNode extends ValidatedStationNode, GatsbyNode {}
 
 export function digest(
   content: string,
@@ -93,7 +108,7 @@ export function parseLatLng({coordinates}: StationData): StationNodeLatLng {
   }
 }
 
-export function validate(node: StationNode): ValidatedStationNode {
+export function validate(node: UnvalidatedStationNode): ValidatedStationNode {
   return {
     ...node,
     valid: Boolean(
@@ -110,31 +125,12 @@ export function validate(node: StationNode): ValidatedStationNode {
   };
 }
 
-interface GatsbyNodeData {
-  id: string;
-  parent: null;
-  children: any[];
-  internal: {
-    content: string;
-    contentDigest: string;
-    description: string;
-    mediaType: string;
-    type: string;
-  };
-}
-
-interface NodeField {
-  node: any;
-  name: string;
-  value: any;
-}
-
 export function createStationNode(
   data: StationData,
-  createNode: (data: GatsbyNodeData) => any,
+  createNode: (data: GatsbyNode) => any,
   createId: (id: string, namespace?: string) => string
 ) {
-  const node = {
+  const node: StationNode = {
     id: createId(data.name, 'Station'),
     parent: null,
     children: [],

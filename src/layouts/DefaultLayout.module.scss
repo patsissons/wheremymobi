@@ -7,27 +7,34 @@
   flex-direction: column;
 }
 
-%content-layout {
-  text-align: center;
+.Content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.Header {
+  background: #007fb3;
+  color: white;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.HeaderLogo {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.Content {
-  @extend %content-layout;
-
-  flex: 1;
-}
-
-.Header {
-  @extend %content-layout;
-
-  background: rebeccapurple;
-  color: white;
-}
-
 .HeaderContent {
-  padding: 1.5rem;
-  margin: 0;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  > h1 {
+    padding-top: 3px;
+  }
 }
