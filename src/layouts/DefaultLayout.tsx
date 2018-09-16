@@ -1,35 +1,26 @@
 import * as React from 'react';
-import {Link} from 'gatsby';
+import {graphql, Link, StaticQuery} from 'gatsby';
 
 import * as styles from './DefaultLayout.module.scss';
 
-export function Header() {
+const query = graphql`
+  query {
+    site {
+      siteMetadata {
+        description
+      }
+    }
+  }
+`;
+
+export interface HeaderProps {
+  description: string;
+}
+
+export function Header({description}: HeaderProps) {
   return (
-    <div
-      style={{
-        background: 'rebeccapurple',
-        marginBottom: '1.45rem',
-      }}
-    >
-      <div
-        style={{
-          margin: '0 auto',
-          maxWidth: 960,
-          padding: '1.45rem 1.0875rem',
-        }}
-      >
-        <h1 style={{margin: 0}}>
-          <Link
-            to="/"
-            style={{
-              color: 'white',
-              textDecoration: 'none',
-            }}
-          >
-            Gatsby
-          </Link>
-        </h1>
-      </div>
+    <div className={styles.Header}>
+      <h1 className={styles.HeaderContent}>{description}</h1>
     </div>
   );
 }
@@ -38,15 +29,38 @@ export interface Props {
   children: any;
 }
 
-type ComposedProps = Props & React.HTMLProps<HTMLDivElement>;
+export interface QueryProps {
+  data: {
+    site: {
+      siteMetadata: {
+        description: string;
+      };
+    };
+  };
+}
 
-export function DefaultLayout({children}: ComposedProps) {
+type ComposedProps = Props & QueryProps;
+
+export function DefaultLayout({
+  children,
+  data: {
+    site: {
+      siteMetadata: {description},
+    },
+  },
+}: ComposedProps) {
   return (
-    <div>
-      <Header />
-      <div className={styles.DefaultLayoutContainer}>{children}</div>
+    <div className={styles.Container}>
+      <Header description={description} />
+      <div className={styles.Content}>{children}</div>
     </div>
   );
 }
 
-export default DefaultLayout;
+export default function({children}: Props) {
+  return (
+    <StaticQuery query={query}>
+      {(data) => <DefaultLayout data={data}>{children}</DefaultLayout>}
+    </StaticQuery>
+  );
+}

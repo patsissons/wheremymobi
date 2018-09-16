@@ -13,6 +13,7 @@
     "paths": {
       "~/*": ["src/*"]
     },
+    "plugins": [{"name": "@divyenduz/ts-graphql-plugin"}],
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,

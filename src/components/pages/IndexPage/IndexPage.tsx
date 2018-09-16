@@ -1,12 +1,13 @@
 import * as React from 'react';
 import {DefaultLayout} from '~/layouts';
+import StationMap, {StationMapProps} from '~/components/StationMap';
 
-export function IndexPage() {
+export interface Props extends StationMapProps {}
+
+export function IndexPage({data}: Props) {
   return (
     <DefaultLayout>
-      <div>
-        <h1>Hi people</h1>
-      </div>
+      <StationMap data={data} />
     </DefaultLayout>
   );
 }

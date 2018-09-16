@@ -1,1 +1,4 @@
-export {default as IndexPage} from './IndexPage';
+import IndexPage, {Props} from './IndexPage';
+
+export type IndexPageProps = Props;
+export default IndexPage;
