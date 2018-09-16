@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {DefaultLayout} from '../../layouts';
+import {DefaultLayout} from '~/layouts';
 
 export function IndexPage() {
   return (

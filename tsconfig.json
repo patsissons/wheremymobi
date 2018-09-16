@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
@@ -8,6 +10,9 @@
     "lib": ["dom", "es2015", "es2017"],
     "module": "commonjs",
     "noEmit": true,
+    "paths": {
+      "~/*": ["src/*"]
+    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,

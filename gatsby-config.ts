@@ -7,4 +7,8 @@ export const siteMetadata = {
   author: metadata.author,
 };
 
-export const plugins = ['gatsby-plugin-typescript', stationApiSource];
+export const plugins = [
+  'gatsby-plugin-sass',
+  'gatsby-plugin-typescript',
+  stationApiSource,
+];

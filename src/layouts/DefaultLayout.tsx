@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Link} from 'gatsby';
 
-import * as styles from './DefaultLayout.scss';
+import * as styles from './DefaultLayout.module.scss';
 
 export function Header() {
   return (

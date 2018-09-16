@@ -1,9 +1,15 @@
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import {createWebpackRules, writeGraphQLSchema} from './config/gatsby';
+
+const tsconfigPathsPlugin = new TsconfigPathsPlugin({});
 
 export function onCreateWebpackConfig({actions, loaders}: any) {
   actions.setWebpackConfig({
     module: {
       rules: createWebpackRules(loaders),
+    },
+    resolve: {
+      plugins: [tsconfigPathsPlugin],
     },
   });
 }
