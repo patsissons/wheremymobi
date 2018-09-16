@@ -3,6 +3,7 @@ import {compose, withProps, withStateHandlers} from 'recompose';
 import {
   BicyclingLayer,
   GoogleMap,
+  InfoWindow,
   withScriptjs,
   WithScriptjsProps,
   withGoogleMap,
@@ -27,42 +28,71 @@ export interface Props {
   };
 }
 
-type ComposedProps = Props & WithScriptjsProps & WithGoogleMapProps;
+interface ActionProps {
+  showInfo(id: string): void;
+  hideInfo(): void;
+}
+
+type ComposedProps = Props &
+  ActionProps &
+  WithScriptjsProps &
+  WithGoogleMapProps;
 
 export interface State {
-  stations: Map<string, StationNode>;
-  stationInfoId?: number;
+  stationInfoId?: string;
 }
 
 export class StationMap extends React.PureComponent<ComposedProps, State> {
-  state: State = {
-    stations: new Map<string, StationNode>(
-      this.props.data.allStation.edges.reduce(
-        (map, {node}) => map.set(node.id, node),
-        new Map<string, StationNode>()
-      )
-    ),
-  };
+  // state: State = {};
 
   get allStations() {
-    return Array.from(this.state.stations.values());
+    return this.props.data.allStation.edges.map(({node}) => node);
   }
 
-  renderMarkers = (node: StationNode) => {
+  renderInfo = () => {
+    if (!this.state || !this.state.stationInfoId) {
+      return false;
+    }
+
+    debugger;
+    const id = this.state.stationInfoId;
+    const station = this.allStations.filter((node) => node.id === id).shift();
+
+    if (!station) {
+      return false;
+    }
+
+    console.log(`Showing station ${id}`, station);
+
     return (
-      <StationMarker key={node.id} position={{lat: node.lat, lng: node.lng}} />
+      <InfoWindow
+        position={{lat: station.lat, lng: station.lng}}
+        onCloseClick={this.props.hideInfo}
+      >
+        <div>{station.name}</div>
+      </InfoWindow>
+    );
+  };
+
+  renderMarkers = (station: StationNode) => {
+    return (
+      <StationMarker
+        key={station.id}
+        station={station}
+        showInfo={this.props.showInfo}
+        position={{lat: station.lat, lng: station.lng}}
+      />
     );
   };
 
   render() {
-    const {} = this.props;
-
     return (
       <GoogleMap
         defaultZoom={13}
         defaultCenter={{lat: 49.279627, lng: -123.121116}}
       >
         <BicyclingLayer />
+        {this.renderInfo()}
         {this.allStations.map(this.renderMarkers)}
       </GoogleMap>
     );
@@ -101,6 +131,20 @@ export default compose<ComposedProps, Props>(
     containerElement: <div className={styles.MapContainer} />,
     mapElement: <div className={styles.Map} />,
   }),
+  withStateHandlers<State, any, ComposedProps>(
+    {stationInfoId: undefined},
+    {
+      showInfo(state, props) {
+        return (stationInfoId: string) => {
+          // debugger;
+          return {stationInfoId};
+        };
+      },
+      // hideInfo(state, props) {
+      //   return () => ({stationInfoId: undefined});
+      // },
+    }
+  ),
   withScriptjs,
   withGoogleMap
 )(StationMap);

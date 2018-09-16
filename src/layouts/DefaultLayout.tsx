@@ -1,29 +1,20 @@
 import * as React from 'react';
 import {graphql, Link, StaticQuery} from 'gatsby';
+import {compose, fromRenderProps} from 'recompose';
 
 import * as styles from './DefaultLayout.module.scss';
-
-const query = graphql`
-  query {
-    site {
-      siteMetadata {
-        description
-        logo
-      }
-    }
-  }
-`;
 
 export interface HeaderProps {
   description: string;
   logo: string;
+  logoUrl: string;
 }
 
-export function Header({description, logo}: HeaderProps) {
+export function Header({description, logo, logoUrl}: HeaderProps) {
   return (
     <div className={styles.Header}>
       <div className={styles.HeaderLogo}>
-        <a href="https://www.mobibikes.ca/en#the-map">
+        <a href={logoUrl}>
           <img src={logo} />
         </a>
       </div>
@@ -35,42 +26,41 @@ export function Header({description, logo}: HeaderProps) {
 }
 
 export interface Props {
-  children: any;
-}
-
-export interface QueryProps {
-  data: {
-    site: {
-      siteMetadata: {
-        description: string;
-        logo: string;
-      };
-    };
+  site: {
+    siteMetadata: HeaderProps;
   };
 }
 
-type ComposedProps = Props & QueryProps;
-
 export function DefaultLayout({
-  children,
-  data: {
-    site: {
-      siteMetadata: {description, logo},
-    },
+  site: {
+    siteMetadata: {description, logo, logoUrl},
   },
-}: ComposedProps) {
+  ...props
+}: Props) {
   return (
     <div className={styles.Container}>
-      <Header description={description} logo={logo} />
-      <div className={styles.Content}>{children}</div>
+      <Header description={description} logo={logo} logoUrl={logoUrl} />
+      <div className={styles.Content} {...props} />
     </div>
   );
 }
 
-export default function({children}: Props) {
-  return (
-    <StaticQuery query={query}>
-      {(data) => <DefaultLayout data={data}>{children}</DefaultLayout>}
-    </StaticQuery>
-  );
+const query = graphql`
+  query {
+    site {
+      siteMetadata {
+        description
+        logo
+        logoUrl
+      }
+    }
+  }
+`;
+
+function DefaultLayoutQuery({...props}: any) {
+  return <StaticQuery query={query} {...props} />;
 }
+
+export default compose<Props, {}>(
+  fromRenderProps<Props, {}>(DefaultLayoutQuery, ({site}) => ({site}))
+)(DefaultLayout);

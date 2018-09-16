@@ -19,22 +19,24 @@
   display: flex;
   flex: 0 1 auto;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
+
+  > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10px;
+  }
 }
 
 .HeaderLogo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  height: 75px;
 }
 
 .HeaderContent {
-  margin-left: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
   > h1 {
-    padding-top: 3px;
+    // padding-top: 3px;
+    text-align: center;
   }
 }
