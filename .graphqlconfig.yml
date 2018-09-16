@@ -1,4 +1,4 @@
-schemaPath: src/graphql/graphql/schema.json
+schemaPath: build/schema.json
 includes:
-  - src/graphql/graphql/schema.graphql
+  - build/schema.graphql
   - 'src/**/*.graphql'

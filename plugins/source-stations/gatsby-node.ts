@@ -70,6 +70,6 @@ export async function sourceNodes(
   debug(`Fetched ${data.result.length} stations`);
 
   data.result.forEach((station) => {
-    createNode(createStationNode(station, createNodeId));
+    createStationNode(station, createNode, createNodeId);
   });
 }

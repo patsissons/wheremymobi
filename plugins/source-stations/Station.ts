@@ -22,23 +22,9 @@ export interface StationNodeLatLng {
   error_coordinates?: string;
 }
 
-export interface StationNodeGatsby {
-  id: string;
-  parent: null;
-  children: [];
-  internal: {
-    content: string;
-    contentDigest: string;
-    description: string;
-    mediaType: string;
-    type: string;
-  };
-}
-
 export interface StationNode
   extends StationNodeNameAndNumber,
-    StationNodeLatLng,
-    StationNodeGatsby {
+    StationNodeLatLng {
   bikes: number;
   free: number;
   operative: boolean;
@@ -124,18 +110,31 @@ export function validate(node: StationNode): ValidatedStationNode {
   };
 }
 
+interface GatsbyNodeData {
+  id: string;
+  parent: null;
+  children: any[];
+  internal: {
+    content: string;
+    contentDigest: string;
+    description: string;
+    mediaType: string;
+    type: string;
+  };
+}
+
+interface NodeField {
+  node: any;
+  name: string;
+  value: any;
+}
+
 export function createStationNode(
   data: StationData,
+  createNode: (data: GatsbyNodeData) => any,
   createId: (id: string, namespace?: string) => string
-): ValidatedStationNode {
-  return validate({
-    ...parseNameAndNumber(data),
-    ...parseLatLng(data),
-    bikes: data.avl_bikes,
-    free: data.free_slots,
-    operative: Boolean(data.operative),
-    style: data.style,
-    total: data.total_slots,
+) {
+  const node = {
     id: createId(data.name, 'Station'),
     parent: null,
     children: [],
@@ -145,5 +144,16 @@ export function createStationNode(
       mediaType: 'application/json',
       type: 'Station',
     },
-  });
+    ...validate({
+      ...parseNameAndNumber(data),
+      ...parseLatLng(data),
+      bikes: data.avl_bikes,
+      free: data.free_slots,
+      operative: Boolean(data.operative),
+      style: data.style,
+      total: data.total_slots,
+    }),
+  };
+
+  createNode(node);
 }
