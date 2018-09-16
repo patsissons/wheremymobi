@@ -1,5 +1,15 @@
 import {createWebpackRules, writeGraphQLSchema} from './config/gatsby';
 
+// export function onCreateBabelConfig(args: any) {
+//   debugger;
+//   return args;
+// }
+
+// export function onPreInit(args: any) {
+//   debugger;
+//   return args;
+// }
+
 export function onCreateWebpackConfig({actions, loaders}: any) {
   actions.setWebpackConfig({
     module: {

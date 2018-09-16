@@ -1,22 +1,10 @@
-import {createLink, createSchema} from './config/gatsby';
-import config from './package.json';
+import {metadata, stationApiSource} from './config/gatsby';
 
 export const siteMetadata = {
-  title: config.name,
-  description: config.description,
-  siteUrl: config.homepage,
-  author: config.author,
+  title: metadata.name,
+  description: metadata.description,
+  siteUrl: metadata.homepage,
+  author: metadata.author,
 };
 
-export const plugins = [
-  'gatsby-plugin-typescript',
-  {
-    resolve: 'gatsby-source-graphql',
-    options: {
-      createLink,
-      createSchema,
-      fieldName: 'stations',
-      typeName: 'MobiStations',
-    },
-  },
-];
+export const plugins = ['gatsby-plugin-typescript', stationApiSource];

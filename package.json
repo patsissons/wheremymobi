@@ -23,11 +23,11 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "ts-gatsby": "ts-node node_modules/gatsby-cli/lib/index.js",
-    "build": "yarn ts-gatsby build",
-    "clean": "rimraf public",
+    "build": "yarn gatsby build",
+    "clean": "rimraf public .cache",
     "deploy": "yarn build --prefix-paths && gh-pages -d public",
-    "dev": "yarn ts-gatsby develop",
+    "dev": "yarn gatsby develop",
+    "gatsby": "ts-node node_modules/gatsby-cli/lib/index.js",
     "lint": "tslint --project tsconfig.json",
     "start": "yarn dev",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -36,24 +36,20 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
-    "apollo-link": "^1.0.0",
-    "apollo-link-rest": "^0.4.0",
-    "fetch-headers": "^2.0.0",
+    "axios": "^0.18.0",
     "gatsby": "^2.0.0-rc.1",
     "gatsby-plugin-sass": "^2.0.0-rc.1",
     "gatsby-plugin-typescript": "^2.0.0-rc.1",
-    "gatsby-source-graphql": "2.0.0-rc.1",
     "graphql": "^0.13.0",
-    "graphql-anywhere": "^4.0.0",
     "node-sass": "^4.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "tachyons-sass": "^4.0.0",
-    "typescript": "^2.0.0"
+    "typescript": "^3.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.0",
     "@types/node": "^10.0.0",
+    "@types/graphql": "^0.13.0",
     "@types/react": "^16.0.0",
     "@types/react-dom": "^16.0.0",
     "fs-extra": "^7.0.0",

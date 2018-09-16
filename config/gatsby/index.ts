@@ -1,3 +1,6 @@
+import metadata from '../../package.json';
+
+export {metadata};
 export {writeGraphQLSchema} from './graphql';
-export {createLink, createSchema} from './source';
+export {stationApiSource} from './source';
 export {createWebpackRules} from './webpack';

@@ -35,9 +35,6 @@ export function Header() {
 }
 
 export interface Props {
-  // location: {
-  //   pathname: string;
-  // };
   children: any;
 }
 
