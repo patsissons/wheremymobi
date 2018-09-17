@@ -6,3 +6,7 @@ declare module 'recompose' {
     propsMapper: mapper<TInner, TOuter>
   ): InferableComponentEnhancerWithProps<TInner & TOuter, TOuter>;
 }
+
+declare global {
+  export const google: any;
+}
