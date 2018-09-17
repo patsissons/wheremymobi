@@ -16,6 +16,7 @@ import {
   withGoogleMap,
   WithGoogleMapProps,
 } from 'react-google-maps';
+import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import {graphql} from 'gatsby';
 import {StationNode} from '~/source-stations';
 import {StationInfo, StationMarker} from './components';
@@ -69,7 +70,7 @@ export class StationMap extends React.PureComponent<ComposedProps> {
     );
   };
 
-  renderMarkers = (station: StationNode) => {
+  renderMarker = (station: StationNode) => {
     return (
       <StationMarker
         key={station.id}
@@ -77,6 +78,20 @@ export class StationMap extends React.PureComponent<ComposedProps> {
         showInfo={this.props.showInfo}
         position={{lat: station.lat, lng: station.lng}}
       />
+    );
+  };
+
+  renderMarkers = (clustered = true) => {
+    const markers = Array.from(this.props.stations.values()).map(
+      this.renderMarker
+    );
+
+    return clustered ? (
+      <MarkerClusterer averageCenter enableRetinaIcons gridSize={30}>
+        {markers}
+      </MarkerClusterer>
+    ) : (
+      markers
     );
   };
 
@@ -89,7 +104,7 @@ export class StationMap extends React.PureComponent<ComposedProps> {
       >
         <BicyclingLayer />
         {this.renderInfo()}
-        {Array.from(this.props.stations.values()).map(this.renderMarkers)}
+        {this.renderMarkers()}
       </GoogleMap>
     );
   }
