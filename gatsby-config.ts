@@ -14,3 +14,5 @@ export const plugins = [
   'gatsby-plugin-typescript',
   stationApiSource,
 ];
+
+export const prefixPath = '/wheremymobi';
