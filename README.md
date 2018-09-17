@@ -1,10 +1,10 @@
 ## Where My Mobi?
 
-Track [Mobi Bike stations](https://www.mobibikes.ca/en#the-map)
+Better visibility for tracking [mobi bike stations](https://patsissons.github.io/wheremymobi/)
 
 ## Data
 
-http://vancouver-ca.smoove.pro/api-public/stations
+Data for [mobi bike stations](https://www.mobibikes.ca/en#the-map) sourced from http://vancouver-ca.smoove.pro/api-public/stations
 
 ## gatsby-starter-typescript-plus
 
