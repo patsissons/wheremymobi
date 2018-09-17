@@ -1,4 +1,0 @@
-schemaPath: build/schema.json
-includes:
-  - build/schema.graphql
-  - 'src/**/*.graphql'
