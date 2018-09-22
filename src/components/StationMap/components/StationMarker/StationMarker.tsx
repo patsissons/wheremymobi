@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Marker, MarkerProps} from 'react-google-maps';
 import {compose, withHandlers} from 'recompose';
-import {StationNode} from '~/source-stations';
+import {StationNode} from '~/gatsby-source-stations';
 
 export interface ActionProps {
   showInfo(station: StationNode): void;

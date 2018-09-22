@@ -29,6 +29,7 @@
     "dev": "yarn gatsby develop",
     "gatsby": "ts-node node_modules/gatsby-cli/lib/index.js",
     "lint": "tslint --project tsconfig.json",
+    "server": "yarn gatsby serve",
     "start": "yarn dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

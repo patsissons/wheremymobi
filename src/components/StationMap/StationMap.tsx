@@ -18,7 +18,7 @@ import {
 } from 'react-google-maps';
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import {graphql} from 'gatsby';
-import {StationNode} from '~/source-stations';
+import {StationNode} from '~/gatsby-source-stations';
 import {StationInfo, StationMarker} from './components';
 import {StationMarkerActionProps} from './components/StationMarker';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StationNode} from '~/source-stations';
+import {StationNode} from '~/gatsby-source-stations';
 
 export interface Props {
   station: StationNode;

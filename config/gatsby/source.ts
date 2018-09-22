@@ -1,7 +1,5 @@
-import {} from '../../plugins/source-stations/gatsby-node';
-
 export const stationApiSource = {
-  resolve: 'source-stations',
+  resolve: 'gatsby-source-stations',
   options: {
     name: 'stations',
     localData: 'data/stations.json',

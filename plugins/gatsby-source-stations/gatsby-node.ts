@@ -8,7 +8,6 @@ export interface FetchResult {
 }
 
 export interface AxiosOptions {
-  url: string;
   method?: string;
   baseURL?: string;
   headers?: any;
@@ -33,12 +32,13 @@ export interface GatsbyOptions {
   typePrefix: string;
   useLocalData: boolean;
   verboseOutput?: boolean;
+  url: string;
 }
 
 type ComposedOptions = AxiosOptions & GatsbyOptions;
 
 export async function sourceNodes(
-  {actions: {createNode}, createNodeId}: any,
+  {actions: {createNode, setPluginStatus}, createNodeId}: any,
   {
     localData,
     name,
@@ -49,6 +49,10 @@ export async function sourceNodes(
     ...axiosConfig
   }: ComposedOptions
 ) {
+  if (!url) {
+    return;
+  }
+
   const debug = (message: string) => {
     if (verboseOutput) {
       console.log(message);
@@ -59,8 +63,8 @@ export async function sourceNodes(
 
   debug(`Fetching stations from ${uri} ...`);
   const {data} = useLocalData
-    ? {data: (await readJson(localData)) as FetchResult}
-    : await axios.get<FetchResult>(url, axiosConfig);
+    ? await fetchLocalData(uri)
+    : await fetchRemoteData(uri, axiosConfig);
 
   if (!data || !data.result) {
     debug(`Fetch failed.`);
@@ -72,4 +76,16 @@ export async function sourceNodes(
   data.result.forEach((station) => {
     createStationNode(station, createNode, createNodeId);
   });
+
+  setPluginStatus({lastFetched: Date.now()});
+}
+
+async function fetchLocalData(path: string) {
+  return {
+    data: (await readJson(path)) as FetchResult,
+  };
+}
+
+function fetchRemoteData(url: string, axiosConfig: AxiosOptions) {
+  return axios.get<FetchResult>(url, axiosConfig);
 }
