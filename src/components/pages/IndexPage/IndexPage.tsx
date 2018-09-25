@@ -3,12 +3,15 @@ import {DefaultLayout} from '~/layouts';
 import StationMap, {StationMapProps} from '~/components/StationMap';
 
 export interface Props {
-  data: {
+  // data?: {
+  //   allStation: StationMapProps['stations'];
+  // };
+  pageContext: {
     allStation: StationMapProps['stations'];
   };
 }
 
-export function IndexPage({data: {allStation}}: Props) {
+export function IndexPage({pageContext: {allStation}}: Props) {
   return (
     <DefaultLayout>
       <StationMap stations={allStation} />
