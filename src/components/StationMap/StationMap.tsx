@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-  compose,
-  mapProps,
-  withProps,
-  withStateHandlers,
-  withHandlers,
-  withState,
-} from 'recompose';
+import {compose, mapProps, withProps, withStateHandlers} from 'recompose';
 import {
   BicyclingLayer,
   GoogleMap,
@@ -27,11 +20,7 @@ import * as styles from './StationMap.module.scss';
 export interface Props {
   stations: {
     totalCount: number;
-    edges: [
-      {
-        node: StationNode;
-      }
-    ];
+    edges: {node: StationNode}[];
   };
 }
 
@@ -110,8 +99,6 @@ export class StationMap extends React.PureComponent<ComposedProps> {
   }
 }
 
-const key = 'AIzaSyBXrYScIU6sWYUWLLlovYhzq-bLzwTgAoc';
-
 export const query = graphql`
   fragment StationMapFragment on Query {
     allStation {
@@ -126,6 +113,7 @@ export const query = graphql`
           bikes
           free
           total
+          updatedAt
           operative
           style
           valid
@@ -135,10 +123,12 @@ export const query = graphql`
   }
 `;
 
+const key = 'AIzaSyBXrYScIU6sWYUWLLlovYhzq-bLzwTgAoc';
+
 export default compose<ComposedProps, Props>(
-  mapProps<MappedProps, Props>(({stations}) => {
+  mapProps<MappedProps, Props>(({stations: {edges}}) => {
     return {
-      stations: stations.edges.reduce((map, {node}) => {
+      stations: edges.reduce((map, {node}) => {
         return map.set(node.id, node);
       }, new Map<string, StationNode>()),
     };

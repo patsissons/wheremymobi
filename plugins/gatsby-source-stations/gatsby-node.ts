@@ -1,5 +1,4 @@
 import axios, {AxiosBasicCredentials, AxiosProxyConfig} from 'axios';
-
 import {readJson} from 'fs-extra';
 import {StationData, createStationNode} from './Station';
 

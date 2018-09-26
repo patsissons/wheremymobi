@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as moment from 'moment';
 import {StationNode} from '~/gatsby-source-stations';
 
 export interface Props {
@@ -23,6 +24,7 @@ export function StationInfo({station}: Props) {
             },15z`}
           >{`${station.lat}, ${station.lng}`}</a>
         </li>
+        <li>{`Last Updated: ${moment.unix(station.updatedAt).fromNow()}`}</li>
       </ul>
     </div>
   );

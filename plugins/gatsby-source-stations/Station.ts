@@ -1,4 +1,5 @@
 import {createHash, HexBase64Latin1Encoding} from 'crypto';
+import * as moment from 'moment';
 
 export interface GatsbyNode {
   id: string;
@@ -43,6 +44,7 @@ export interface UnvalidatedStationNode
   operative: boolean;
   style: string;
   total: number;
+  updatedAt: number;
 }
 
 export interface ValidatedStationNode extends UnvalidatedStationNode {
@@ -148,6 +150,7 @@ export function createStationNode(
       operative: Boolean(data.operative),
       style: data.style,
       total: data.total_slots,
+      updatedAt: moment.now(),
     }),
   };
 

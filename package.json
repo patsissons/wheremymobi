@@ -42,6 +42,7 @@
     "gatsby-plugin-sass": "^2.0.0-rc.1",
     "gatsby-plugin-typescript": "^2.0.0-rc.1",
     "graphql": "^0.13.0",
+    "moment": "^2.22.2",
     "node-sass": "^4.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -52,8 +53,8 @@
   "devDependencies": {
     "@divyenduz/ts-graphql-plugin": "^0.1.0",
     "@types/fs-extra": "^5.0.0",
-    "@types/node": "^10.0.0",
     "@types/graphql": "^0.13.0",
+    "@types/node": "^10.0.0",
     "@types/react": "^16.0.0",
     "@types/react-dom": "^16.0.0",
     "@types/recompose": "^0.26.0",
@@ -64,10 +65,10 @@
     "rimraf": "^2.0.0",
     "sass-loader": "^7.0.0",
     "ts-node": "^7.0.0",
+    "tsconfig-paths-webpack-plugin": "^3.0.0",
     "tslint": "^5.0.0",
     "tslint-config-blvd": "^1.0.0",
     "tslint-config-prettier": "^1.0.0",
-    "tsconfig-paths-webpack-plugin": "^3.0.0",
     "tslint-plugin-prettier": "^1.0.0"
   }
 }
