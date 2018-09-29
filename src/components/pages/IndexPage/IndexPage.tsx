@@ -8,11 +8,12 @@ import {
 } from 'recompose';
 // import rxjsConfig from 'recompose/rxjsObservableConfig';
 import {timer} from 'rxjs';
+import {} from 'rxjs/ajax';
 import {map, mergeMap, startWith} from 'rxjs/operators';
 import {DefaultLayout} from '~/layouts';
 import StationMap from '~/components/StationMap';
 import {fetch} from '~/gatsby-source-stations';
-import {FetchResult} from '~/gatsby-source-stations/source';
+import {FetchResult, fetchObservable} from '~/gatsby-source-stations/source';
 import {createStationNode, StationNode} from '~/gatsby-source-stations/Station';
 
 export interface QueryProps {
@@ -34,7 +35,7 @@ export function IndexPage({data, result}: Props) {
   }
 
   const resolveResults = (): FetchResult => {
-    if (result) {
+    if (result && result.fetchedAt && result.stations) {
       return result;
     }
 
@@ -54,12 +55,9 @@ export function IndexPage({data, result}: Props) {
 
   const {error, fetchedAt, stations} = resolveResults();
 
-  if (error) {
-    return <div>{error.message}</div>;
-  }
-
   return (
     <DefaultLayout>
+      {Boolean(error) && <div>{error.message}</div>}
       <StationMap fetchedAt={fetchedAt} stations={stations} />
     </DefaultLayout>
   );
@@ -88,17 +86,16 @@ export const fragment = graphql`
   }
 `;
 
-export default IndexPage;
-// export default compose<Props, {}>(
-//   mapPropsStream(() => {
-//     return timer(0, 1000 * 60 * 5).pipe(
-//       mergeMap(() => fetch()),
-//       map((result) => {
-//         return {
-//           result,
-//         };
-//       }),
-//       startWith({}),
-//     );
-//   }),
-// )(IndexPage);
+export default compose<Props, {}>(
+  mapPropsStream(() => {
+    return timer(0, 1000 * 60 * 5).pipe(
+      mergeMap(() => fetchObservable()),
+      map((result) => {
+        return {
+          result,
+        };
+      }),
+      startWith({}),
+    );
+  }),
+)(IndexPage);
