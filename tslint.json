@@ -4,6 +4,6 @@
   "rules": {
     "function-name": false,
     "interface-over-type-literal": false,
-    "prettier": true
+    "prettier": false
   }
 }

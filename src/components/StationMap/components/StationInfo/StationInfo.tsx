@@ -1,12 +1,13 @@
 import * as React from 'react';
-import * as moment from 'moment';
-import {StationNode} from '~/gatsby-source-stations';
+import moment from 'moment';
+import {StationNode} from '~/gatsby-source-stations/Station';
 
 export interface Props {
+  fetchedAt: moment.Moment;
   station: StationNode;
 }
 
-export function StationInfo({station}: Props) {
+export function StationInfo({fetchedAt, station}: Props) {
   return (
     <div>
       <ul>
@@ -24,7 +25,7 @@ export function StationInfo({station}: Props) {
             },15z`}
           >{`${station.lat}, ${station.lng}`}</a>
         </li>
-        <li>{`Last Updated: ${moment.unix(station.updatedAt).fromNow()}`}</li>
+        <li>{`Last Updated: ${fetchedAt.fromNow()}`}</li>
       </ul>
     </div>
   );

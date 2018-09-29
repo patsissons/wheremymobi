@@ -1,4 +1,5 @@
 import * as React from 'react';
+import moment from 'moment';
 import {compose, mapProps, withProps, withStateHandlers} from 'recompose';
 import {
   BicyclingLayer,
@@ -10,22 +11,23 @@ import {
   WithGoogleMapProps,
 } from 'react-google-maps';
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
-import {graphql} from 'gatsby';
-import {StationNode} from '~/gatsby-source-stations';
+import {StationNode} from '~/gatsby-source-stations/Station';
 import {StationInfo, StationMarker} from './components';
 import {StationMarkerActionProps} from './components/StationMarker';
 
 import * as styles from './StationMap.module.scss';
 
-export interface Props {
-  stations: {
-    totalCount: number;
-    edges: {node: StationNode}[];
-  };
+interface FetchProps {
+  fetchedAt: moment.Moment;
 }
 
-interface MappedProps {
-  stations: Map<string, StationNode>;
+export interface Props extends FetchProps {
+  stations: StationNode[];
+  mapsApiKey?: string;
+}
+
+interface MappedProps extends FetchProps {
+  stations: Map<number, StationNode>;
 }
 
 interface ActionProps extends StationMarkerActionProps {
@@ -44,7 +46,7 @@ type ComposedProps = MappedProps &
 
 export class StationMap extends React.PureComponent<ComposedProps> {
   renderInfo = () => {
-    const {selectedStation: station} = this.props;
+    const {fetchedAt, selectedStation: station} = this.props;
 
     return (
       (station && (
@@ -52,7 +54,7 @@ export class StationMap extends React.PureComponent<ComposedProps> {
           position={{lat: station.lat, lng: station.lng}}
           onCloseClick={this.props.hideInfo}
         >
-          <StationInfo station={station} />
+          <StationInfo fetchedAt={fetchedAt} station={station} />
         </InfoWindow>
       )) ||
       false
@@ -62,7 +64,7 @@ export class StationMap extends React.PureComponent<ComposedProps> {
   renderMarker = (station: StationNode) => {
     return (
       <StationMarker
-        key={station.id}
+        key={station.number}
         station={station}
         showInfo={this.props.showInfo}
         position={{lat: station.lat, lng: station.lng}}
@@ -72,7 +74,7 @@ export class StationMap extends React.PureComponent<ComposedProps> {
 
   renderMarkers = (clustered = true) => {
     const markers = Array.from(this.props.stations.values()).map(
-      this.renderMarker
+      this.renderMarker,
     );
 
     return clustered ? (
@@ -99,42 +101,23 @@ export class StationMap extends React.PureComponent<ComposedProps> {
   }
 }
 
-export const query = graphql`
-  fragment StationMapFragment on Query {
-    allStation {
-      totalCount
-      edges {
-        node {
-          id
-          number
-          name
-          lat
-          lng
-          bikes
-          free
-          total
-          updatedAt
-          operative
-          style
-          valid
-        }
-      }
-    }
-  }
-`;
-
-const key = 'AIzaSyBXrYScIU6sWYUWLLlovYhzq-bLzwTgAoc';
-
 export default compose<ComposedProps, Props>(
-  mapProps<MappedProps, Props>(({stations: {edges}}) => {
-    return {
-      stations: edges.reduce((map, {node}) => {
-        return map.set(node.id, node);
-      }, new Map<string, StationNode>()),
-    };
-  }),
+  mapProps<MappedProps, Props>(
+    ({
+      fetchedAt,
+      mapsApiKey = 'AIzaSyBXrYScIU6sWYUWLLlovYhzq-bLzwTgAoc',
+      stations,
+    }) => {
+      return {
+        fetchedAt,
+        stations: stations.reduce((map, station) => {
+          return map.set(station.number, station);
+        }, new Map<number, StationNode>()),
+        googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&v=3.exp&libraries=geometry,drawing,places`,
+      };
+    },
+  ),
   withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${key}&v=3.exp&libraries=geometry,drawing,places`,
     loadingElement: <div className={styles.LoadingContainer} />,
     containerElement: <div className={styles.MapContainer} />,
     mapElement: <div className={styles.Map} />,
@@ -148,8 +131,8 @@ export default compose<ComposedProps, Props>(
       hideInfo() {
         return () => ({selectedStation: undefined});
       },
-    }
+    },
   ),
   withScriptjs,
-  withGoogleMap
+  withGoogleMap,
 )(StationMap);

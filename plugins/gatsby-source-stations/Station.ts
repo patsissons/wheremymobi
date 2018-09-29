@@ -1,19 +1,3 @@
-import {createHash, HexBase64Latin1Encoding} from 'crypto';
-import * as moment from 'moment';
-
-export interface GatsbyNode {
-  id: string;
-  parent: any;
-  children: any[];
-  internal: {
-    content: string;
-    contentDigest: string;
-    description: string;
-    mediaType: string;
-    type: string;
-  };
-}
-
 export interface StationData {
   name: string;
   coordinates: string;
@@ -44,26 +28,10 @@ export interface UnvalidatedStationNode
   operative: boolean;
   style: string;
   total: number;
-  updatedAt: number;
 }
 
-export interface ValidatedStationNode extends UnvalidatedStationNode {
+export interface StationNode extends UnvalidatedStationNode {
   valid: boolean;
-}
-
-export interface StationNode extends ValidatedStationNode, GatsbyNode {}
-
-export function digest(
-  content: string,
-  algorithm = 'md5',
-  encoding: HexBase64Latin1Encoding = 'hex'
-) {
-  return {
-    content,
-    contentDigest: createHash(algorithm)
-      .update(content)
-      .digest(encoding),
-  };
 }
 
 export function parseNameAndNumber({
@@ -110,7 +78,7 @@ export function parseLatLng({coordinates}: StationData): StationNodeLatLng {
   }
 }
 
-export function validate(node: UnvalidatedStationNode): ValidatedStationNode {
+export function validate(node: UnvalidatedStationNode): StationNode {
   return {
     ...node,
     valid: Boolean(
@@ -127,32 +95,14 @@ export function validate(node: UnvalidatedStationNode): ValidatedStationNode {
   };
 }
 
-export function createStationNode(
-  data: StationData,
-  createNode: (data: GatsbyNode) => any,
-  createId: (id: string, namespace?: string) => string
-) {
-  const node: StationNode = {
-    id: createId(data.name, 'Station'),
-    parent: null,
-    children: [],
-    internal: {
-      ...digest(JSON.stringify(data)),
-      description: 'Mobi Bike Station',
-      mediaType: 'application/json',
-      type: 'Station',
-    },
-    ...validate({
-      ...parseNameAndNumber(data),
-      ...parseLatLng(data),
-      bikes: data.avl_bikes,
-      free: data.free_slots,
-      operative: Boolean(data.operative),
-      style: data.style,
-      total: data.total_slots,
-      updatedAt: moment.now(),
-    }),
-  };
-
-  createNode(node);
+export function createStationNode(stationData: StationData): StationNode {
+  return validate({
+    ...parseNameAndNumber(stationData),
+    ...parseLatLng(stationData),
+    bikes: stationData.avl_bikes,
+    free: stationData.free_slots,
+    operative: Boolean(stationData.operative),
+    style: stationData.style,
+    total: stationData.total_slots,
+  });
 }

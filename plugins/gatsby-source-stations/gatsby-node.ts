@@ -1,90 +1,105 @@
-import axios, {AxiosBasicCredentials, AxiosProxyConfig} from 'axios';
+import {createHash, HexBase64Latin1Encoding} from 'crypto';
 import {readJson} from 'fs-extra';
-import {StationData, createStationNode} from './Station';
+import moment from 'moment';
+import {resolve} from 'path';
+import {fetch, FetchOptions, FetchResponse, FetchResult} from './source';
+import {createStationNode, StationNode} from './Station';
 
-export interface FetchResult {
-  result: StationData[];
+export interface GatsbyNode extends StationNode {
+  id: string;
+  parent: any;
+  children: any[];
+  internal: {
+    content: string;
+    contentDigest: string;
+    description: string;
+    mediaType: string;
+    type: string;
+  };
 }
 
-export interface AxiosOptions {
-  method?: string;
-  baseURL?: string;
-  headers?: any;
-  params?: any;
-  data?: any;
-  timeout?: number;
-  withCredentials?: boolean;
-  auth?: AxiosBasicCredentials;
-  responseType?: string;
-  xsrfCookieName?: string;
-  xsrfHeaderName?: string;
-  maxContentLength?: number;
-  maxRedirects?: number;
-  httpAgent?: any;
-  httpsAgent?: any;
-  proxy?: AxiosProxyConfig | false;
-}
+export interface GatsbyStationNode extends StationNode, GatsbyNode {}
 
 export interface GatsbyOptions {
-  localData: string;
   name: string;
   typePrefix: string;
-  useLocalData: boolean;
-  verboseOutput?: boolean;
-  url: string;
+  url?: string;
+  useLocalData?: boolean;
 }
 
-type ComposedOptions = AxiosOptions & GatsbyOptions;
+type ComposedOptions = FetchOptions & GatsbyOptions;
 
 export async function sourceNodes(
   {actions: {createNode, setPluginStatus}, createNodeId}: any,
   {
-    localData,
     name,
     typePrefix,
-    useLocalData,
-    verboseOutput,
     url,
-    ...axiosConfig
-  }: ComposedOptions
+    useLocalData = true,
+    ...fetchOptions
+  }: ComposedOptions,
 ) {
-  if (!url) {
-    return;
+  const {error, fetchedAt, stations} = useLocalData
+    ? await fetchLocal()
+    : await fetch(url, fetchOptions);
+
+  if (error) {
+    throw error;
   }
 
-  const debug = (message: string) => {
-    if (verboseOutput) {
-      console.log(message);
-    }
-  };
-
-  const uri = useLocalData ? localData : url;
-
-  debug(`Fetching stations from ${uri} ...`);
-  const {data} = useLocalData
-    ? await fetchLocalData(uri)
-    : await fetchRemoteData(uri, axiosConfig);
-
-  if (!data || !data.result) {
-    debug(`Fetch failed.`);
-    return;
-  }
-
-  debug(`Fetched ${data.result.length} stations`);
-
-  data.result.forEach((station) => {
-    createStationNode(station, createNode, createNodeId);
+  stations.forEach((stationNode) => {
+    createNode(createGatsbyNode(stationNode, createNodeId));
   });
 
-  setPluginStatus({lastFetched: Date.now()});
+  setPluginStatus({fetchedAt: fetchedAt.utc().unix()});
 }
 
-async function fetchLocalData(path: string) {
+export async function fetchLocal(): Promise<FetchResult> {
+  try {
+    const {result} = (await readJson(
+      resolve(__dirname, 'data', 'stations.json'),
+    )) as FetchResponse;
+
+    return {
+      fetchedAt: moment(),
+      stations: result.map((stationData) => createStationNode(stationData)),
+    };
+  } catch (error) {
+    return {
+      error,
+      fetchedAt: moment(),
+      stations: [],
+    };
+  }
+}
+
+export function digest(
+  content: string,
+  algorithm = 'md5',
+  encoding: HexBase64Latin1Encoding = 'hex',
+) {
   return {
-    data: (await readJson(path)) as FetchResult,
+    content,
+    contentDigest: createHash(algorithm)
+      .update(content)
+      .digest(encoding),
   };
 }
 
-function fetchRemoteData(url: string, axiosConfig: AxiosOptions) {
-  return axios.get<FetchResult>(url, axiosConfig);
+export function createGatsbyNode(
+  stationNode: StationNode,
+  createNodeId: (id: string, namespace?: string) => string,
+): GatsbyStationNode {
+  return {
+    id: createNodeId(stationNode.name, 'Station'),
+    parent: null,
+    children: [],
+    internal: {
+      ...digest(JSON.stringify(stationNode)),
+      description: 'Mobi Bike Station',
+      mediaType: 'application/json',
+      type: 'Station',
+    },
+    ...stationNode,
+  };
 }
