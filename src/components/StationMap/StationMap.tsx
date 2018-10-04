@@ -58,10 +58,7 @@ export class StationMap extends React.PureComponent<ComposedProps> {
           position={{lat: station.lat, lng: station.lng}}
           onCloseClick={this.props.hideInfo}
           options={{
-            pixelOffset: {
-              width: 0,
-              height: -100,
-            },
+            pixelOffset: new google.maps.Size(0, -100),
           }}
         >
           <StationInfo fetchedAt={fetchedAt} station={station} />
