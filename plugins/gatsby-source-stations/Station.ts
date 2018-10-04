@@ -59,7 +59,7 @@ export function parseNameAndNumber({
 
 export function parseLatLng({coordinates}: StationData): StationNodeLatLng {
   try {
-    const match = /^(-?\d+\.\d+),\s+(-?\d+\.\d+)$/.exec(coordinates);
+    const match = /^\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*$/.exec(coordinates);
 
     if (!match) {
       throw new Error(`Unable to parse "lat, lng" from ${coordinates}`);
