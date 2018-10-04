@@ -119,15 +119,17 @@ export class StationMap extends React.PureComponent<ComposedProps> {
 
 export default compose<ComposedProps, Props>(
   withMapsApiKey(),
-  mapProps<MappedProps, Props>(({mapsApiKey, stations, ...props}) => {
-    return {
-      googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&v=3.exp&libraries=geometry,drawing,places`,
-      stations: stations.reduce((map, station) => {
-        return map.set(station.number, station);
-      }, new Map<number, StationNode>()),
-      ...props,
-    };
-  }),
+  mapProps<MappedProps, Props & WithMapsApiKeyProps>(
+    ({mapsApiKey, stations, ...props}) => {
+      return {
+        googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&v=3.exp&libraries=geometry,drawing,places`,
+        stations: stations.reduce((map, station) => {
+          return map.set(station.number, station);
+        }, new Map<number, StationNode>()),
+        ...props,
+      };
+    },
+  ),
   withProps({
     loadingElement: <div className={styles.LoadingContainer} />,
     containerElement: <div className={styles.MapContainer} />,
