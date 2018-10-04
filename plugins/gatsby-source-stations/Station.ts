@@ -81,17 +81,19 @@ export function parseLatLng({coordinates}: StationData): StationNodeLatLng {
 export function validate(node: UnvalidatedStationNode): StationNode {
   return {
     ...node,
-    valid: Boolean(
-      Number.isInteger(node.bikes) &&
-        Number.isInteger(node.free) &&
-        Number.isInteger(node.total) &&
-        Number.isInteger(node.number) &&
-        Number.isFinite(node.lat) &&
-        Number.isFinite(node.lng) &&
-        /^\w/.test(node.name) &&
-        !node.error_coordinates &&
-        !node.error_name
-    ),
+    valid: [
+      Number.isInteger(node.bikes),
+      Number.isInteger(node.free),
+      Number.isInteger(node.total),
+      Number.isInteger(node.number),
+      Number.isFinite(node.lat),
+      node.lat !== 0,
+      Number.isFinite(node.lng),
+      node.lng !== 0,
+      /^\w/.test(node.name),
+      !node.error_coordinates,
+      !node.error_name,
+    ].every((x) => x),
   };
 }
 
