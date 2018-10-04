@@ -20,9 +20,9 @@ export function StationInfo({fetchedAt, station}: Props) {
         <li>
           <a
             target="_blank"
-            href={`https://www.google.com/maps/@${station.lat},${
-              station.lng
-            },15z`}
+            href={`https://www.google.com/maps/dir/?api=${1}&travelmode=bicycling&destination=${
+              station.lat
+            },${station.lng}`}
           >{`${station.lat}, ${station.lng}`}</a>
         </li>
         <li>{`Last Updated: ${fetchedAt.fromNow()}`}</li>
