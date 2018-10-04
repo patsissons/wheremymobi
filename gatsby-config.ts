@@ -15,4 +15,4 @@ export const plugins = [
   stationApiSource,
 ];
 
-export const pathPrefix = '/wheremymobi';
+export const pathPrefix = '/';
