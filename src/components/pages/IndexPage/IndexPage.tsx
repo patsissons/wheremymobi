@@ -31,7 +31,7 @@ export interface Props {
 
 export function IndexPage({data, result}: Props) {
   if (!data && !result) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   const resolveResults = (): FetchResult => {
