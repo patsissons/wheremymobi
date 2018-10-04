@@ -62,6 +62,12 @@ export class StationMap extends React.PureComponent<ComposedProps> {
   };
 
   renderMarker = (station: StationNode) => {
+    if (!station.valid) {
+      // tslint:disable-next-line:no-console
+      console.debug(`Bad Station Found`, station);
+      return false;
+    }
+
     return (
       <StationMarker
         key={station.number}
