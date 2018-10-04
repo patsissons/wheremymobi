@@ -53,6 +53,12 @@ export class StationMap extends React.PureComponent<ComposedProps> {
         <InfoWindow
           position={{lat: station.lat, lng: station.lng}}
           onCloseClick={this.props.hideInfo}
+          options={{
+            pixelOffset: {
+              width: 0,
+              height: -100,
+            },
+          }}
         >
           <StationInfo fetchedAt={fetchedAt} station={station} />
         </InfoWindow>
