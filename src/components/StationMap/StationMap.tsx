@@ -1,6 +1,12 @@
 import * as React from 'react';
 import moment from 'moment';
-import {compose, mapProps, withProps, withStateHandlers} from 'recompose';
+import {
+  compose,
+  mapProps,
+  withProps,
+  withStateHandlers,
+  // mapPropsStream,
+} from 'recompose';
 import {
   BicyclingLayer,
   GoogleMap,
@@ -11,6 +17,8 @@ import {
   WithGoogleMapProps,
 } from 'react-google-maps';
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
+// import {Observable} from 'rxjs';
+// import {combineLatest, tap} from 'rxjs/operators';
 import {
   withMapsApiKey,
   WithMapsApiKeyProps,
@@ -29,6 +37,10 @@ export interface Props extends FetchProps {
   stations: StationNode[];
 }
 
+// interface PositionProps {
+//   position: Position | undefined;
+// }
+
 interface MappedProps extends FetchProps {
   stations: Map<number, StationNode>;
 }
@@ -43,6 +55,7 @@ interface StateProps {
 
 type ComposedProps = MappedProps &
   ActionProps &
+  // PositionProps &
   StateProps &
   WithMapsApiKeyProps &
   WithScriptjsProps &
@@ -100,11 +113,20 @@ export class StationMap extends React.PureComponent<ComposedProps> {
   };
 
   render() {
+    const {hideInfo} = this.props;
+
+    // const center = position
+    //   ? {lat: position.coords.latitude, lng: position.coords.longitude}
+    //   : undefined;
+    // const zoom = position ? 13 : undefined;
+
     return (
       <GoogleMap
         defaultZoom={13}
         defaultCenter={{lat: 49.279627, lng: -123.121116}}
-        onClick={this.props.hideInfo}
+        // center={center}
+        // zoom={zoom}
+        onClick={hideInfo}
       >
         <BicyclingLayer />
         {this.renderInfo()}
@@ -115,6 +137,24 @@ export class StationMap extends React.PureComponent<ComposedProps> {
 }
 
 export default compose<ComposedProps, Props>(
+  // mapPropsStream<any, any>((oldProps) => {
+  //   return new Observable((observer) => {
+  //     navigator.geolocation.watchPosition(
+  //       (position) => {
+  //         observer.next(position);
+  //       },
+  //       (error) => {
+  //         observer.error(error);
+  //       },
+  //       {enableHighAccuracy: true},
+  //     );
+  //   }).pipe(
+  //     combineLatest(oldProps as any, (position, props) => ({
+  //       ...props,
+  //       position,
+  //     })),
+  //   );
+  // }),
   withMapsApiKey(),
   mapProps<MappedProps, Props & WithMapsApiKeyProps>(
     ({mapsApiKey, stations, ...props}) => {
@@ -128,7 +168,7 @@ export default compose<ComposedProps, Props>(
     },
   ),
   withProps({
-    loadingElement: <div className={styles.LoadingContainer} />,
+    loadingElement: <div className={styles.LoadingContainer}>Loading...</div>,
     containerElement: <div className={styles.MapContainer} />,
     mapElement: <div className={styles.Map} />,
   }),
