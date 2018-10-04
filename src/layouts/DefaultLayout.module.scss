@@ -38,4 +38,8 @@
   > h1 {
     text-align: center;
   }
+
+  @include page-when-condensed {
+    display: none;
+  }
 }
