@@ -16,6 +16,10 @@ import {StationInfo, StationMarker} from './components';
 import {StationMarkerActionProps} from './components/StationMarker';
 
 import * as styles from './StationMap.module.scss';
+import {
+  withMapsApiKey,
+  WithMapsApiKeyProps,
+} from '~/components/StationMap/utils';
 
 interface FetchProps {
   fetchedAt: moment.Moment;
@@ -23,7 +27,6 @@ interface FetchProps {
 
 export interface Props extends FetchProps {
   stations: StationNode[];
-  mapsApiKey?: string;
 }
 
 interface MappedProps extends FetchProps {
@@ -41,6 +44,7 @@ interface StateProps {
 type ComposedProps = MappedProps &
   ActionProps &
   StateProps &
+  WithMapsApiKeyProps &
   WithScriptjsProps &
   WithGoogleMapProps;
 
@@ -114,21 +118,16 @@ export class StationMap extends React.PureComponent<ComposedProps> {
 }
 
 export default compose<ComposedProps, Props>(
-  mapProps<MappedProps, Props>(
-    ({
-      fetchedAt,
-      mapsApiKey = 'AIzaSyBXrYScIU6sWYUWLLlovYhzq-bLzwTgAoc',
-      stations,
-    }) => {
-      return {
-        fetchedAt,
-        stations: stations.reduce((map, station) => {
-          return map.set(station.number, station);
-        }, new Map<number, StationNode>()),
-        googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&v=3.exp&libraries=geometry,drawing,places`,
-      };
-    },
-  ),
+  withMapsApiKey(),
+  mapProps<MappedProps, Props>(({mapsApiKey, stations, ...props}) => {
+    return {
+      googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&v=3.exp&libraries=geometry,drawing,places`,
+      stations: stations.reduce((map, station) => {
+        return map.set(station.number, station);
+      }, new Map<number, StationNode>()),
+      ...props,
+    };
+  }),
   withProps({
     loadingElement: <div className={styles.LoadingContainer} />,
     containerElement: <div className={styles.MapContainer} />,
