@@ -11,15 +11,15 @@ import {
   WithGoogleMapProps,
 } from 'react-google-maps';
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
+import {
+  withMapsApiKey,
+  WithMapsApiKeyProps,
+} from '~/components/StationMap/utils';
 import {StationNode} from '~/gatsby-source-stations/Station';
 import {StationInfo, StationMarker} from './components';
 import {StationMarkerActionProps} from './components/StationMarker';
 
 import * as styles from './StationMap.module.scss';
-import {
-  withMapsApiKey,
-  WithMapsApiKeyProps,
-} from '~/components/StationMap/utils';
 
 interface FetchProps {
   fetchedAt: moment.Moment;
