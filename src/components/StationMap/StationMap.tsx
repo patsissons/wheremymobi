@@ -104,7 +104,7 @@ export class StationMap extends React.PureComponent<ComposedProps> {
     );
 
     return clustered ? (
-      <MarkerClusterer averageCenter enableRetinaIcons gridSize={30}>
+      <MarkerClusterer averageCenter enableRetinaIcons gridSize={50}>
         {markers}
       </MarkerClusterer>
     ) : (
