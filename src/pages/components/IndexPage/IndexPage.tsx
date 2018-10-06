@@ -3,10 +3,9 @@ import moment from 'moment';
 import {compose, mapPropsStream} from 'recompose';
 import {timer} from 'rxjs';
 import {map, mergeMap, startWith} from 'rxjs/operators';
-import {DefaultLayout} from '~/layouts';
-import StationMap from '~/components/StationMap';
+import {Loader, StationMap} from '~/components';
 import {FetchResult, fetchObservable} from '~/gatsby-source-stations/source';
-import {Loader} from './components';
+import {DefaultLayout} from '~/layouts';
 
 export interface Props {
   result?: FetchResult;
