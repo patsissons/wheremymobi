@@ -8,9 +8,6 @@ export function onCreateWebpackConfig({actions, loaders}: any) {
     resolve: {
       plugins: [tsconfigPathsPlugin],
     },
-    devServer: {
-      disableHostCheck: true,
-    },
   });
 }
 

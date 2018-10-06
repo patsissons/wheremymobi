@@ -1,4 +1,4 @@
-import {metadata, stationApiSource} from './config/gatsby';
+import {metadata} from './config/gatsby';
 
 export const siteMetadata = {
   author: metadata.author,
@@ -9,10 +9,6 @@ export const siteMetadata = {
   title: metadata.name,
 };
 
-export const plugins = [
-  'gatsby-plugin-sass',
-  'gatsby-plugin-typescript',
-  stationApiSource,
-];
+export const plugins = ['gatsby-plugin-sass', 'gatsby-plugin-typescript'];
 
 export const pathPrefix = '/';

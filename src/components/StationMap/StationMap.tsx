@@ -5,7 +5,8 @@ import {
   mapProps,
   withProps,
   withStateHandlers,
-  // mapPropsStream,
+  defaultProps,
+  StateHandlerMap,
 } from 'recompose';
 import {
   BicyclingLayer,
@@ -17,15 +18,14 @@ import {
   WithGoogleMapProps,
 } from 'react-google-maps';
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
-// import {Observable} from 'rxjs';
-// import {combineLatest, tap} from 'rxjs/operators';
-import {
-  withMapsApiKey,
-  WithMapsApiKeyProps,
-} from '~/components/StationMap/utils';
 import {StationNode} from '~/gatsby-source-stations/Station';
-import {StationInfo, StationMarker} from './components';
-import {StationMarkerActionProps} from './components/StationMarker';
+import {
+  SelectedStationProps,
+  StationInfo,
+  StationMarker,
+  StationMarkerActionProps,
+} from './components';
+import {withMapsApiKey, WithMapsApiKeyProps} from './decorators';
 
 import * as styles from './StationMap.module.scss';
 
@@ -37,29 +37,29 @@ export interface Props extends FetchProps {
   stations: StationNode[];
 }
 
-// interface PositionProps {
-//   position: Position | undefined;
-// }
+interface DefaultProps {
+  defaultCenter: google.maps.LatLngLiteral;
+  defaultZoom: number;
+}
 
-interface MappedProps extends FetchProps {
+interface InjectedProps {
   stations: Map<number, StationNode>;
 }
 
-interface ActionProps extends StationMarkerActionProps {
-  hideInfo(): void;
+interface ActionProps
+  extends StationMarkerActionProps,
+    StateHandlerMap<SelectedStationProps> {
+  hideInfo(): SelectedStationProps;
 }
 
-interface StateProps {
-  selectedStation?: StationNode;
-}
-
-type ComposedProps = MappedProps &
-  ActionProps &
-  // PositionProps &
-  StateProps &
+type ComposedProps = ActionProps &
+  DefaultProps &
+  FetchProps &
+  InjectedProps &
+  SelectedStationProps &
   WithMapsApiKeyProps &
-  WithScriptjsProps &
-  WithGoogleMapProps;
+  WithGoogleMapProps &
+  WithScriptjsProps;
 
 export class StationMap extends React.PureComponent<ComposedProps> {
   renderInfo = () => {
@@ -83,17 +83,19 @@ export class StationMap extends React.PureComponent<ComposedProps> {
 
   renderMarker = (station: StationNode) => {
     if (!station.valid) {
+      // this should never happen
       // tslint:disable-next-line:no-console
       console.debug(`Bad Station Found`, station);
       return false;
     }
 
+    const {showInfo} = this.props;
+
     return (
       <StationMarker
         key={station.number}
         station={station}
-        showInfo={this.props.showInfo}
-        position={{lat: station.lat, lng: station.lng}}
+        showInfo={showInfo}
       />
     );
   };
@@ -113,19 +115,12 @@ export class StationMap extends React.PureComponent<ComposedProps> {
   };
 
   render() {
-    const {hideInfo} = this.props;
-
-    // const center = position
-    //   ? {lat: position.coords.latitude, lng: position.coords.longitude}
-    //   : undefined;
-    // const zoom = position ? 13 : undefined;
+    const {hideInfo, defaultCenter, defaultZoom} = this.props;
 
     return (
       <GoogleMap
-        defaultZoom={13}
-        defaultCenter={{lat: 49.279627, lng: -123.121116}}
-        // center={center}
-        // zoom={zoom}
+        defaultCenter={defaultCenter}
+        defaultZoom={defaultZoom}
         onClick={hideInfo}
       >
         <BicyclingLayer />
@@ -137,42 +132,15 @@ export class StationMap extends React.PureComponent<ComposedProps> {
 }
 
 export default compose<ComposedProps, Props>(
-  // mapPropsStream<any, any>((oldProps) => {
-  //   return new Observable((observer) => {
-  //     navigator.geolocation.watchPosition(
-  //       (position) => {
-  //         observer.next(position);
-  //       },
-  //       (error) => {
-  //         observer.error(error);
-  //       },
-  //       {enableHighAccuracy: true},
-  //     );
-  //   }).pipe(
-  //     combineLatest(oldProps as any, (position, props) => ({
-  //       ...props,
-  //       position,
-  //     })),
-  //   );
-  // }),
-  withMapsApiKey(),
-  mapProps<MappedProps, Props & WithMapsApiKeyProps>(
-    ({mapsApiKey, stations, ...props}) => {
-      return {
-        googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&v=3.exp&libraries=geometry,drawing,places`,
-        stations: stations.reduce((map, station) => {
-          return map.set(station.number, station);
-        }, new Map<number, StationNode>()),
-        ...props,
-      };
+  withMapsApiKey,
+  defaultProps<DefaultProps>({
+    defaultCenter: {
+      lat: 49.279627,
+      lng: -123.121116,
     },
-  ),
-  withProps({
-    loadingElement: <div className={styles.LoadingContainer}>Loading...</div>,
-    containerElement: <div className={styles.MapContainer} />,
-    mapElement: <div className={styles.Map} />,
+    defaultZoom: 13,
   }),
-  withStateHandlers<StateProps, any, ComposedProps>(
+  withStateHandlers<SelectedStationProps, ActionProps, ComposedProps>(
     {},
     {
       showInfo() {
@@ -181,6 +149,24 @@ export default compose<ComposedProps, Props>(
       hideInfo() {
         return () => ({selectedStation: undefined});
       },
+    },
+  ),
+  withProps<WithGoogleMapProps & WithScriptjsProps, WithMapsApiKeyProps>(
+    ({mapsApiKey}) => ({
+      googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&v=3.exp&libraries=geometry,drawing,places`,
+      loadingElement: <div className={styles.LoadingContainer}>Loading...</div>,
+      containerElement: <div className={styles.MapContainer} />,
+      mapElement: <div className={styles.Map} />,
+    }),
+  ),
+  mapProps<InjectedProps, WithMapsApiKeyProps & Props>(
+    ({mapsApiKey, stations, ...props}) => {
+      return {
+        stations: stations.reduce((map, station) => {
+          return map.set(station.number, station);
+        }, new Map<number, StationNode>()),
+        ...props,
+      };
     },
   ),
   withScriptjs,
