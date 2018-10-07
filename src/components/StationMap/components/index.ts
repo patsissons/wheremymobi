@@ -1,3 +1,7 @@
+import GpsMarker, {GpsMarkerProps} from './GpsMarker';
+export type GpsMarkerProps = GpsMarkerProps;
+export {GpsMarker};
+
 import StationInfo, {StationInfoProps} from './StationInfo';
 export type StationInfoProps = StationInfoProps;
 export {StationInfo};

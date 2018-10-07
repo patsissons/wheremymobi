@@ -20,6 +20,8 @@ import {
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import {StationNode} from '~/station';
 import {
+  GpsMarker,
+  GpsMarkerProps,
   SelectedStationProps,
   StationInfo,
   StationMarker,
@@ -33,7 +35,11 @@ interface FetchProps {
   fetchedAt: moment.Moment;
 }
 
-export interface Props extends FetchProps {
+interface PositionProps {
+  position: Partial<GpsMarkerProps> | undefined;
+}
+
+export interface Props extends FetchProps, PositionProps {
   nodes: StationNode[];
 }
 
@@ -56,6 +62,7 @@ type ComposedProps = ActionProps &
   DefaultProps &
   FetchProps &
   InjectedProps &
+  PositionProps &
   SelectedStationProps &
   WithMapsApiKeyProps &
   WithGoogleMapProps &
@@ -109,11 +116,28 @@ export class StationMap extends React.PureComponent<ComposedProps> {
     );
 
     return clustered ? (
-      <MarkerClusterer averageCenter enableRetinaIcons gridSize={50}>
+      <MarkerClusterer
+        averageCenter
+        enableRetinaIcons
+        gridSize={50}
+        maxZoom={17}
+      >
         {markers}
       </MarkerClusterer>
     ) : (
       markers
+    );
+  };
+
+  renderPosition = () => {
+    const {position} = this.props;
+
+    if (!position || !position.coords || !position.timestamp) {
+      return false;
+    }
+
+    return (
+      <GpsMarker coords={position.coords} timestamp={position.timestamp} />
     );
   };
 
@@ -127,6 +151,7 @@ export class StationMap extends React.PureComponent<ComposedProps> {
         onClick={hideInfo}
       >
         <BicyclingLayer />
+        {this.renderPosition()}
         {this.renderInfo()}
         {this.renderMarkers()}
       </GoogleMap>

@@ -16,14 +16,16 @@ type ComposedProps = WithPositionProps &
   WithStationsProps;
 
 export function IndexPage({params, position, stations}: ComposedProps) {
-  const isLoading = !params || !stations;
-
   return (
     <DefaultLayout>
-      {isLoading ? (
+      {!params || !stations ? (
         <Loader />
       ) : (
-        <StationMap fetchedAt={stations.fetchedAt} nodes={stations.nodes} />
+        <StationMap
+          fetchedAt={stations.fetchedAt}
+          nodes={stations.nodes}
+          position={position}
+        />
       )}
     </DefaultLayout>
   );
@@ -32,5 +34,5 @@ export function IndexPage({params, position, stations}: ComposedProps) {
 export default compose<ComposedProps, {}>(
   withQueryParams,
   withPosition(),
-  withStations('vancouver'),
+  withStations(),
 )(IndexPage);
