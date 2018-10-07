@@ -18,7 +18,7 @@ import {
   WithGoogleMapProps,
 } from 'react-google-maps';
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
-import {StationNode} from '~/gatsby-source-stations/Station';
+import {StationNode} from '~/station';
 import {
   SelectedStationProps,
   StationInfo,
@@ -34,7 +34,7 @@ interface FetchProps {
 }
 
 export interface Props extends FetchProps {
-  stations: StationNode[];
+  nodes: StationNode[];
 }
 
 interface DefaultProps {
@@ -43,7 +43,7 @@ interface DefaultProps {
 }
 
 interface InjectedProps {
-  stations: Map<number, StationNode>;
+  nodes: Map<number, StationNode>;
 }
 
 interface ActionProps
@@ -63,29 +63,32 @@ type ComposedProps = ActionProps &
 
 export class StationMap extends React.PureComponent<ComposedProps> {
   renderInfo = () => {
-    const {fetchedAt, selectedStation: station} = this.props;
+    const {fetchedAt, selectedNode} = this.props;
 
     return (
-      (station && (
+      (selectedNode && (
         <InfoWindow
-          position={{lat: station.lat, lng: station.lng}}
+          position={{
+            lat: selectedNode.station.lat,
+            lng: selectedNode.station.lng,
+          }}
           onCloseClick={this.props.hideInfo}
           options={{
             pixelOffset: new google.maps.Size(0, -100),
           }}
         >
-          <StationInfo fetchedAt={fetchedAt} station={station} />
+          <StationInfo fetchedAt={fetchedAt} station={selectedNode.station} />
         </InfoWindow>
       )) ||
       false
     );
   };
 
-  renderMarker = (station: StationNode) => {
-    if (!station.valid) {
+  renderMarker = (node: StationNode) => {
+    if (!node.isValid) {
       // this should never happen
       // tslint:disable-next-line:no-console
-      console.debug(`Bad Station Found`, station);
+      console.debug(`Bad Station Found`, node.station);
       return false;
     }
 
@@ -93,15 +96,15 @@ export class StationMap extends React.PureComponent<ComposedProps> {
 
     return (
       <StationMarker
-        key={station.number}
-        station={station}
+        key={node.station.number}
+        node={node}
         showInfo={showInfo}
       />
     );
   };
 
   renderMarkers = (clustered = true) => {
-    const markers = Array.from(this.props.stations.values()).map(
+    const markers = Array.from(this.props.nodes.values()).map(
       this.renderMarker,
     );
 
@@ -144,10 +147,10 @@ export default compose<ComposedProps, Props>(
     {},
     {
       showInfo() {
-        return (selectedStation: StationNode) => ({selectedStation});
+        return (selectedNode: StationNode) => ({selectedNode});
       },
       hideInfo() {
-        return () => ({selectedStation: undefined});
+        return () => ({selectedNode: undefined});
       },
     },
   ),
@@ -160,10 +163,10 @@ export default compose<ComposedProps, Props>(
     }),
   ),
   mapProps<InjectedProps, WithMapsApiKeyProps & Props>(
-    ({mapsApiKey, stations, ...props}) => {
+    ({mapsApiKey, nodes, ...props}) => {
       return {
-        stations: stations.reduce((map, station) => {
-          return map.set(station.number, station);
+        nodes: nodes.reduce((map, node) => {
+          return map.set(node.station.number, node);
         }, new Map<number, StationNode>()),
         ...props,
       };

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import moment from 'moment';
-import {StationNode} from '~/gatsby-source-stations/Station';
+import {Station} from '~/station';
 
 export interface Props {
   fetchedAt: moment.Moment;
-  station: StationNode;
+  station: Station;
 }
 
 export function StationInfo({fetchedAt, station}: Props) {

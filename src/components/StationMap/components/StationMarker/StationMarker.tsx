@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {Marker, MarkerProps} from 'react-google-maps';
 import {compose, withHandlers} from 'recompose';
-import {StationNode} from '~/gatsby-source-stations/Station';
+import {StationNode} from '~/station';
 import {createIcon} from './icon';
 
 export interface SelectedStationProps {
-  selectedStation?: StationNode;
+  selectedNode?: StationNode;
 }
 
 export interface ActionProps {
@@ -13,7 +13,7 @@ export interface ActionProps {
 }
 
 export interface Props extends ActionProps, MarkerProps {
-  station: StationNode;
+  node: StationNode;
 }
 
 interface HandlerProps {
@@ -25,7 +25,7 @@ type ComposedProps = Props & HandlerProps;
 export function StationMarker({
   handleOnClick,
   showInfo,
-  station,
+  node: {station},
   ...props
 }: ComposedProps) {
   const {lat, lng} = station;
@@ -47,8 +47,8 @@ export function StationMarker({
 
 export default compose<ComposedProps, Props>(
   withHandlers({
-    handleOnClick({showInfo, station}: Props) {
-      return () => showInfo(station);
+    handleOnClick({showInfo, node}: Props) {
+      return () => showInfo(node);
     },
   }),
 )(StationMarker);

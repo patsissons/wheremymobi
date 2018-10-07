@@ -1,53 +1,36 @@
 import * as React from 'react';
-import moment from 'moment';
-import {compose, mapPropsStream} from 'recompose';
-import {timer} from 'rxjs';
-import {map, mergeMap, startWith} from 'rxjs/operators';
+import {compose} from 'recompose';
 import {Loader, StationMap} from '~/components';
-import {FetchResult, fetchObservable} from '~/gatsby-source-stations/source';
 import {DefaultLayout} from '~/layouts';
+import {
+  withPosition,
+  WithPositionProps,
+  withQueryParams,
+  WithQueryParamProps,
+  withStations,
+  WithStationsProps,
+} from './decorators';
 
-export interface Props {
-  result?: FetchResult;
-}
+type ComposedProps = WithPositionProps &
+  WithQueryParamProps &
+  WithStationsProps;
 
-export function IndexPage({result}: Props) {
-  if (!result) {
-    return <Loader />;
-  }
-
-  const resolveResults = (): FetchResult => {
-    if (result && result.fetchedAt && result.stations) {
-      return result;
-    }
-
-    return {
-      error: new Error('fail'),
-      fetchedAt: moment(),
-      stations: [],
-    };
-  };
-
-  const {error, fetchedAt, stations} = resolveResults();
+export function IndexPage({params, position, stations}: ComposedProps) {
+  const isLoading = !params || !stations;
 
   return (
     <DefaultLayout>
-      {Boolean(error) && <div>{error.message}</div>}
-      <StationMap fetchedAt={fetchedAt} stations={stations} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <StationMap fetchedAt={stations.fetchedAt} nodes={stations.nodes} />
+      )}
     </DefaultLayout>
   );
 }
 
-export default compose<Props, {}>(
-  mapPropsStream(() => {
-    return timer(0, 1000 * 60 * 5).pipe(
-      mergeMap(() => fetchObservable()),
-      map((result) => {
-        return {
-          result,
-        };
-      }),
-      startWith({}),
-    );
-  }),
+export default compose<ComposedProps, {}>(
+  withQueryParams,
+  withPosition(),
+  withStations('vancouver'),
 )(IndexPage);
