@@ -1,5 +1,8 @@
+import dotenv from 'dotenv';
 import metadata from '../../package.json';
 
-export {metadata};
+dotenv.config();
+const {env} = process;
+
+export {env, metadata};
 export {writeGraphQLSchema} from './graphql';
-export {stationApiSource} from './source';

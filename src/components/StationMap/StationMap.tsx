@@ -33,6 +33,7 @@ import * as styles from './StationMap.module.scss';
 
 interface FetchProps {
   fetchedAt: moment.Moment;
+  location: google.maps.LatLngLiteral;
 }
 
 interface PositionProps {
@@ -70,15 +71,12 @@ type ComposedProps = ActionProps &
 
 export class StationMap extends React.PureComponent<ComposedProps> {
   renderInfo = () => {
-    const {fetchedAt, selectedNode} = this.props;
+    const {fetchedAt, location, selectedNode} = this.props;
 
     return (
       (selectedNode && (
         <InfoWindow
-          position={{
-            lat: selectedNode.station.lat,
-            lng: selectedNode.station.lng,
-          }}
+          position={location}
           onCloseClick={this.props.hideInfo}
           options={{
             pixelOffset: new google.maps.Size(0, -100),

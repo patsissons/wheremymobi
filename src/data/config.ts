@@ -12,9 +12,22 @@ export interface StationSourceConfig {
   options?: any;
   type: keyof typeof StationSourceType;
   uri: string;
+  cors?: boolean;
 }
 
 const configMap = new Map<string, StationSourceConfig>([
+  [
+    'test',
+    {
+      location: {
+        lat: 49.279627,
+        lng: -123.121116,
+      },
+      name: 'Test Data',
+      type: 'Smoove',
+      uri: '/static_data',
+    },
+  ],
   [
     'vancouver',
     {
@@ -25,6 +38,7 @@ const configMap = new Map<string, StationSourceConfig>([
       name: 'Mobi Bike Vancouver',
       type: 'Smoove',
       uri: 'http://vancouver-ca.smoove.pro/api-public/stations',
+      cors: true,
     },
   ],
 ]);

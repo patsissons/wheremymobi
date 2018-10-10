@@ -1,14 +1,14 @@
 import {mapPropsStream, setObservableConfig, withProps} from 'recompose';
-import {from, Observable} from 'rxjs';
+import {from, Observable, combineLatest} from 'rxjs';
 import {
-  withLatestFrom,
   map,
   filter,
   distinctUntilChanged,
-  mergeMap,
   startWith,
+  mergeMap,
 } from 'rxjs/operators';
 import {StationSource, StationSourceResult} from '~/data';
+import {Subject} from 'rxjs/internal/Subject';
 
 setObservableConfig({
   fromESObservable: from as any,
@@ -56,41 +56,60 @@ export function withPosition(
   });
 
   return mapPropsStream<WithPositionProps, {}>((props) => {
-    return source.pipe(
-      withLatestFrom(props, (position, prevProps) => {
+    return combineLatest(
+      source.pipe(startWith(undefined)),
+      props,
+      (position, prev) => {
+        console.log('[position]', position, prev);
         return {
-          ...prevProps,
+          ...prev,
           position,
         };
-      }),
-      startWith({}),
+      },
     );
   });
 }
 
 export interface WithStationsProps {
   stations?: StationSourceResult;
+  reload(): void;
 }
 
 export function withStations(defaultKey = 'vancouver') {
-  return mapPropsStream<WithStationsProps, WithQueryParamProps>((props) => {
-    return props.pipe(
+  const reloader = new Subject();
+
+  return mapPropsStream<
+    WithStationsProps,
+    WithStationsProps & WithQueryParamProps
+  >((props) => {
+    const stationsObservable = props.pipe(
       filter(({params}) => Boolean(params)),
       map(({params}) => {
-        return params.get('source') || defaultKey;
-      }),
-      distinctUntilChanged(),
-      withLatestFrom(props, (key, {params}) => {
-        return StationSource.create(key, params.has('debug'));
-      }),
-      mergeMap((station) => station.watchStations()),
-      withLatestFrom(props, (stations, prevProps) => {
         return {
-          ...prevProps,
-          stations,
+          debug: Boolean(params.get('debug')),
+          source:
+            params.get('source') || (params.get('test') ? 'test' : defaultKey),
         };
       }),
-      startWith({}),
+      distinctUntilChanged(
+        (a, b) => a.debug === b.debug && a.source === b.source,
+      ),
+      mergeMap(({debug, source}) => {
+        console.log('fetch', {source, debug});
+        return StationSource.create(source, {debug}).watchStations(reloader);
+      }),
     );
+
+    return combineLatest(stationsObservable, props, (stations, prev) => {
+      console.log('[stations]', stations, prev);
+      return {
+        ...prev,
+        stations,
+        reload: () => {
+          console.log('reload');
+          reloader.next();
+        },
+      };
+    });
   });
 }

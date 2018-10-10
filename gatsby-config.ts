@@ -1,6 +1,7 @@
-import {metadata} from './config/gatsby';
+import {env, metadata} from './config/gatsby';
 
 export const siteMetadata = {
+  env,
   author: metadata.author,
   description: metadata.description,
   logo: 'https://www.mobibikes.ca/sites/all/themes/smoove_bootstrap/logo.png',

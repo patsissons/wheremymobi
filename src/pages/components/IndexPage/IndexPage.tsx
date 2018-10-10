@@ -15,7 +15,8 @@ type ComposedProps = WithPositionProps &
   WithQueryParamProps &
   WithStationsProps;
 
-export function IndexPage({params, position, stations}: ComposedProps) {
+export function IndexPage({params, position, reload, stations}: ComposedProps) {
+  console.log('reload', reload);
   return (
     <DefaultLayout>
       {!params || !stations ? (
@@ -23,6 +24,7 @@ export function IndexPage({params, position, stations}: ComposedProps) {
       ) : (
         <StationMap
           fetchedAt={stations.fetchedAt}
+          location={stations.config.location}
           nodes={stations.nodes}
           position={position}
         />

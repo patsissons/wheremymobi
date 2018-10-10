@@ -1,7 +1,7 @@
 import moment from 'moment';
-import {Observable, of, timer} from 'rxjs';
+import {Observable, of, timer, combineLatest, merge} from 'rxjs';
 import {ajax} from 'rxjs/ajax';
-import {tap, map, catchError, mergeMap} from 'rxjs/operators';
+import {tap, map, catchError, mergeMap, debounceTime} from 'rxjs/operators';
 import {Station, StationNode} from '~/station';
 import {
   getConfig,
@@ -12,23 +12,29 @@ import {
 } from './config';
 
 export interface StationSourceResult {
+  config: StationSourceConfig;
   error?: any[];
   fetchedAt: moment.Moment;
   nodes: StationNode[];
 }
 
+export interface Options {
+  debug?: boolean;
+}
+
 export class StationSource {
   public static create(
     configOrKey: string | StationSourceConfig,
-    verboseOutput?: boolean,
+    {debug}: Options,
   ) {
     const config =
       typeof configOrKey === 'string' ? getConfig(configOrKey) : configOrKey;
-    return new StationSource(config, mapTransform(config), verboseOutput);
+
+    return new StationSource(config, mapTransform(config), debug);
   }
 
-  public static nearest(location: google.maps.LatLng, verboseOutput?: boolean) {
-    return StationSource.create(getConfigByLocation(location), verboseOutput);
+  public static nearest(location: google.maps.LatLng, options: Options) {
+    return StationSource.create(getConfigByLocation(location), options);
   }
 
   readonly config: StationSourceConfig;
@@ -46,7 +52,9 @@ export class StationSource {
   }
 
   getJSON() {
-    const uri = `https://cors.io/?${this.config.uri}`;
+    const uri = this.config.cors
+      ? `https://cors.io/?${this.config.uri}`
+      : this.config.uri;
     this.debug(`Fetching stations from '${uri}' ...`);
 
     const headers = this.config.options
@@ -65,6 +73,7 @@ export class StationSource {
         this.debug(`Fetched ${stations.length} stations`);
 
         return {
+          config: this.config,
           nodes: stations.map((station) => new StationNode(station)),
           fetchedAt: moment(),
         };
@@ -74,6 +83,7 @@ export class StationSource {
 
         return of<StationSourceResult>({
           error,
+          config: this.config,
           fetchedAt: moment(),
           nodes: [],
         });
@@ -81,8 +91,13 @@ export class StationSource {
     );
   }
 
-  watchStations(interval = 300, source?: Observable<any>) {
-    return timer(0, 1000 * interval).pipe(
+  watchStations(
+    reloader: Observable<any> = of(true),
+    interval = 300,
+    source?: Observable<any>,
+  ) {
+    return merge(timer(0, 1000 * interval), reloader).pipe(
+      debounceTime(100),
       mergeMap(() => this.getStations(source)),
     );
   }
