@@ -40,13 +40,13 @@ yarn
 npm install
 
 # serve with hot reload at localhost:8000
-npm start
+yarn start
 
 # build for production
-npm run build
+yarn build
 
 # build for production and push to gh-pages branch
-npm run deploy
+yarn deploy
 ```
 
 ## Credits
