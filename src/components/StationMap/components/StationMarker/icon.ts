@@ -18,9 +18,8 @@ export function getFillColor({bikes}: Station): string {
 }
 
 function markerWithFillColor(station: Station) {
-  return `data:image/svg+xml;utf8,${marker.replace(
-    /fill="currentColor"/,
-    `fill="${getFillColor(station)}"`,
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
+    marker.replace(/fill="currentColor"/, `fill="${getFillColor(station)}"`),
   )}`;
 }
 
