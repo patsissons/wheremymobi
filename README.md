@@ -45,6 +45,9 @@ yarn start
 # build for production
 yarn build
 
+# test out production build
+yarn server
+
 # build for production and push to gh-pages branch
 yarn deploy
 ```
