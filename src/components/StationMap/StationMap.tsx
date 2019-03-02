@@ -157,9 +157,9 @@ export class StationMap extends React.PureComponent<ComposedProps> {
         onClick={hideInfo}
       >
         <BicyclingLayer />
+        {this.renderMarkers()}
         {this.renderPosition()}
         {this.renderInfo()}
-        {this.renderMarkers()}
       </GoogleMap>
     );
   }
