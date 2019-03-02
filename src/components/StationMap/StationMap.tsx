@@ -71,21 +71,29 @@ type ComposedProps = ActionProps &
 
 export class StationMap extends React.PureComponent<ComposedProps> {
   renderInfo = () => {
-    const {fetchedAt, location, selectedNode} = this.props;
+    const {fetchedAt, selectedNode} = this.props;
+
+    if (!selectedNode) {
+      return false;
+    }
+
+    const {
+      station: {lat, lng},
+    } = selectedNode;
 
     return (
-      (selectedNode && (
-        <InfoWindow
-          position={location}
-          onCloseClick={this.props.hideInfo}
-          options={{
-            pixelOffset: new google.maps.Size(0, -100),
-          }}
-        >
-          <StationInfo fetchedAt={fetchedAt} station={selectedNode.station} />
-        </InfoWindow>
-      )) ||
-      false
+      <InfoWindow
+        position={{
+          lat,
+          lng,
+        }}
+        onCloseClick={this.props.hideInfo}
+        options={{
+          pixelOffset: new google.maps.Size(0, -100),
+        }}
+      >
+        <StationInfo fetchedAt={fetchedAt} station={selectedNode.station} />
+      </InfoWindow>
     );
   };
 
