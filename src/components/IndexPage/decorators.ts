@@ -15,19 +15,27 @@ setObservableConfig({
 });
 
 export interface WithQueryParamProps {
-  params: Map<string, string>;
+  params: Map<string, string> | null;
 }
 
 function getUrlParams() {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   const params = new Map<string, string>();
+
   new URLSearchParams(window.location.search).forEach((value, key) => {
     params.set(key.toLowerCase(), value);
   });
+
   return params;
 }
 
-export const withQueryParams = withProps<WithQueryParamProps, {}>({
-  params: getUrlParams(),
+export const withQueryParams = withProps<WithQueryParamProps, {}>(() => {
+  return {
+    params: getUrlParams(),
+  };
 });
 
 interface PositionProps {
@@ -40,35 +48,35 @@ export interface WithPositionProps {
   position?: PositionProps;
 }
 
-export function withPosition(
-  options: PositionOptions = {enableHighAccuracy: true},
-) {
-  const source = new Observable<PositionProps>((observer) => {
-    navigator.geolocation.watchPosition(
-      (position) => {
-        observer.next(position);
-      },
-      (error) => {
-        observer.error({error});
-      },
-      options,
-    );
-  });
+// export function withPosition(
+//   options: PositionOptions = {enableHighAccuracy: true},
+// ) {
+//   return mapPropsStream<WithPositionProps, {}>((props) => {
+//     const source = new Observable<PositionProps>((observer) => {
+//       navigator.geolocation.watchPosition(
+//         (position) => {
+//           observer.next(position);
+//         },
+//         (error) => {
+//           observer.error({error});
+//         },
+//         options,
+//       );
+//     });
 
-  return mapPropsStream<WithPositionProps, {}>((props) => {
-    return combineLatest(
-      source.pipe(startWith(undefined)),
-      props,
-      (position, prev) => {
-        console.log('[position]', position, prev);
-        return {
-          ...prev,
-          position,
-        };
-      },
-    );
-  });
-}
+//     return combineLatest(
+//       source.pipe(startWith(undefined)),
+//       props,
+//       (position, prev) => {
+//         console.log('[position]', position, prev);
+//         return {
+//           ...prev,
+//           position,
+//         };
+//       },
+//     );
+//   });
+// }
 
 export interface WithStationsProps {
   stations?: StationSourceResult;
@@ -83,12 +91,14 @@ export function withStations(defaultKey = 'vancouver') {
     WithStationsProps & WithQueryParamProps
   >((props) => {
     const stationsObservable = props.pipe(
-      filter(({params}) => Boolean(params)),
-      map(({params}) => {
+      map(({params}) => params),
+      map((params) => {
         return {
-          debug: Boolean(params.get('debug')),
+          debug: params ? Boolean(params.get('debug')) : false,
           source:
-            params.get('source') || (params.get('test') ? 'test' : defaultKey),
+            (params &&
+              (params.get('source') || (params.get('test') && 'test'))) ||
+            defaultKey,
         };
       }),
       distinctUntilChanged(
