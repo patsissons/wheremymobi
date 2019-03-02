@@ -125,7 +125,7 @@ export class StationMap extends React.PureComponent<ComposedProps> {
       <MarkerClusterer
         averageCenter
         enableRetinaIcons
-        gridSize={50}
+        gridSize={60}
         maxZoom={17}
       >
         {markers}
