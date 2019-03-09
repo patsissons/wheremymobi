@@ -43,6 +43,7 @@ export function GpsMarker({
           strokeWeight: 1,
         }}
         position={new google.maps.LatLng(lat, lng)}
+        zIndex={google.maps.Marker.MAX_ZINDEX}
         {...props}
       />
     </>

@@ -3,9 +3,9 @@ import {compose} from 'recompose';
 import {Loader, StationMap} from '~/components';
 import {DefaultLayout} from '~/layouts';
 import {
-  // withPosition,
+  withPosition,
   WithPositionProps,
-  // withQueryParams,
+  withQueryParams,
   WithQueryParamProps,
   withStations,
   WithStationsProps,
@@ -16,7 +16,6 @@ type ComposedProps = WithPositionProps &
   WithStationsProps;
 
 export function IndexPage({position, reload, stations}: ComposedProps) {
-  console.log('reload', reload);
   return (
     <DefaultLayout>
       {!stations ? (
@@ -27,6 +26,7 @@ export function IndexPage({position, reload, stations}: ComposedProps) {
           location={stations.config.location}
           nodes={stations.nodes}
           position={position}
+          reload={reload}
         />
       )}
     </DefaultLayout>
@@ -34,7 +34,7 @@ export function IndexPage({position, reload, stations}: ComposedProps) {
 }
 
 export default compose<ComposedProps, {}>(
-  // withQueryParams,
-  // withPosition(),
+  withQueryParams,
+  withPosition(),
   withStations(),
 )(IndexPage);

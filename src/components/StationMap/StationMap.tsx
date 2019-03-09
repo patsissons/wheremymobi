@@ -42,6 +42,7 @@ interface PositionProps {
 
 export interface Props extends FetchProps, PositionProps {
   nodes: StationNode[];
+  reload(): void;
 }
 
 interface DefaultProps {
