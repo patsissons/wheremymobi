@@ -21,14 +21,16 @@
     "bike"
   ],
   "license": "MIT",
-  "main": "n/a",
   "scripts": {
     "build": "yarn gatsby build",
-    "clean": "rimraf public .cache",
-    "deploy": "yarn build --prefix-paths && gh-pages -d public",
+    "clean": "del docs .cache",
+    "deploy": "yarn clean && yarn build --prefix-paths && ncp public docs",
     "dev": "yarn gatsby develop",
     "gatsby": "ts-node node_modules/gatsby-cli/lib/index.js",
-    "lint": "tslint --project tsconfig.json",
+    "lint": "yarn lint:ts",
+    "lint:stats": "yarn lint:ts --format node_modules/eslint-stats/byError.js",
+    "lint:ts": "eslint . --ext .ts --ext .tsx --max-warnings 0 --format codeframe",
+    "pretty": "prettier --write '**/*.{css,scss,js,json,md,ts,tsx,yml}'",
     "server": "yarn gatsby serve",
     "start": "yarn dev",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -37,11 +39,12 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
-    "gatsby": "^2.0.0-rc.1",
-    "gatsby-plugin-sass": "^2.0.0-rc.1",
-    "gatsby-plugin-typescript": "^2.0.0-rc.1",
-    "graphql": "^0.13.0",
-    "moment": "^2.22.2",
+    "@babel/core": "^7.0.0-0",
+    "gatsby": "^2.0.0",
+    "gatsby-plugin-sass": "^2.0.0",
+    "gatsby-plugin-typescript": "^2.0.0",
+    "graphql": "^14.0.0",
+    "moment": "^2.0.0",
     "node-sass": "^4.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -49,29 +52,74 @@
     "react-spinkit": "^3.0.0",
     "recompose": "^0.30.0",
     "rxjs": "^6.0.0",
-    "typescript": "^3.0.0"
+    "typescript": "~3.2.0"
   },
   "devDependencies": {
-    "@types/dotenv": "^4.0.0",
+    "@types/dotenv": "^6.0.0",
     "@types/fs-extra": "^5.0.0",
     "@types/googlemaps": "^3.0.0",
-    "@types/graphql": "^0.13.0",
-    "@types/node": "^10.0.0",
+    "@types/graphql": "^14.0.0",
+    "@types/node": "^11.0.0",
     "@types/react": "^16.0.0",
     "@types/react-dom": "^16.0.0",
     "@types/react-spinkit": "^3.0.0",
-    "@types/recompose": "^0.27.0",
+    "@types/recompose": "^0.30.0",
+    "del-cli": "^1.0.0",
     "dotenv": "^6.0.0",
+    "eslint": "^5.0.0",
+    "eslint-plugin-shopify": "^26.0.0",
+    "eslint-stats": "^1.0.0",
     "fs-extra": "^7.0.0",
-    "gh-pages": "^1.0.0",
+    "husky": "^1.0.0",
+    "ncp": "^2.0.0",
     "prettier": "^1.0.0",
-    "rimraf": "^2.0.0",
+    "pretty-quick": "^1.0.0",
     "sass-loader": "^7.0.0",
-    "ts-node": "^7.0.0",
-    "tsconfig-paths-webpack-plugin": "^3.0.0",
-    "tslint": "^5.0.0",
-    "tslint-config-blvd": "^1.0.0",
-    "tslint-config-prettier": "^1.0.0",
-    "tslint-plugin-prettier": "^1.0.0"
-  }
+    "ts-node": "^8.0.0",
+    "tsconfig-paths-webpack-plugin": "^3.0.0"
+  },
+  "resolutions": {
+    "graphql": "14.1.1",
+    "typescript-eslint-parser": "22.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:shopify/react",
+      "plugin:shopify/typescript",
+      "plugin:shopify/jest",
+      "plugin:shopify/prettier"
+    ],
+    "settings": {
+      "react": {
+        "version": "16.8"
+      }
+    },
+    "rules": {
+      "import/no-anonymous-default-export": "off",
+      "import/no-named-as-default": "off",
+      "no-empty-pattern": "off",
+      "shopify/images-no-direct-imports": "off"
+    },
+    "overrides": []
+  },
+  "eslintIgnore": [
+    "/.cache",
+    "/build",
+    "/docs",
+    "/public"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "browserslist": [
+    "last 3 chrome versions",
+    "last 3 chromeandroid versions",
+    "last 3 firefox versions",
+    "last 3 opera versions",
+    "last 2 edge versions",
+    "safari >= 10",
+    "ios >= 9"
+  ]
 }
