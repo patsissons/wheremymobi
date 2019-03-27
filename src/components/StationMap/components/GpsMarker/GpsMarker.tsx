@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import {Circle, Marker, MarkerProps} from 'react-google-maps';
 
 export interface Props extends MarkerProps {

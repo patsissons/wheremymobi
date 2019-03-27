@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {Observable, of, timer, combineLatest, merge} from 'rxjs';
+import {Observable, of, timer, merge} from 'rxjs';
 import {ajax} from 'rxjs/ajax';
 import {tap, map, catchError, mergeMap, debounceTime} from 'rxjs/operators';
 import {Station, StationNode} from '~/station';

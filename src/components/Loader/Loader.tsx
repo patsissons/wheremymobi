@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import Spinner, {SpinnerProps} from 'react-spinkit';
 import {compose, withProps} from 'recompose';
 

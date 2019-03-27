@@ -1,4 +1,3 @@
-import {OperatorFunction} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {createStation, parseLatLng, Station} from '~/station';
 

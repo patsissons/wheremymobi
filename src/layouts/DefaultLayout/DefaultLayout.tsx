@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import {graphql, StaticQuery} from 'gatsby';
 import {compose, defaultProps, fromRenderProps} from 'recompose';
 import {Header, HeaderProps} from './components';
