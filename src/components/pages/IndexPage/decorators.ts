@@ -76,6 +76,7 @@ export function withPosition(
       }),
       startWith(undefined),
       combineLatest(props, (position, prev) => {
+        // eslint-disable-next-line no-console
         console.log('[position]', position, prev);
         return {
           ...prev,
@@ -95,6 +96,7 @@ export interface WithStationsProps {
 export function withStations(defaultKey = 'vancouver') {
   const reloader = new Subject();
   const reload = () => {
+    // eslint-disable-next-line no-console
     console.log('reload');
     reloader.next();
   };
@@ -116,13 +118,16 @@ export function withStations(defaultKey = 'vancouver') {
         };
       }),
       distinctUntilChanged(
-        (a, b) => a.debug === b.debug && a.source === b.source,
+        (left, right) =>
+          left.debug === right.debug && left.source === right.source,
       ),
       mergeMap(({debug, source}) => {
+        // eslint-disable-next-line no-console
         console.log('fetch', {source, debug});
         return StationSource.create(source, {debug}).watchStations(reloader);
       }),
       combineLatest(props, (stations, prev) => {
+        // eslint-disable-next-line no-console
         console.log('[stations]', stations, prev);
         return {
           ...prev,

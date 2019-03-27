@@ -1,3 +1,5 @@
-import Header, {HeaderProps} from './Header';
+import {HeaderProps} from './Header';
+
 export type HeaderProps = HeaderProps;
-export {Header};
+
+export {default as Header} from './Header';

@@ -1,5 +1,5 @@
-import {readJSON} from 'fs-extra';
 import {resolve} from 'path';
+import {readJSON} from 'fs-extra';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import {writeGraphQLSchema} from './config/gatsby';
 

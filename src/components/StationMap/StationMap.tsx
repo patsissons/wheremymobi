@@ -102,7 +102,7 @@ export class StationMap extends React.PureComponent<ComposedProps> {
   renderMarker = (node: StationNode) => {
     if (!node.isValid) {
       // this should never happen
-      // tslint:disable-next-line:no-console
+      // eslint-disable-next-line no-console
       console.debug(`Bad Station Found`, node.station);
       return false;
     }

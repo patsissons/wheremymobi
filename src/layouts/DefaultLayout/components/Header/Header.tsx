@@ -13,7 +13,7 @@ export function Header({description, logo, logoUrl}: Props) {
     <div className={styles.Header}>
       <div className={styles.HeaderLogo}>
         <a href={logoUrl}>
-          <img src={logo} />
+          <img alt="logo" src={logo} />
         </a>
       </div>
       <div className={styles.HeaderContent}>

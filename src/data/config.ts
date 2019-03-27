@@ -62,7 +62,7 @@ export function getConfigByLocation(location: google.maps.LatLng) {
         new google.maps.LatLng(config.location.lat, config.location.lng),
       ),
     }))
-    .sort((a, b) => a.distance - b.distance)[0].config;
+    .sort((left, right) => left.distance - right.distance)[0].config;
 }
 
 export type StationSourceTransform = OperatorFunction<any, Station[]>;

@@ -44,6 +44,7 @@ export class StationSource {
   constructor(
     config: StationSourceConfig,
     transform: StationSourceTransform,
+    // eslint-disable-next-line no-process-env
     verboseOutput = process.env.NODE_ENV !== 'production',
   ) {
     this.config = config;
@@ -104,11 +105,8 @@ export class StationSource {
 
   protected debug(message: string, ...args: any[]) {
     if (this.verboseOutput) {
-      if (args.length) {
-        console.log(message, args);
-      } else {
-        console.log(message);
-      }
+      // eslint-disable-next-line no-console
+      console.log(message, args);
     }
   }
 }

@@ -1,3 +1,1 @@
-import DefaultLayout, {DefaultLayoutProps} from './DefaultLayout';
-export type DefaultLayoutProps = DefaultLayoutProps;
-export {DefaultLayout};
+export {default as DefaultLayout} from './DefaultLayout';

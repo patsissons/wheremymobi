@@ -20,6 +20,7 @@ export function StationInfo({fetchedAt, station}: Props) {
         } total)`}</li>
         <li>
           <a
+            rel="noopener noreferrer"
             target="_blank"
             href={`https://www.google.com/maps/dir/?api=${1}&travelmode=bicycling&destination=${
               station.lat

@@ -98,7 +98,11 @@
       "import/no-anonymous-default-export": "off",
       "import/no-named-as-default": "off",
       "no-empty-pattern": "off",
-      "shopify/images-no-direct-imports": "off"
+      "shopify/images-no-direct-imports": "off",
+      "babel/object-curly-spacing": "off",
+      "prettier/prettier": "off",
+      "import/named": "off",
+      "shopify/strict-component-boundaries": "off"
     },
     "overrides": []
   },

@@ -1,5 +1,2 @@
-import IndexPage from './IndexPage';
-export {IndexPage};
-
-import NotFoundPage from './NotFoundPage';
-export {NotFoundPage};
+export {default as IndexPage} from './IndexPage';
+export {default as NotFoundPage} from './NotFoundPage';

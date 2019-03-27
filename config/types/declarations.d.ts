@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 declare global {
   export const google: any;
 }

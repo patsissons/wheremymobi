@@ -4,8 +4,11 @@ import {createStation, parseLatLng, Station} from '~/station';
 export interface SmooveStation {
   name: string;
   coordinates: string;
+  // eslint-disable-next-line camelcase
   total_slots: number;
+  // eslint-disable-next-line camelcase
   free_slots: number;
+  // eslint-disable-next-line camelcase
   avl_bikes: number;
   operative: boolean;
   style: string;
