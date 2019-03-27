@@ -65,7 +65,7 @@
     "@types/react-spinkit": "^3.0.0",
     "@types/recompose": "^0.30.0",
     "del-cli": "^1.0.0",
-    "dotenv": "^6.0.0",
+    "dotenv": "^7.0.0",
     "eslint": "^5.0.0",
     "eslint-plugin-shopify": "^26.0.0",
     "eslint-stats": "^1.0.0",
