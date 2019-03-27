@@ -10,6 +10,15 @@ export const siteMetadata = {
   title: metadata.name,
 };
 
-export const plugins = ['gatsby-plugin-sass', 'gatsby-plugin-typescript'];
+export const plugins = [
+  {
+    resolve: `gatsby-plugin-sass`,
+    options: {
+      data: '@import "shared.scss";@import "global.scss";',
+      includePaths: ['src/styles'],
+    },
+  },
+  'gatsby-plugin-typescript',
+];
 
 export const pathPrefix = '/';
