@@ -11,7 +11,8 @@
     "module": "commonjs",
     "noEmit": true,
     "paths": {
-      "~/*": ["src/*", "plugins/*", "config/*"]
+      "~/*": ["src/*", "plugins/*", "config/*"],
+      "*": ["src/packages/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
