@@ -20,6 +20,7 @@ import {
 } from 'react-google-maps';
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import {StationNode} from '~/station';
+import {Control, ControlSite} from 'react-google-maps-controls';
 import {
   GpsMarker,
   GpsMarkerProps,
@@ -71,7 +72,55 @@ type ComposedProps = ActionProps &
   WithGoogleMapProps &
   WithScriptjsProps;
 
-export class StationMap extends React.PureComponent<ComposedProps> {
+interface State {
+  followGps: boolean;
+}
+
+export class StationMap extends React.PureComponent<ComposedProps, State> {
+  state: State = {followGps: true};
+
+  get gpsCenter() {
+    const {
+      props: {position},
+      state: {followGps},
+    } = this;
+
+    if (followGps && position && position.coords) {
+      const {
+        coords: {latitude, longitude},
+      } = position;
+
+      return new google.maps.LatLng(latitude, longitude);
+    }
+
+    return undefined;
+  }
+
+  get gpsZoom() {
+    const {
+      props: {position},
+      state: {followGps},
+    } = this;
+
+    if (followGps && position && position.coords) {
+      const {
+        coords: {accuracy},
+      } = position;
+
+      return Math.min(20, Math.max(1, Math.log2(591657550 / accuracy) - 6));
+    }
+
+    return undefined;
+  }
+
+  handleDrag = () => {
+    this.setState({followGps: false});
+  };
+
+  handleGpsCenter = () => {
+    this.setState({followGps: true});
+  };
+
   renderInfo = () => {
     const {fetchedAt, selectedNode} = this.props;
 
@@ -150,15 +199,35 @@ export class StationMap extends React.PureComponent<ComposedProps> {
   };
 
   render() {
-    const {hideInfo, defaultCenter, defaultZoom} = this.props;
+    const {
+      props: {hideInfo, defaultCenter, defaultZoom},
+      state: {followGps},
+    } = this;
 
     return (
       <GoogleMap
+        center={this.gpsCenter}
         defaultCenter={defaultCenter}
         defaultZoom={defaultZoom}
         onClick={hideInfo}
+        onDrag={this.handleDrag}
+        zoom={this.gpsZoom}
       >
         <BicyclingLayer />
+        <ControlSite>
+          <Control onClick={this.handleGpsCenter}>
+            <div
+              style={{
+                backgroundImage:
+                  'url(https://maps.gstatic.com/tactile/mylocation/mylocation-sprite-1x.png)',
+                backgroundPositionX: (followGps ? -9 : -5) * 18,
+                backgroundRepeat: 'no-repeat',
+                width: '18px',
+                height: '18px',
+              }}
+            />
+          </Control>
+        </ControlSite>
         {this.renderMarkers()}
         {this.renderPosition()}
         {this.renderInfo()}
