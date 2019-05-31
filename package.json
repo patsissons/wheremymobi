@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/patsissons/wheremymobi"
+    "url": "git+https://github.com/patsissons/wheremymobi.git"
   },
   "bugs": {
     "url": "https://github.com/patsissons/wheremymobi/issues"
   },
-  "homepage": "https://patsissons.github.io/wheremymobi/",
+  "homepage": "https://patsissons.github.io/wheremymobi",
   "keywords": [
     "mobi",
     "bike"
