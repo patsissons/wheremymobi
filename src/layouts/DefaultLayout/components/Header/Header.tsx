@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import * as styles from './Header.module.scss';
 
@@ -22,5 +22,3 @@ export function Header({description, logo, logoUrl}: Props) {
     </div>
   );
 }
-
-export default Header;

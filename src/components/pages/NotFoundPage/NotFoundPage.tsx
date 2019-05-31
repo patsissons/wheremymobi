@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import * as styles from './NotFoundPage.module.scss';
 
@@ -10,5 +10,3 @@ export function NotFoundPage() {
     </div>
   );
 }
-
-export default NotFoundPage;

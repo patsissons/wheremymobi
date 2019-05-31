@@ -1,36 +1,33 @@
-import * as React from 'react';
-
+import React from 'react';
 import {graphql, StaticQuery} from 'gatsby';
-import {compose, defaultProps, fromRenderProps} from 'recompose';
-import {Header, HeaderProps} from './components';
+import {Header} from './components';
 
 import * as styles from './DefaultLayout.module.scss';
 
-export interface Props {
-  errors: any[];
+interface Props {
+  children?: any;
 }
 
 interface QueryProps {
   site: {
-    siteMetadata: HeaderProps;
+    siteMetadata: {
+      description: string;
+      logo: string;
+      logoUrl: string;
+    };
   };
 }
 
-type ComposedProps = Props & QueryProps;
-
-export function DefaultLayout({
-  errors,
-  site: {
-    siteMetadata: {description, logo, logoUrl},
-  },
-  ...props
-}: ComposedProps) {
+export function DefaultLayout(props: Props) {
   return (
-    <div className={styles.Container}>
-      <Header description={description} logo={logo} logoUrl={logoUrl} />
-      <div className={styles.Content} {...props} />
-      {errors.length === 0 ? false : <div>{errors}</div>}
-    </div>
+    <StaticQuery query={query}>
+      {({site: {siteMetadata}}: QueryProps) => (
+        <div className={styles.Container}>
+          <Header {...siteMetadata} />
+          <div className={styles.Content} {...props} />
+        </div>
+      )}
+    </StaticQuery>
   );
 }
 
@@ -45,14 +42,3 @@ const query = graphql`
     }
   }
 `;
-
-function DefaultLayoutQuery({...props}: any) {
-  return <StaticQuery query={query} {...props} />;
-}
-
-export default compose<ComposedProps, {}>(
-  defaultProps({
-    errors: [],
-  }),
-  fromRenderProps<QueryProps, {}>(DefaultLayoutQuery, ({site}) => ({site})),
-)(DefaultLayout);

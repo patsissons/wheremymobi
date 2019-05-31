@@ -1,0 +1,27 @@
+$iconSize: 18px;
+$iconIndexInactive: -2;
+$iconIndexInactiveMouseDown: -3;
+$iconIndexUnavailable: -4;
+$iconIndexActive: -9;
+
+.GpsButton:active .GpsIconInactive {
+  background-position-x: $iconIndexInactiveMouseDown * $iconSize;
+}
+
+.GpsIcon {
+  background-image: url('https://maps.gstatic.com/tactile/mylocation/mylocation-sprite-1x.png');
+  background-position-x: $iconIndexUnavailable * $iconSize;
+  background-repeat: no-repeat;
+  width: $iconSize;
+  height: $iconSize;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.GpsIconInactive {
+  background-position-x: $iconIndexInactive * $iconSize;
+}
+
+.GpsIconActive {
+  background-position-x: $iconIndexActive * $iconSize;
+}

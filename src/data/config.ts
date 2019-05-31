@@ -1,10 +1,11 @@
-import {OperatorFunction} from 'rxjs';
-import {Station} from '~/station';
+import {Station} from '~/models';
 import {Smoove} from './transform';
 
 enum StationSourceType {
   Smoove,
 }
+
+export type SourceName = 'vancouver' | 'test';
 
 export interface StationSourceConfig {
   location: google.maps.LatLngLiteral;
@@ -15,7 +16,7 @@ export interface StationSourceConfig {
   cors?: boolean;
 }
 
-const configMap = new Map<string, StationSourceConfig>([
+const configMap = new Map<SourceName, StationSourceConfig>([
   [
     'test',
     {
@@ -43,8 +44,8 @@ const configMap = new Map<string, StationSourceConfig>([
   ],
 ]);
 
-export function getConfig(key: string) {
-  const config = configMap.get(key.toLowerCase());
+export function getConfig(key: SourceName) {
+  const config = configMap.get(key);
 
   if (!config) {
     throw new Error(`No station data for source '${key}'`);
@@ -54,7 +55,7 @@ export function getConfig(key: string) {
 }
 
 export function getConfigByLocation(location: google.maps.LatLng) {
-  return Array.from(configMap.values())
+  return Array.from<StationSourceConfig>(configMap.values())
     .map((config) => ({
       config,
       distance: google.maps.geometry.spherical.computeDistanceBetween(
@@ -65,11 +66,9 @@ export function getConfigByLocation(location: google.maps.LatLng) {
     .sort((left, right) => left.distance - right.distance)[0].config;
 }
 
-export type StationSourceTransform = OperatorFunction<any, Station[]>;
+export type StationSourceTransform = (response: any) => Station[];
 
-export function mapTransform({
-  type,
-}: StationSourceConfig): StationSourceTransform {
+export function mapTransform({type}: StationSourceConfig) {
   switch (type) {
     case 'Smoove':
       return Smoove;

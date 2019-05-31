@@ -1,14 +1,13 @@
-import {map} from 'rxjs/operators';
-import {createStation, parseLatLng, Station} from '~/station';
+import {createStation, Station, StationData} from '~/models';
 
 export interface SmooveStation {
   name: string;
   coordinates: string;
-  // eslint-disable-next-line camelcase
+  // eslint-disable-next-line babel/camelcase
   total_slots: number;
-  // eslint-disable-next-line camelcase
+  // eslint-disable-next-line babel/camelcase
   free_slots: number;
-  // eslint-disable-next-line camelcase
+  // eslint-disable-next-line babel/camelcase
   avl_bikes: number;
   operative: boolean;
   style: string;
@@ -18,7 +17,26 @@ export interface Response {
   result: SmooveStation[];
 }
 
-export function parseNameAndNumber({name}: SmooveStation, station: Station) {
+export function parseLatLng({coordinates}: SmooveStation) {
+  try {
+    const match = /^\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*$/.exec(coordinates);
+
+    if (!match) {
+      throw new Error(`Unable to parse "lat, lng" from ${coordinates}`);
+    }
+
+    return {
+      lat: Number(match[1]),
+      lng: Number(match[2]),
+    };
+  } catch (error) {
+    return {
+      latLngError: error,
+    };
+  }
+}
+
+export function parseNameAndNumber({name}: SmooveStation) {
   try {
     const match = /^(\d+)\s+(.*)$/.exec(name);
 
@@ -26,26 +44,44 @@ export function parseNameAndNumber({name}: SmooveStation, station: Station) {
       throw new Error(`Unable to parse "number name" from ${name}`);
     }
 
-    station.number = Number(match[1]);
-    station.name = match[2];
+    return {
+      name: match[2],
+      number: Number(match[1]),
+    };
   } catch (error) {
-    station.errors.push(error);
+    return {
+      nameNumberError: error,
+    };
   }
 }
 
-export function create(data: SmooveStation) {
-  const station = createStation({
-    data,
-    bikes: data.avl_bikes,
-    free: data.free_slots,
-    operative: data.operative,
-    total: data.total_slots,
-  });
+export function create(smooveData: SmooveStation) {
+  const {nameNumberError, name, number} = parseNameAndNumber(smooveData);
+  const {lat, latLngError, lng} = parseLatLng(smooveData);
+  const data: StationData = {
+    ...smooveData,
+    bikes: smooveData.avl_bikes,
+    free: smooveData.free_slots,
+    lat,
+    lng,
+    name,
+    number,
+    operative: smooveData.operative,
+    total: smooveData.total_slots,
+    errors: [],
+  };
 
-  parseNameAndNumber(data, station);
-  parseLatLng(data.coordinates, station);
+  if (nameNumberError) {
+    data.errors.push(nameNumberError);
+  }
 
-  return station;
+  if (latLngError) {
+    data.errors.push(latLngError);
+  }
+
+  return createStation(data);
 }
 
-export default map<Response, Station[]>(({result}) => result.map(create));
+export function Smoove({result}: Response) {
+  return result.map(create);
+}

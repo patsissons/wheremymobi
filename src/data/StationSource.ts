@@ -1,21 +1,20 @@
+import fetch from 'isomorphic-fetch';
 import moment from 'moment';
-import {Observable, of, timer, merge} from 'rxjs';
-import {ajax} from 'rxjs/ajax';
-import {tap, map, catchError, mergeMap, debounceTime} from 'rxjs/operators';
-import {Station, StationNode} from '~/station';
+import {Station} from '~/models';
 import {
   getConfig,
   getConfigByLocation,
   mapTransform,
+  SourceName,
   StationSourceConfig,
   StationSourceTransform,
 } from './config';
 
 export interface StationSourceResult {
   config: StationSourceConfig;
-  error?: any[];
+  error?: any;
   fetchedAt: moment.Moment;
-  nodes: StationNode[];
+  stations: Station[];
 }
 
 export interface Options {
@@ -24,7 +23,7 @@ export interface Options {
 
 export class StationSource {
   public static create(
-    configOrKey: string | StationSourceConfig,
+    configOrKey: SourceName | StationSourceConfig,
     {debug}: Options,
   ) {
     const config =
@@ -52,55 +51,46 @@ export class StationSource {
     this.verboseOutput = verboseOutput;
   }
 
-  getJSON() {
+  async getJSON() {
     const uri = this.config.cors
       ? `https://cors.io/?${this.config.uri}`
       : this.config.uri;
     this.debug(`Fetching stations from '${uri}' ...`);
 
-    const headers = this.config.options
-      ? this.config.options.headers
-      : undefined;
-    return ajax.getJSON(uri, headers);
+    const response = await fetch(uri, {
+      headers: this.config.options ? this.config.options.headers : undefined,
+    });
+
+    const json = response.json();
+
+    this.debug('Fetch Response', json);
+
+    return json;
   }
 
-  getStations(source?: Observable<any>) {
-    return (source || this.getJSON()).pipe(
-      tap((response) => {
-        this.debug('Fetch Response', response);
-      }),
-      this.transform,
-      map<Station[], StationSourceResult>((stations) => {
-        this.debug(`Fetched ${stations.length} stations`);
+  async getStations(): Promise<StationSourceResult> {
+    try {
+      const json = await this.getJSON();
 
-        return {
-          config: this.config,
-          nodes: stations.map((station) => new StationNode(station)),
-          fetchedAt: moment(),
-        };
-      }),
-      catchError((error = {}) => {
-        this.debug(`Fetch failed: ${error.message || 'Unknown Error'}`, error);
+      const stations = this.transform(json);
 
-        return of<StationSourceResult>({
-          error,
-          config: this.config,
-          fetchedAt: moment(),
-          nodes: [],
-        });
-      }),
-    );
-  }
+      this.debug(`Fetched ${stations.length} stations`);
 
-  watchStations(
-    reloader: Observable<any> = of(true),
-    interval = 300,
-    source?: Observable<any>,
-  ) {
-    return merge(timer(0, 1000 * interval), reloader).pipe(
-      debounceTime(100),
-      mergeMap(() => this.getStations(source)),
-    );
+      return {
+        config: this.config,
+        fetchedAt: moment(),
+        stations,
+      };
+    } catch (error) {
+      this.debug(`Fetch failed: ${error.message || 'Unknown Error'}`, error);
+
+      return {
+        config: this.config,
+        error,
+        fetchedAt: moment(),
+        stations: [],
+      };
+    }
   }
 
   protected debug(message: string, ...args: any[]) {

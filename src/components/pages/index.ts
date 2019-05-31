@@ -1,2 +1,2 @@
-export {default as IndexPage} from './IndexPage';
-export {default as NotFoundPage} from './NotFoundPage';
+export {IndexPage} from './IndexPage';
+export {NotFoundPage} from './NotFoundPage';
