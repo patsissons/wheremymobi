@@ -1,0 +1,22 @@
+type Coordinates {
+  lat: Float!
+  lng: Float!
+}
+
+type Station {
+  bikes: Int!
+  free: Int!
+  coords: Coordinates!
+  name: String!
+  number: Int!
+  operative: Boolean!
+  total: Int!
+}
+
+input StationsInput {
+  coords: Coordinates!
+}
+
+type Query {
+  stations(stationInput: StationsInput): [Station!]!
+}

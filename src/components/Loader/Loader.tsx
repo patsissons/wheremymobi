@@ -1,9 +1,9 @@
 import React from 'react';
 import Spinner, {SpinnerProps} from 'react-spinkit';
 
-import * as styles from './Loader.module.scss';
+import styles from './Loader.module.scss';
 
-type SpinnerNames = 'double-bounce' | 'chasing-dots' | 'circle' | 'cube-grid';
+type SpinnerName = 'double-bounce' | 'chasing-dots' | 'circle' | 'cube-grid';
 export const loaders: Required<SpinnerProps['name']>[] = [
   'double-bounce',
   'chasing-dots',
@@ -12,18 +12,18 @@ export const loaders: Required<SpinnerProps['name']>[] = [
 ];
 
 export function randomLoaderName() {
-  return loaders[Math.floor(Math.random() * loaders.length)];
+  return loaders[Math.floor(Math.random() * loaders.length)] as SpinnerName;
 }
 
 export interface Props {
-  name?: SpinnerNames;
+  name?: SpinnerName;
 }
 
-export function Loader({name}: Props) {
+export function Loader({name = randomLoaderName()}: Props) {
   if (name) {
     return (
       <div className={styles.LoadingContainer}>
-        <Spinner className={styles.Loader} name={name || randomLoaderName()} />
+        <Spinner className={styles.Loader} name={name} />
       </div>
     );
   }

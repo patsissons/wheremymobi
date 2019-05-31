@@ -21,35 +21,17 @@
     "bike"
   ],
   "license": "MIT",
-  "scripts": {
-    "build": "yarn gatsby build",
-    "clean": "del docs .cache",
-    "deploy": "yarn clean && yarn build --prefix-paths && ncp public docs",
-    "dev": "yarn gatsby develop",
-    "gatsby": "ts-node node_modules/gatsby-cli/lib/index.js",
-    "lint": "yarn lint:ts",
-    "lint:stats": "yarn lint:ts --format node_modules/eslint-stats/byError.js",
-    "lint:ts": "eslint . --ext .ts --ext .tsx --max-warnings 0 --format codeframe",
-    "pretty": "prettier --write '**/*.{css,scss,js,json,md,ts,tsx,yml}'",
-    "server": "yarn gatsby serve",
-    "validate": "tsc --noEmit",
-    "start": "yarn dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "engines": {
-    "node": ">=11.0.0"
-  },
   "dependencies": {
-    "@babel/core": "^7.0.0-0",
     "@google/markerclustererplus": "^2.0.0",
     "@googlemap-react/core": "^0.1.0",
+    "@shopify/react-graphql": "^3.0.0",
     "@shopify/react-hooks": "^1.0.0",
+    "@shopify/react-i18n": "^1.0.0",
     "@shopify/useful-types": "^1.0.0",
+    "apollo-server-express": "^2.0.0",
     "classnames": "^2.0.0",
-    "gatsby": "^2.0.0",
-    "gatsby-plugin-sass": "^2.0.0",
-    "gatsby-plugin-typescript": "^2.0.0",
-    "graphql": "14.3.1",
+    "graphql": "^14.0.0",
+    "graphql-tag": "^2.0.0",
     "isomorphic-fetch": "^2.0.0",
     "moment": "^2.0.0",
     "node-sass": "^4.0.0",
@@ -57,7 +39,7 @@
     "react-dom": "~16.9.0-alpha",
     "react-spinkit": "^3.0.0",
     "scriptjs": "^2.0.0",
-    "typescript": "~3.4.0"
+    "typescript": "~3.5.0"
   },
   "devDependencies": {
     "@shopify/react-testing": "^1.0.0",
@@ -67,7 +49,8 @@
     "@types/googlemaps": "^3.0.0",
     "@types/graphql": "^14.0.0",
     "@types/isomorphic-fetch": "^0.0.35",
-    "@types/node": "^11.0.0",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
     "@types/react": "~16.8.0",
     "@types/react-dom": "~16.8.0",
     "@types/react-spinkit": "^3.0.0",
@@ -76,15 +59,33 @@
     "eslint": "^5.0.0",
     "eslint-plugin-shopify": "^28.0.0",
     "eslint-stats": "^1.0.0",
+    "express": "^4.0.0",
     "fs-extra": "^8.0.0",
     "husky": "^2.0.0",
-    "jest": "^24.0.0",
     "ncp": "^2.0.0",
     "prettier": "^1.0.0",
     "pretty-quick": "^1.0.0",
-    "sass-loader": "^7.0.0",
-    "ts-node": "^8.0.0",
-    "tsconfig-paths-webpack-plugin": "^3.0.0"
+    "react-scripts": "^3.0.0"
+  },
+  "resolutions": {
+    "eslint-plugin-import": "2.17.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "clean": "del docs .cache",
+    "deploy": "yarn clean && yarn build --prefix-paths && ncp public docs",
+    "lint": "yarn lint:ts",
+    "lint:stats": "yarn lint:ts --format node_modules/eslint-stats/byError.js",
+    "lint:ts": "eslint . --ext .ts --ext .tsx --max-warnings 0 --format codeframe",
+    "pretty": "prettier --write '**/*.{css,scss,js,json,md,ts,tsx,yml}'",
+    "server": "echo \"Error: no server specified\" && exit 1",
+    "validate": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=11.0.0"
   },
   "eslintConfig": {
     "extends": [
@@ -102,6 +103,7 @@
       "eslint-comments/no-unlimited-disable": "off",
       "no-empty-pattern": "off",
       "no-redeclare": "off",
+      "no-restricted-globals": "off",
       "shopify/images-no-direct-imports": "off",
       "shopify/strict-component-boundaries": "off"
     },
@@ -128,13 +130,16 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "browserslist": [
-    "last 3 chrome versions",
-    "last 3 chromeandroid versions",
-    "last 3 firefox versions",
-    "last 3 opera versions",
-    "last 2 edge versions",
-    "safari >= 10",
-    "ios >= 9"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

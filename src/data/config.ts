@@ -1,4 +1,5 @@
-import {Station} from '~/models';
+import {Station} from 'models';
+import {googleMapsAsync} from 'utilities/google';
 import {Smoove} from './transform';
 
 enum StationSourceType {
@@ -26,7 +27,7 @@ const configMap = new Map<SourceName, StationSourceConfig>([
       },
       name: 'Test Data',
       type: 'Smoove',
-      uri: '/static_data',
+      uri: '/test_data',
     },
   ],
   [
@@ -54,12 +55,14 @@ export function getConfig(key: SourceName) {
   return config;
 }
 
-export function getConfigByLocation(location: google.maps.LatLng) {
+export function getConfigByLocation(location: google.maps.LatLngLiteral) {
+  const google = googleMapsAsync(false);
+
   return Array.from<StationSourceConfig>(configMap.values())
     .map((config) => ({
       config,
       distance: google.maps.geometry.spherical.computeDistanceBetween(
-        location,
+        new google.maps.LatLng(location),
         new google.maps.LatLng(config.location.lat, config.location.lng),
       ),
     }))

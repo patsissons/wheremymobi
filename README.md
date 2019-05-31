@@ -6,56 +6,49 @@ Better visibility for tracking [mobi bike stations](https://patsissons.github.io
 
 Data for [mobi bike stations](https://www.mobibikes.ca/en#the-map) sourced from http://vancouver-ca.smoove.pro/api-public/stations
 
-## gatsby-starter-typescript-plus
+## create-react-app
 
-> A starter kit for TypeScript-based Gatsby projects with sensible defaults.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This is a starter kit for [Gatsby.js](https://www.gatsbyjs.org/) websites written in TypeScript. It includes the bare essentials for you to get started (styling, Markdown parsing, minimal toolset).
+## Available Scripts
 
-## Features
+In the project directory, you can run:
 
-- TypeScript
-- ESLint (with Shopify ESLint rules)
-- Markdown rendering with Remark
-- Basic component structure
-- Styling with [emotion](https://emotion.sh/)
+### `npm start`
 
-## Geting started
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Install this starter (assuming you have `gatsby-cli` installed) by running the following command:
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-```bash
-gatsby new project-name https://github.com/resir014/gatsby-starter-typescript-plus
-```
+### `npm test`
 
-## Developing
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-A nodejs >= 6.0.0 setup with [yarn](https://yarnpkg.com/) is recommended.
+### `npm run build`
 
-```bash
-# install dependencies
-yarn
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-# ...or, for npm
-npm install
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-# serve with hot reload at localhost:8000
-yarn start
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-# build for production
-yarn build
+### `npm run eject`
 
-# test out production build
-yarn server
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-# build for production and push to gh-pages branch
-yarn deploy
-```
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Credits
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-Built with [Gatsby](https://www.gatsbyjs.org/) - the blazing-fast static site generator for [React](https://facebook.github.io/react/).
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Deploy
+## Learn More
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/resir014/gatsby-starter-typescript-plus)
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).

@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import moment from 'moment';
-import {Station} from '~/models';
+import {Station} from 'models';
 import {
   getConfig,
   getConfigByLocation,
@@ -32,7 +32,7 @@ export class StationSource {
     return new StationSource(config, mapTransform(config), debug);
   }
 
-  public static nearest(location: google.maps.LatLng, options: Options) {
+  public static nearest(location: google.maps.LatLngLiteral, options: Options) {
     return StationSource.create(getConfigByLocation(location), options);
   }
 

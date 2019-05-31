@@ -1,4 +1,4 @@
-import {createStation, Station, StationData} from '~/models';
+import {createStation, StationData} from 'models';
 
 export interface SmooveStation {
   name: string;
