@@ -1,23 +1,23 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": ".",
-    "allowSyntheticDefaultImports": true,
+    "baseUrl": "src",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "es2015", "es2017", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "jsx": "preserve",
-    "lib": ["dom", "es2015", "es2017", "esnext"],
-    "module": "commonjs",
-    "noEmit": true,
-    "paths": {
-      "~/*": ["src/*", "plugins/*", "config/*"]
-    },
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "target": "esnext"
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "sourceMap": true,
+    "jsx": "preserve"
   },
-  "include": ["./config/**/*", "./src/**/*", "./*.ts"]
+  "include": ["src"]
 }

@@ -1,1 +1,1 @@
-export {default as Smoove} from './Smoove';
+export {Smoove} from './Smoove';
