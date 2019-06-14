@@ -23,7 +23,6 @@ export function App() {
               position={position}
               updateStations={updateStations}
             />
-            <div>testing</div>
           </GoogleMapProvider>
         ) : (
           <Loader />

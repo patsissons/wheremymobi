@@ -164,12 +164,7 @@ export function StationMap({
         useVisualization
       />
       <BicyclingLayer />
-      <CustomControl bindingPosition="TOP_CENTER">
-        <CustomButton onClick={selectedNearestStation}>
-          <img alt="Nearest stations" src={BikeImage} />
-        </CustomButton>
-      </CustomControl>
-      <CustomControl bindingPosition="TOP_CENTER">
+      <CustomControl bindingPosition="BOTTOM_CENTER">
         <CustomButton onClick={updateStations}>
           <img alt="Update stations" src={AutoRenewImage} />
         </CustomButton>
@@ -180,6 +175,11 @@ export function StationMap({
           position={position}
           onClick={handleGpsCenter}
         />
+      </CustomControl>
+      <CustomControl bindingPosition="BOTTOM_CENTER">
+        <CustomButton onClick={selectedNearestStation}>
+          <img alt="Nearest stations" src={BikeImage} />
+        </CustomButton>
       </CustomControl>
       {map && validStations.length > 0 && (
         <MarkerClusterer>

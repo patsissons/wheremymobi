@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/patsissons/wheremymobi/issues"
   },
-  "homepage": "https://patsissons.github.io/wheremymobi",
+  "homepage": "https://wheremymobi.com",
   "keywords": [
     "mobi",
     "bike"
@@ -65,7 +65,8 @@
     "ncp": "^2.0.0",
     "prettier": "^1.0.0",
     "pretty-quick": "^1.0.0",
-    "react-scripts": "^3.0.0"
+    "react-scripts": "^3.0.0",
+    "serve": "^11.0.0"
   },
   "resolutions": {
     "eslint-plugin-import": "2.17.2"
@@ -75,13 +76,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "clean": "del docs .cache",
-    "deploy": "yarn clean && yarn build --prefix-paths && ncp public docs",
+    "clean": "del build docs .cache",
+    "deploy": "yarn clean && yarn build && ncp build docs",
     "lint": "yarn lint:ts",
     "lint:stats": "yarn lint:ts --format node_modules/eslint-stats/byError.js",
     "lint:ts": "eslint . --ext .ts --ext .tsx --max-warnings 0 --format codeframe",
     "pretty": "prettier --write '**/*.{css,scss,js,json,md,ts,tsx,yml}'",
-    "server": "echo \"Error: no server specified\" && exit 1",
+    "server": "serve -s build",
     "validate": "tsc --noEmit"
   },
   "engines": {
