@@ -2,6 +2,10 @@
 
 Better visibility for tracking [mobi bike stations](https://patsissons.github.io/wheremymobi/)
 
+## Mapping
+
+Google maps tooling for react provided by [`googlemap-react`](https://github.com/googlemap-react/googlemap-react).
+
 ## Data
 
 Data for [mobi bike stations](https://www.mobibikes.ca/en#the-map) sourced from http://vancouver-ca.smoove.pro/api-public/stations

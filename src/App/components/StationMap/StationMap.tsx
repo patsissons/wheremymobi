@@ -12,18 +12,18 @@ import {googleMapsAsync, useGoogleNamespace} from 'utilities/google';
 import {
   CustomButton,
   CustomControl,
-  GpsCenterButton,
   GpsMarker,
   StationInfo,
   StationMarker,
+  stationMarkerIconRadius,
 } from './components';
 import {useMarkerClusterer} from './hooks';
+import {BikeImage, GpsImage, RefreshImage, SlotImage} from './images';
 
-import AutoRenewImage from './images/autorenew-1x.png';
-import BikeImage from './images/bike-1x.png';
 import styles from './StationMap.module.scss';
 
 const defaultZoom = 13;
+const maxZoom = 17;
 
 export interface Props {
   fetchedAt: moment.Moment;
@@ -42,24 +42,27 @@ export function StationMap({
 }: Props) {
   const {state: {map = undefined} = {}} = useContext(GoogleMapContext);
   const [followGps, setFollowGps] = useState(true);
+  const [centered, setCentered] = useState(false);
   const [validStations, setValidStations] = useState<ValidStation[]>([]);
   const [selectedStation, setSelectedStation] = useState<ValidStation>();
+  const [preferBikes, setPreferBikes] = useState(true);
   const [google] = useGoogleNamespace();
   const MarkerClusterer = useMarkerClusterer();
   const selectedNearestStation = useCallback(() => {
-    const station = nearestStation(position, validStations);
+    if (map) {
+      const station = nearestStation(position, validStations, preferBikes);
 
-    if (station) {
-      if (station === selectedStation) {
-        if (map) {
+      if (station) {
+        if (station === selectedStation) {
           map.panTo(station);
+          map.setZoom(maxZoom);
+        } else {
+          setFollowGps(false);
+          setSelectedStation(station);
         }
-      } else {
-        setFollowGps(false);
-        setSelectedStation(station);
       }
     }
-  }, [map, position, selectedStation, validStations]);
+  }, [map, position, preferBikes, selectedStation, validStations]);
   const centerGps = useCallback(() => {
     if (map) {
       const center = gpsCenter(position);
@@ -72,8 +75,10 @@ export function StationMap({
       if (zoom) {
         map.setZoom(zoom);
       }
+
+      setCentered(true);
     }
-  }, [map, position]);
+  }, [map, position, setCentered]);
   const showInfo = useCallback(
     (id: number) => {
       setSelectedStation(
@@ -90,21 +95,25 @@ export function StationMap({
       return null;
     }
 
-    const {lat, lng} = selectedStation;
+    const {number, lat, lng} = selectedStation;
 
     return (
       <InfoWindow
+        anchorId={`station-${number}`}
         onCloseClick={hideInfo}
-        opts={{
-          position: {lat, lng},
-          pixelOffset: new google.maps.Size(0, -100),
-        }}
+        opts={
+          {
+            // position: {lat, lng},
+            // pixelOffset: new google.maps.Size(0, -stationMarkerIconRadius),
+            // closeBoxMargin: '10px',
+          }
+        }
         visible
       >
         <StationInfo fetchedAt={fetchedAt} station={selectedStation} />
       </InfoWindow>
     );
-  }, [fetchedAt, google.maps.Size, hideInfo, map, selectedStation]);
+  }, [fetchedAt, hideInfo, map, selectedStation]);
   const renderGpsMarker = useCallback(() => {
     if (!map || !position || !position.coords || !position.timestamp) {
       return null;
@@ -116,14 +125,23 @@ export function StationMap({
   }, [map, position]);
   const handleDrag = useCallback(() => {
     setFollowGps(false);
+    setCentered(false);
   }, []);
   const handleGpsCenter = useCallback(() => {
     if (followGps) {
-      centerGps();
+      if (centered) {
+        setFollowGps(false);
+        setCentered(false);
+      } else {
+        centerGps();
+      }
     } else {
       setFollowGps(true);
     }
-  }, [centerGps, followGps]);
+  }, [centerGps, centered, followGps]);
+  const handleTogglePreference = useCallback(() => {
+    setPreferBikes((value) => !value);
+  }, []);
   useEffect(() => {
     const updatedStations: ValidStation[] = [];
 
@@ -154,6 +172,7 @@ export function StationMap({
         opts={{
           center: location,
           zoom: defaultZoom,
+          maxZoom,
         }}
         onClick={hideInfo}
         onDrag={handleDrag}
@@ -166,24 +185,52 @@ export function StationMap({
       <BicyclingLayer />
       <CustomControl bindingPosition="BOTTOM_CENTER">
         <CustomButton onClick={updateStations}>
-          <img alt="Update stations" src={AutoRenewImage} />
+          <RefreshImage className={styles.ButtonImage} />
         </CustomButton>
       </CustomControl>
       <CustomControl bindingPosition="BOTTOM_CENTER">
-        <GpsCenterButton
-          followGps={followGps}
-          position={position}
+        <CustomButton
+          disabled={!isValidPosition(position)}
           onClick={handleGpsCenter}
-        />
+        >
+          <GpsImage
+            className={styles.ButtonImage}
+            style={{
+              fill: followGps ? '#008ABF' : '#000',
+              fillOpacity: isValidPosition(position) ? 1 : 0.25,
+            }}
+            focusable="false"
+            aria-hidden="true"
+          />
+        </CustomButton>
       </CustomControl>
       <CustomControl bindingPosition="BOTTOM_CENTER">
         <CustomButton onClick={selectedNearestStation}>
-          <img alt="Nearest stations" src={BikeImage} />
+          {preferBikes ? (
+            <BikeImage className={styles.ButtonImage} />
+          ) : (
+            <SlotImage
+              className={styles.ButtonImage}
+              style={{fill: '#008ABF'}}
+            />
+          )}
+        </CustomButton>
+      </CustomControl>
+      <CustomControl bindingPosition="RIGHT_TOP">
+        <CustomButton onClick={handleTogglePreference}>
+          {preferBikes ? (
+            <BikeImage className={styles.ButtonImage} />
+          ) : (
+            <SlotImage
+              className={styles.ButtonImage}
+              style={{fill: '#008ABF'}}
+            />
+          )}
         </CustomButton>
       </CustomControl>
       {map && validStations.length > 0 && (
         <MarkerClusterer>
-          {validStations.map(({bikes, free, lat, lng, number}) => {
+          {validStations.map(({bikes, free, lat, lng, number, total}) => {
             return (
               <StationMarker
                 key={number}
@@ -192,7 +239,9 @@ export function StationMap({
                 id={number}
                 lat={lat}
                 lng={lng}
+                preferBikes={preferBikes}
                 showInfo={showInfo}
+                total={total}
               />
             );
           })}
@@ -207,6 +256,7 @@ export function StationMap({
 export function nearestStation(
   position: Position | undefined,
   stations: ValidStation[],
+  preferNearestBike: boolean | undefined,
 ) {
   if (!position || stations.length === 0) {
     return undefined;
@@ -227,6 +277,13 @@ export function nearestStation(
         new google.maps.LatLng(station.lat, station.lng),
       ),
     }))
+    .filter(
+      ({station: {bikes, errors, free, operative}}) =>
+        preferNearestBike == null ||
+        ((!errors || !errors.length) &&
+          operative &&
+          (preferNearestBike ? bikes > 0 : free > 0)),
+    )
     .sort((left, right) => left.distance - right.distance)[0].station;
 }
 
@@ -267,15 +324,23 @@ function gpsCenter(position: Position | undefined) {
   return undefined;
 }
 
-function gpsZoom(position: Position | undefined) {
+function gpsZoom(position: Position | undefined, max = maxZoom) {
   if (position) {
     const {
       coords: {accuracy},
     } = position;
 
     // magic number explained here: https://gis.stackexchange.com/a/111589
-    return Math.min(20, Math.max(1, Math.log2(591657550 / accuracy) - 6));
+    return Math.min(max, Math.max(1, Math.log2(591657550 / accuracy) - 6));
   }
 
   return undefined;
+}
+
+function isValidPosition(position: Position | undefined) {
+  return (
+    position &&
+    position.coords.latitude !== 0 &&
+    position.coords.longitude !== 0
+  );
 }

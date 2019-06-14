@@ -1,6 +1,10 @@
+$buttonImageSize: 20px;
+
 .MapContainer {
   flex: 1;
 }
 
-.UpdateStationsButton {
+.ButtonImage {
+  width: $buttonImageSize;
+  height: $buttonImageSize;
 }
