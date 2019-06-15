@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-  useEffect,
-} from 'react';
+import React, {useCallback, useContext, useState, useEffect} from 'react';
 import MarkerClustererPlus from '@google/markerclustererplus';
 import {GoogleMapContext} from '@googlemap-react/core';
 import {Props} from '@shopify/useful-types';
@@ -15,18 +9,7 @@ type Action = Context['dispatch'] extends (action: infer T) => void ? T : never;
 
 export function useMarkerClusterer() {
   const {dispatch, state} = useContext(GoogleMapContext);
-  const clusterer = useMemo(() => {
-    if (state && state.map) {
-      return new MarkerClustererPlus(state.map, [], {
-        averageCenter: true,
-        gridSize: 60,
-        maxZoom: 17,
-        enableRetinaIcons: true,
-      });
-    }
-
-    return undefined;
-  }, [state]);
+  const [clusterer, setClusterer] = useState<MarkerClustererPlus>();
   const [context, setContext] = useState<Context>();
   const Provider = useCallback(
     (props: {children?: any}) =>
@@ -35,6 +18,16 @@ export function useMarkerClusterer() {
   );
   const [google] = useGoogleNamespace();
   useEffect(() => {
+    if (!clusterer && state && state.map) {
+      setClusterer(
+        new MarkerClustererPlus(state.map, [], {
+          averageCenter: true,
+          gridSize: 60,
+          maxZoom: 17,
+          enableRetinaIcons: true,
+        }),
+      );
+    }
     if (!context && clusterer && state) {
       setContext({
         dispatch(action: Action) {

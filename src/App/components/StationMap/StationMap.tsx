@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useCallback} from 'react';
 import {
   BicyclingLayer,
   GoogleMapContext,
@@ -46,23 +46,6 @@ export function StationMap({
   const [selectedStation, setSelectedStation] = useState<ValidStation>();
   const [preferBikes, setPreferBikes] = useState(true);
   const MarkerClusterer = useMarkerClusterer();
-  const selectedNearestStation = useCallback(() => {
-    if (map) {
-      const station = nearestStation(position, validStations, preferBikes);
-
-      if (station) {
-        if (station === selectedStation) {
-          map.panTo(station);
-          map.setZoom(maxZoom);
-        } else {
-          if (followGps) {
-            setFollowGps(false);
-          }
-          setSelectedStation(station);
-        }
-      }
-    }
-  }, [followGps, map, position, preferBikes, selectedStation, validStations]);
   const centerGps = useCallback(() => {
     if (map) {
       const center = gpsCenter(position);
@@ -81,72 +64,6 @@ export function StationMap({
       }
     }
   }, [centered, map, position]);
-  const showInfo = useCallback(
-    (id: number) => {
-      setSelectedStation(
-        validStations.filter((station) => station.number === id).shift(),
-      );
-    },
-    [validStations],
-  );
-  const hideInfo = useCallback(() => {
-    setSelectedStation(undefined);
-  }, []);
-  const renderInfoWindow = useCallback(() => {
-    if (!map || !selectedStation) {
-      return null;
-    }
-
-    const {number} = selectedStation;
-
-    return (
-      <InfoWindow
-        anchorId={`station-${number}`}
-        onCloseClick={hideInfo}
-        visible
-      >
-        <StationInfo fetchedAt={fetchedAt} station={selectedStation} />
-      </InfoWindow>
-    );
-  }, [fetchedAt, hideInfo, map, selectedStation]);
-  const renderGpsMarker = useCallback(() => {
-    if (!map || !position || !position.coords || !position.timestamp) {
-      return null;
-    }
-
-    return (
-      <GpsMarker coords={position.coords} timestamp={position.timestamp} />
-    );
-  }, [map, position]);
-  const handleDragStart = useCallback(() => {
-    if (followGps) {
-      setFollowGps(false);
-    }
-
-    if (centered) {
-      setCentered(false);
-    }
-  }, [centered, followGps]);
-  const handleGpsCenter = useCallback(() => {
-    if (followGps) {
-      if (centered) {
-        if (followGps) {
-          setFollowGps(false);
-        }
-
-        if (centered) {
-          setCentered(false);
-        }
-      } else {
-        centerGps();
-      }
-    } else if (!followGps) {
-      setFollowGps(true);
-    }
-  }, [centerGps, centered, followGps]);
-  const handleTogglePreference = useCallback(() => {
-    setPreferBikes((value) => !value);
-  }, []);
   useEffect(() => {
     const updatedStations: ValidStation[] = [];
 
@@ -168,7 +85,95 @@ export function StationMap({
     if (followGps) {
       centerGps();
     }
-  }, [followGps, position, centerGps]);
+  }, [followGps, centerGps]);
+
+  function selectedNearestStation() {
+    if (map) {
+      const station = nearestStation(position, validStations, preferBikes);
+
+      if (station) {
+        if (station === selectedStation) {
+          map.panTo(station);
+          map.setZoom(maxZoom);
+        } else {
+          if (followGps) {
+            setFollowGps(false);
+          }
+          setSelectedStation(station);
+        }
+      }
+    }
+  }
+
+  function showInfo(id: number) {
+    setSelectedStation(
+      validStations.filter((station) => station.number === id).shift(),
+    );
+  }
+
+  function hideInfo() {
+    setSelectedStation(undefined);
+  }
+
+  function renderInfoWindow() {
+    if (!map || !selectedStation) {
+      return null;
+    }
+
+    const {number} = selectedStation;
+
+    return (
+      <InfoWindow
+        anchorId={`station-${number}`}
+        onCloseClick={hideInfo}
+        visible
+      >
+        <StationInfo fetchedAt={fetchedAt} station={selectedStation} />
+      </InfoWindow>
+    );
+  }
+
+  function renderGpsMarker() {
+    if (!map || !position || !position.coords || !position.timestamp) {
+      return null;
+    }
+
+    return (
+      <GpsMarker coords={position.coords} timestamp={position.timestamp} />
+    );
+  }
+
+  function handleDragStart() {
+    if (followGps) {
+      setFollowGps(false);
+    }
+
+    if (centered) {
+      setCentered(false);
+    }
+  }
+
+  function handleGpsCenter() {
+    if (followGps) {
+      if (centered) {
+        if (followGps) {
+          setFollowGps(false);
+        }
+
+        if (centered) {
+          setCentered(false);
+        }
+      } else {
+        centerGps();
+      }
+    } else if (!followGps) {
+      setFollowGps(true);
+    }
+  }
+
+  function handleTogglePreference() {
+    setPreferBikes((value) => !value);
+  }
 
   return (
     <div className={styles.MapContainer}>

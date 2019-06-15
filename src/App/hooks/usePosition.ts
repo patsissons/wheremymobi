@@ -15,24 +15,20 @@ export function usePosition({options}: UsePositionProps) {
   const [watchId, setWatchId] = useState<number>();
   const [position, setPosition] = useState<Position>();
   const [error, setError] = useState<PositionError>();
-  const handlePositionChanged = useCallback<PositionCallback>(setPosition, [
-    setPosition,
-  ]);
-  const handleError = useCallback<PositionErrorCallback>(setError, [setError]);
   const updatePosition = useCallback(() => {
     if (typeof navigator !== 'undefined') {
       navigator.geolocation.getCurrentPosition(
-        handlePositionChanged,
-        handleError,
+        setPosition,
+        setError,
         options || defaultOptions,
       );
     }
-  }, [handleError, handlePositionChanged, options]);
+  }, [options]);
   useEffect(() => {
     if (!watchId && typeof navigator !== 'undefined') {
       const id = navigator.geolocation.watchPosition(
-        handlePositionChanged,
-        handleError,
+        setPosition,
+        setError,
         options || defaultOptions,
       );
 
@@ -48,7 +44,7 @@ export function usePosition({options}: UsePositionProps) {
     }
 
     return undefined;
-  }, [handleError, handlePositionChanged, options, watchId]);
+  }, [options, watchId]);
   useDebugValue(
     position
       ? `[${position.coords.latitude}, ${position.coords.longitude}] @ ${moment(
