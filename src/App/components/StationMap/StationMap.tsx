@@ -118,7 +118,7 @@ export function StationMap({
       <GpsMarker coords={position.coords} timestamp={position.timestamp} />
     );
   }, [map, position]);
-  const handleDrag = useCallback(() => {
+  const handleDragStart = useCallback(() => {
     if (followGps) {
       setFollowGps(false);
     }
@@ -180,7 +180,7 @@ export function StationMap({
           maxZoom,
         }}
         onClick={hideInfo}
-        onDrag={handleDrag}
+        onDragStart={handleDragStart}
         LoadingComponent={<Loader />}
         useDrawing
         useGeometry
