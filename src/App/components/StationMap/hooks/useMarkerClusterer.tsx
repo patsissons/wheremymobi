@@ -57,7 +57,6 @@ export function useMarkerClusterer(opts: Options = {}) {
             }
           }
 
-          // console.log('*** ACTION:', action);
           dispatch(action);
         },
         state,

@@ -9,7 +9,7 @@ import {
 import moment from 'moment';
 import {Loader} from 'components';
 import {Station, ValidStation} from 'models';
-import {googleMapsAsync} from 'utilities/google';
+import {googleMapsAsync, useGoogleNamespace} from 'utilities/google';
 import {
   CustomButton,
   CustomControl,
@@ -22,6 +22,9 @@ import {
   CircleMinus,
   CirclePlus,
   GpsImage,
+  MarkerLowImage,
+  MarkerMidImage,
+  MarkerHighImage,
   RefreshImage,
   SlotImage,
 } from './images';
@@ -53,8 +56,8 @@ export function StationMap({
   const [selectedStation, setSelectedStation] = useState<ValidStation>();
   const [preferBikes, setPreferBikes] = useState(true);
   const [showStations, setShowStations] = useState(true);
-  // const [dragging, setDragging] = useState(false);
   const MarkerClusterer = useMarkerClusterer();
+  const [google] = useGoogleNamespace();
   const centerGps = useCallback(() => {
     if (map) {
       const center = isValidPosition(position) && latLngFromPosition(position);
@@ -127,8 +130,6 @@ export function StationMap({
     if (centered) {
       setCentered(false);
     }
-
-    // setDragging(true);
   }
 
   function handleGpsCenter() {
@@ -159,7 +160,6 @@ export function StationMap({
           maxZoom,
         }}
         onClick={() => setSelectedStation(undefined)}
-        // onDragEnd={() => setDragging(false)}
         onDragStart={handleDragStart}
         LoadingComponent={<Loader />}
       />
@@ -234,11 +234,9 @@ export function StationMap({
                 }
                 opts={{
                   icon: {
-                    path: 'M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0',
-                    fillColor: colorForCount(preferBikes ? bikes : free, total),
-                    fillOpacity: 1,
-                    strokeColor: 'white',
-                    strokeOpacity: 1,
+                    url: markerForCount(preferBikes ? bikes : free, total),
+                    size: new google.maps.Size(50, 50),
+                    labelOrigin: new google.maps.Point(25, 21),
                   },
                   label: {
                     color: 'white',
@@ -247,7 +245,6 @@ export function StationMap({
                     fontWeight: 'bold',
                   },
                   position: {lat, lng},
-                  // visible: !dragging,
                 }}
               />
             );
@@ -345,17 +342,11 @@ function isValidPosition(position: Position | undefined): position is Position {
   );
 }
 
-const colors = {
-  low: 'salmon',
-  mid: 'sandybrown',
-  high: 'mediumseagreen',
-};
-
-function colorForCount(count: number, total: number) {
+function markerForCount(count: number, total: number) {
   const fraction = count / total;
   if (fraction >= 0.5) {
-    return colors.high;
+    return MarkerHighImage;
   }
 
-  return count >= 0.25 ? colors.mid : colors.low;
+  return fraction >= 0.25 ? MarkerMidImage : MarkerLowImage;
 }
