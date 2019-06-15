@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useState, useEffect} from 'react';
-import MarkerClustererPlus from '@google/markerclustererplus';
+import MarkerClustererPlus, {Options} from '@google/markerclustererplus';
 import {GoogleMapContext} from '@googlemap-react/core';
 import {Props} from '@shopify/useful-types';
 import {useGoogleNamespace} from 'utilities/google';
@@ -7,7 +7,14 @@ import {useGoogleNamespace} from 'utilities/google';
 type Context = Props<typeof GoogleMapContext.Provider>['value'];
 type Action = Context['dispatch'] extends (action: infer T) => void ? T : never;
 
-export function useMarkerClusterer() {
+const defaultOpts: Options = {
+  averageCenter: true,
+  gridSize: 90,
+  maxZoom: 17,
+  enableRetinaIcons: false,
+};
+
+export function useMarkerClusterer(opts: Options = {}) {
   const {dispatch, state} = useContext(GoogleMapContext);
   const [clusterer, setClusterer] = useState<MarkerClustererPlus>();
   const [context, setContext] = useState<Context>();
@@ -21,10 +28,8 @@ export function useMarkerClusterer() {
     if (!clusterer && state && state.map) {
       setClusterer(
         new MarkerClustererPlus(state.map, [], {
-          averageCenter: true,
-          gridSize: 60,
-          maxZoom: 17,
-          enableRetinaIcons: true,
+          ...defaultOpts,
+          ...opts,
         }),
       );
     }
@@ -52,12 +57,13 @@ export function useMarkerClusterer() {
             }
           }
 
+          // console.log('*** ACTION:', action);
           dispatch(action);
         },
         state,
       });
     }
-  }, [clusterer, context, dispatch, google.maps.Marker, state]);
+  }, [clusterer, context, dispatch, google.maps.Marker, opts, state]);
 
   return Provider;
 }

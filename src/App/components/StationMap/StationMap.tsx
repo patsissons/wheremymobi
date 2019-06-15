@@ -4,6 +4,7 @@ import {
   GoogleMapContext,
   InfoWindow,
   MapBox,
+  Marker,
 } from '@googlemap-react/core';
 import moment from 'moment';
 import {Loader} from 'components';
@@ -14,10 +15,16 @@ import {
   CustomControl,
   GpsMarker,
   StationInfo,
-  StationMarker,
 } from './components';
 import {useMarkerClusterer} from './hooks';
-import {BikeImage, GpsImage, RefreshImage, SlotImage} from './images';
+import {
+  BikeImage,
+  CircleMinus,
+  CirclePlus,
+  GpsImage,
+  RefreshImage,
+  SlotImage,
+} from './images';
 
 import styles from './StationMap.module.scss';
 
@@ -45,10 +52,12 @@ export function StationMap({
   const [validStations, setValidStations] = useState<ValidStation[]>([]);
   const [selectedStation, setSelectedStation] = useState<ValidStation>();
   const [preferBikes, setPreferBikes] = useState(true);
+  const [showStations, setShowStations] = useState(true);
+  // const [dragging, setDragging] = useState(false);
   const MarkerClusterer = useMarkerClusterer();
   const centerGps = useCallback(() => {
     if (map) {
-      const center = gpsCenter(position);
+      const center = isValidPosition(position) && latLngFromPosition(position);
       const zoom = gpsZoom(position);
 
       if (center) {
@@ -89,58 +98,25 @@ export function StationMap({
 
   function selectedNearestStation() {
     if (map) {
-      const station = nearestStation(position, validStations, preferBikes);
+      const station = nearestStation(
+        (followGps &&
+          isValidPosition(position) &&
+          latLngFromPosition(position)) ||
+          map.getCenter(),
+        validStations,
+        preferBikes,
+      );
 
-      if (station) {
-        if (station === selectedStation) {
-          map.panTo(station);
-          map.setZoom(maxZoom);
-        } else {
-          if (followGps) {
-            setFollowGps(false);
-          }
-          setSelectedStation(station);
+      if (station === selectedStation) {
+        map.panTo(station);
+        map.setZoom(maxZoom);
+      } else {
+        if (followGps) {
+          setFollowGps(false);
         }
+        setSelectedStation(station);
       }
     }
-  }
-
-  function showInfo(id: number) {
-    setSelectedStation(
-      validStations.filter((station) => station.number === id).shift(),
-    );
-  }
-
-  function hideInfo() {
-    setSelectedStation(undefined);
-  }
-
-  function renderInfoWindow() {
-    if (!map || !selectedStation) {
-      return null;
-    }
-
-    const {number} = selectedStation;
-
-    return (
-      <InfoWindow
-        anchorId={`station-${number}`}
-        onCloseClick={hideInfo}
-        visible
-      >
-        <StationInfo fetchedAt={fetchedAt} station={selectedStation} />
-      </InfoWindow>
-    );
-  }
-
-  function renderGpsMarker() {
-    if (!map || !position || !position.coords || !position.timestamp) {
-      return null;
-    }
-
-    return (
-      <GpsMarker coords={position.coords} timestamp={position.timestamp} />
-    );
   }
 
   function handleDragStart() {
@@ -151,6 +127,8 @@ export function StationMap({
     if (centered) {
       setCentered(false);
     }
+
+    // setDragging(true);
   }
 
   function handleGpsCenter() {
@@ -171,10 +149,6 @@ export function StationMap({
     }
   }
 
-  function handleTogglePreference() {
-    setPreferBikes((value) => !value);
-  }
-
   return (
     <div className={styles.MapContainer}>
       <MapBox
@@ -184,13 +158,10 @@ export function StationMap({
           zoom: defaultZoom,
           maxZoom,
         }}
-        onClick={hideInfo}
+        onClick={() => setSelectedStation(undefined)}
+        // onDragEnd={() => setDragging(false)}
         onDragStart={handleDragStart}
         LoadingComponent={<Loader />}
-        useDrawing
-        useGeometry
-        usePlaces
-        useVisualization
       />
       <BicyclingLayer />
       <CustomControl bindingPosition="BOTTOM_CENTER">
@@ -227,7 +198,7 @@ export function StationMap({
         </CustomButton>
       </CustomControl>
       <CustomControl bindingPosition="RIGHT_TOP">
-        <CustomButton onClick={handleTogglePreference}>
+        <CustomButton onClick={() => setPreferBikes((value) => !value)}>
           {preferBikes ? (
             <BikeImage className={styles.ButtonImage} />
           ) : (
@@ -238,46 +209,73 @@ export function StationMap({
           )}
         </CustomButton>
       </CustomControl>
-      {map && validStations.length > 0 && (
+      <CustomControl bindingPosition="RIGHT_TOP">
+        <CustomButton onClick={() => setShowStations((value) => !value)}>
+          {showStations ? (
+            <CircleMinus className={styles.ButtonImage} />
+          ) : (
+            <CirclePlus className={styles.ButtonImage} />
+          )}
+        </CustomButton>
+      </CustomControl>
+      {showStations && map && validStations.length > 0 && (
         <MarkerClusterer>
           {validStations.map(({bikes, free, lat, lng, number, total}) => {
             return (
-              <StationMarker
+              <Marker
                 key={number}
-                bikes={bikes}
-                free={free}
-                id={number}
-                lat={lat}
-                lng={lng}
-                preferBikes={preferBikes}
-                showInfo={showInfo}
-                total={total}
+                id={`station-${number}`}
+                onClick={(id) =>
+                  setSelectedStation(
+                    validStations
+                      .filter((station) => station.number === number)
+                      .shift(),
+                  )
+                }
+                opts={{
+                  icon: {
+                    path: 'M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0',
+                    fillColor: colorForCount(preferBikes ? bikes : free, total),
+                    fillOpacity: 1,
+                    strokeColor: 'white',
+                    strokeOpacity: 1,
+                  },
+                  label: {
+                    color: 'white',
+                    text: `${bikes} | ${free}`,
+                    fontSize: '0.75rem',
+                    fontWeight: 'bold',
+                  },
+                  position: {lat, lng},
+                  // visible: !dragging,
+                }}
               />
             );
           })}
         </MarkerClusterer>
       )}
-      {renderGpsMarker()}
-      {renderInfoWindow()}
+      {map && position && position.coords && position.timestamp && (
+        <GpsMarker coords={position.coords} timestamp={position.timestamp} />
+      )}
+      {map && selectedStation && (
+        <InfoWindow
+          anchorId={`station-${selectedStation.number}`}
+          onCloseClick={() => setSelectedStation(undefined)}
+          visible
+        >
+          <StationInfo fetchedAt={fetchedAt} station={selectedStation} />
+        </InfoWindow>
+      )}
     </div>
   );
 }
 
 export function nearestStation(
-  position: Position | undefined,
+  source: google.maps.LatLng,
   stations: ValidStation[],
   preferNearestBike: boolean | undefined,
 ) {
-  if (!position || stations.length === 0) {
-    return undefined;
-  }
-
-  const google = googleMapsAsync(false);
-
-  const source = new google.maps.LatLng(
-    position.coords.latitude,
-    position.coords.longitude,
-  );
+  const google = googleMapsAsync();
 
   return stations
     .map((station) => ({
@@ -320,18 +318,10 @@ function stationComparer(prev: Station, next: Station) {
   );
 }
 
-function gpsCenter(position: Position | undefined) {
-  if (position) {
-    const {
-      coords: {latitude, longitude},
-    } = position;
+function latLngFromPosition({coords: {latitude, longitude}}: Position) {
+  const google = googleMapsAsync();
 
-    const google = googleMapsAsync();
-
-    return new google.maps.LatLng(latitude, longitude);
-  }
-
-  return undefined;
+  return new google.maps.LatLng(latitude, longitude);
 }
 
 function gpsZoom(position: Position | undefined, max = maxZoom) {
@@ -347,10 +337,25 @@ function gpsZoom(position: Position | undefined, max = maxZoom) {
   return undefined;
 }
 
-function isValidPosition(position: Position | undefined) {
-  return (
+function isValidPosition(position: Position | undefined): position is Position {
+  return Boolean(
     position &&
-    position.coords.latitude !== 0 &&
-    position.coords.longitude !== 0
+      position.coords.latitude !== 0 &&
+      position.coords.longitude !== 0,
   );
+}
+
+const colors = {
+  low: 'salmon',
+  mid: 'sandybrown',
+  high: 'mediumseagreen',
+};
+
+function colorForCount(count: number, total: number) {
+  const fraction = count / total;
+  if (fraction >= 0.5) {
+    return colors.high;
+  }
+
+  return count >= 0.25 ? colors.mid : colors.low;
 }
