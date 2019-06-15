@@ -7,8 +7,6 @@ export const colors = {
   high: 'mediumseagreen',
 };
 
-export const stationMarkerIconRadius = 20;
-
 export interface Props {
   bikes: number;
   free: number;

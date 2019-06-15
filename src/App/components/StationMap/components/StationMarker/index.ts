@@ -1,1 +1,1 @@
-export {StationMarker, stationMarkerIconRadius} from './StationMarker';
+export {StationMarker} from './StationMarker';

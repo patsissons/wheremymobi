@@ -2,4 +2,4 @@ export {CustomButton} from './CustomButton';
 export {CustomControl} from './CustomControl';
 export {GpsMarker} from './GpsMarker';
 export {StationInfo} from './StationInfo';
-export {StationMarker, stationMarkerIconRadius} from './StationMarker';
+export {StationMarker} from './StationMarker';

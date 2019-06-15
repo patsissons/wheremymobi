@@ -8,14 +8,13 @@ import {
 import moment from 'moment';
 import {Loader} from 'components';
 import {Station, ValidStation} from 'models';
-import {googleMapsAsync, useGoogleNamespace} from 'utilities/google';
+import {googleMapsAsync} from 'utilities/google';
 import {
   CustomButton,
   CustomControl,
   GpsMarker,
   StationInfo,
   StationMarker,
-  stationMarkerIconRadius,
 } from './components';
 import {useMarkerClusterer} from './hooks';
 import {BikeImage, GpsImage, RefreshImage, SlotImage} from './images';
@@ -46,7 +45,6 @@ export function StationMap({
   const [validStations, setValidStations] = useState<ValidStation[]>([]);
   const [selectedStation, setSelectedStation] = useState<ValidStation>();
   const [preferBikes, setPreferBikes] = useState(true);
-  const [google] = useGoogleNamespace();
   const MarkerClusterer = useMarkerClusterer();
   const selectedNearestStation = useCallback(() => {
     if (map) {
@@ -57,12 +55,14 @@ export function StationMap({
           map.panTo(station);
           map.setZoom(maxZoom);
         } else {
-          setFollowGps(false);
+          if (followGps) {
+            setFollowGps(false);
+          }
           setSelectedStation(station);
         }
       }
     }
-  }, [map, position, preferBikes, selectedStation, validStations]);
+  }, [followGps, map, position, preferBikes, selectedStation, validStations]);
   const centerGps = useCallback(() => {
     if (map) {
       const center = gpsCenter(position);
@@ -76,9 +76,11 @@ export function StationMap({
         map.setZoom(zoom);
       }
 
-      setCentered(true);
+      if (!centered) {
+        setCentered(true);
+      }
     }
-  }, [map, position, setCentered]);
+  }, [centered, map, position]);
   const showInfo = useCallback(
     (id: number) => {
       setSelectedStation(
@@ -95,19 +97,12 @@ export function StationMap({
       return null;
     }
 
-    const {number, lat, lng} = selectedStation;
+    const {number} = selectedStation;
 
     return (
       <InfoWindow
         anchorId={`station-${number}`}
         onCloseClick={hideInfo}
-        opts={
-          {
-            // position: {lat, lng},
-            // pixelOffset: new google.maps.Size(0, -stationMarkerIconRadius),
-            // closeBoxMargin: '10px',
-          }
-        }
         visible
       >
         <StationInfo fetchedAt={fetchedAt} station={selectedStation} />
@@ -124,18 +119,28 @@ export function StationMap({
     );
   }, [map, position]);
   const handleDrag = useCallback(() => {
-    setFollowGps(false);
-    setCentered(false);
-  }, []);
+    if (followGps) {
+      setFollowGps(false);
+    }
+
+    if (centered) {
+      setCentered(false);
+    }
+  }, [centered, followGps]);
   const handleGpsCenter = useCallback(() => {
     if (followGps) {
       if (centered) {
-        setFollowGps(false);
-        setCentered(false);
+        if (followGps) {
+          setFollowGps(false);
+        }
+
+        if (centered) {
+          setCentered(false);
+        }
       } else {
         centerGps();
       }
-    } else {
+    } else if (!followGps) {
       setFollowGps(true);
     }
   }, [centerGps, centered, followGps]);
