@@ -55,7 +55,7 @@ export function StationMap({
   const [validStations, setValidStations] = useState<ValidStation[]>([]);
   const [selectedStation, setSelectedStation] = useState<ValidStation>();
   const [preferBikes, setPreferBikes] = useState(true);
-  const [showStations, setShowStations] = useState(true);
+  const [showLabels, setShowLabels] = useState(false);
   const MarkerClusterer = useMarkerClusterer();
   const [google] = useGoogleNamespace();
   const centerGps = useCallback(() => {
@@ -210,22 +210,22 @@ export function StationMap({
         </CustomButton>
       </CustomControl>
       <CustomControl bindingPosition="RIGHT_TOP">
-        <CustomButton onClick={() => setShowStations((value) => !value)}>
-          {showStations ? (
+        <CustomButton onClick={() => setShowLabels((value) => !value)}>
+          {showLabels ? (
             <CircleMinus className={styles.ButtonImage} />
           ) : (
             <CirclePlus className={styles.ButtonImage} />
           )}
         </CustomButton>
       </CustomControl>
-      {showStations && map && validStations.length > 0 && (
+      {map && validStations.length > 0 && (
         <MarkerClusterer>
           {validStations.map(({bikes, free, lat, lng, number, total}) => {
             return (
               <Marker
                 key={number}
                 id={`station-${number}`}
-                onClick={(id) =>
+                onClick={() =>
                   setSelectedStation(
                     validStations
                       .filter((station) => station.number === number)
@@ -238,12 +238,14 @@ export function StationMap({
                     size: new google.maps.Size(50, 50),
                     labelOrigin: new google.maps.Point(25, 21),
                   },
-                  label: {
-                    color: 'white',
-                    text: `${bikes} | ${free}`,
-                    fontSize: '0.75rem',
-                    fontWeight: 'bold',
-                  },
+                  label: showLabels
+                    ? {
+                        color: 'white',
+                        text: `${bikes} | ${free}`,
+                        fontSize: '0.75rem',
+                        fontWeight: 'bold',
+                      }
+                    : undefined,
                   position: {lat, lng},
                 }}
               />
