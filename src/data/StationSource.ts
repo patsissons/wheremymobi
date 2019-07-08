@@ -53,7 +53,7 @@ export class StationSource {
 
   async getJSON() {
     const uri = this.config.cors
-      ? `https://cors.io/?${this.config.uri}`
+      ? `https://cors-anywhere.herokuapp.com/${this.config.uri}`
       : this.config.uri;
     this.debug(`Fetching stations from '${uri}' ...`);
 
