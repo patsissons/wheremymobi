@@ -4,17 +4,17 @@ import {
   GoogleMapContext,
   InfoWindow,
   MapBox,
-  Marker,
 } from '@googlemap-react/core';
 import moment from 'moment';
 import {Loader} from 'components';
 import {Station, ValidStation} from 'models';
-import {googleMapsAsync, useGoogleNamespace} from 'utilities/google';
+import {googleMapsAsync} from 'utilities/google';
 import {
   CustomButton,
   CustomControl,
   GpsMarker,
   StationInfo,
+  StationMarker,
 } from './components';
 import {useMarkerClusterer} from './hooks';
 import {
@@ -22,9 +22,6 @@ import {
   CircleMinus,
   CirclePlus,
   GpsImage,
-  MarkerLowImage,
-  MarkerMidImage,
-  MarkerHighImage,
   RefreshImage,
   SlotImage,
 } from './images';
@@ -57,7 +54,6 @@ export function StationMap({
   const [preferBikes, setPreferBikes] = useState(true);
   const [showLabels, setShowLabels] = useState(false);
   const MarkerClusterer = useMarkerClusterer();
-  const [google] = useGoogleNamespace();
   const centerGps = useCallback(() => {
     if (map) {
       const center = isValidPosition(position) && latLngFromPosition(position);
@@ -222,9 +218,13 @@ export function StationMap({
         <MarkerClusterer>
           {validStations.map(({bikes, free, lat, lng, number, total}) => {
             return (
-              <Marker
+              <StationMarker
                 key={number}
-                id={`station-${number}`}
+                bikes={bikes}
+                free={free}
+                lat={lat}
+                lng={lng}
+                number={number}
                 onClick={() =>
                   setSelectedStation(
                     validStations
@@ -232,22 +232,9 @@ export function StationMap({
                       .shift(),
                   )
                 }
-                opts={{
-                  icon: {
-                    url: markerForCount(preferBikes ? bikes : free, total),
-                    size: new google.maps.Size(50, 50),
-                    labelOrigin: new google.maps.Point(25, 21),
-                  },
-                  label: showLabels
-                    ? {
-                        color: 'white',
-                        text: `${bikes} | ${free}`,
-                        fontSize: '0.75rem',
-                        fontWeight: 'bold',
-                      }
-                    : undefined,
-                  position: {lat, lng},
-                }}
+                preferBikes={preferBikes}
+                showLabel={showLabels}
+                total={total}
               />
             );
           })}
@@ -344,11 +331,26 @@ function isValidPosition(position: Position | undefined): position is Position {
   );
 }
 
-function markerForCount(count: number, total: number) {
-  const fraction = count / total;
-  if (fraction >= 0.5) {
-    return MarkerHighImage;
-  }
+// function createMarkerOpts(): google.maps.MarkerOptions {
+//   return {
+//     label: {
+//       color: 'white',
+//       fontSize: '0.75rem',
+//       fontWeight: 'bold',
+//     },
+//   };
+// }
 
-  return fraction >= 0.25 ? MarkerMidImage : MarkerLowImage;
-}
+// function markerForCount(count: number, total: number) {
+//   if (count <= 0) {
+//     return MarkerNoneImage;
+//   }
+
+//   const fraction = count / total;
+
+//   if (fraction >= 0.5) {
+//     return MarkerHighImage;
+//   }
+
+//   return fraction >= 0.25 ? MarkerMidImage : MarkerLowImage;
+// }
