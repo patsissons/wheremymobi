@@ -24,7 +24,7 @@
   "dependencies": {
     "@google/markerclustererplus": "^2.0.0",
     "@googlemap-react/core": "^0.1.0",
-    "@shopify/react-graphql": "^3.0.0",
+    "@shopify/react-graphql": "^4.0.0",
     "@shopify/react-hooks": "^1.0.0",
     "@shopify/react-i18n": "^1.0.0",
     "@shopify/useful-types": "^1.0.0",
@@ -35,8 +35,8 @@
     "isomorphic-fetch": "^2.0.0",
     "moment": "^2.0.0",
     "node-sass": "^4.0.0",
-    "react": "~16.9.0-alpha",
-    "react-dom": "~16.9.0-alpha",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
     "react-spinkit": "^3.0.0",
     "scriptjs": "^2.0.0",
     "typescript": "~3.5.0"
@@ -45,23 +45,23 @@
     "@shopify/react-testing": "^1.0.0",
     "@types/classnames": "^2.0.0",
     "@types/dotenv": "^6.0.0",
-    "@types/fs-extra": "^7.0.0",
+    "@types/fs-extra": "^8.0.0",
     "@types/googlemaps": "^3.0.0",
     "@types/graphql": "^14.0.0",
     "@types/isomorphic-fetch": "^0.0.35",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
-    "@types/react": "~16.8.0",
+    "@types/react": "~16.9.0",
     "@types/react-dom": "~16.8.0",
     "@types/react-spinkit": "^3.0.0",
     "del-cli": "^2.0.0",
     "dotenv": "^8.0.0",
     "eslint": "^5.0.0",
-    "eslint-plugin-shopify": "^28.0.0",
+    "eslint-plugin-shopify": "^30.0.0",
     "eslint-stats": "^1.0.0",
     "express": "^4.0.0",
     "fs-extra": "^8.0.0",
-    "husky": "^2.0.0",
+    "husky": "^3.0.0",
     "ncp": "^2.0.0",
     "prettier": "^1.0.0",
     "pretty-quick": "^1.0.0",
@@ -69,7 +69,8 @@
     "serve": "^11.0.0"
   },
   "resolutions": {
-    "eslint-plugin-import": "2.17.2"
+    "eslint": "5.16.0",
+    "typescript-eslint-parser": "22.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
