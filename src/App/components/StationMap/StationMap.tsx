@@ -8,6 +8,7 @@ import {
 import moment from 'moment';
 import {Loader} from 'components';
 import {Station, ValidStation} from 'models';
+import {GOOGLE_MAPS_API_KEY} from 'utilities/env';
 import {googleMapsAsync} from 'utilities/google';
 import {
   CustomButton,
@@ -80,6 +81,7 @@ export function StationMap({
         // this should never happen
         // eslint-disable-next-line no-console
         console.debug(`Bad Station Found`, station);
+        return;
       }
 
       updatedStations.push(station as ValidStation);
@@ -149,7 +151,7 @@ export function StationMap({
   return (
     <div className={styles.MapContainer}>
       <MapBox
-        apiKey="AIzaSyBXrYScIU6sWYUWLLlovYhzq-bLzwTgAoc"
+        apiKey={GOOGLE_MAPS_API_KEY}
         opts={{
           center: location,
           zoom: defaultZoom,
@@ -330,27 +332,3 @@ function isValidPosition(position: Position | undefined): position is Position {
       position.coords.longitude !== 0,
   );
 }
-
-// function createMarkerOpts(): google.maps.MarkerOptions {
-//   return {
-//     label: {
-//       color: 'white',
-//       fontSize: '0.75rem',
-//       fontWeight: 'bold',
-//     },
-//   };
-// }
-
-// function markerForCount(count: number, total: number) {
-//   if (count <= 0) {
-//     return MarkerNoneImage;
-//   }
-
-//   const fraction = count / total;
-
-//   if (fraction >= 0.5) {
-//     return MarkerHighImage;
-//   }
-
-//   return fraction >= 0.25 ? MarkerMidImage : MarkerLowImage;
-// }

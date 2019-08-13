@@ -13,9 +13,7 @@ export function StationInfo({fetchedAt, station}: Props) {
       <li>{`[${station.number.toString().padStart(4, '0')}] ${station.name}${
         station.operative ? '' : ' (CLOSED)'
       }`}</li>
-      <li>{`${station.bikes} bikes / ${station.free} slots (${
-        station.total
-      } total)`}</li>
+      <li>{`${station.bikes} bikes / ${station.free} slots (${station.total} total)`}</li>
       <li>
         <a
           rel="noopener noreferrer"
