@@ -8,7 +8,7 @@ import {
 import moment from 'moment';
 import {Loader} from 'components';
 import {Station, ValidStation} from 'models';
-import {GOOGLE_MAPS_API_KEY} from 'utilities/env';
+import {gmapKey} from 'utilities/env';
 import {googleMapsAsync} from 'utilities/google';
 import {
   CustomButton,
@@ -151,7 +151,7 @@ export function StationMap({
   return (
     <div className={styles.MapContainer}>
       <MapBox
-        apiKey={GOOGLE_MAPS_API_KEY}
+        apiKey={gmapKey()}
         opts={{
           center: location,
           zoom: defaultZoom,
