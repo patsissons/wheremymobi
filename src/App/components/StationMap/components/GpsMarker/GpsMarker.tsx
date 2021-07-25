@@ -4,7 +4,7 @@ import {useGoogleNamespace} from 'utilities/google';
 
 interface Props {
   color?: string;
-  coords: Coordinates;
+  coords: GeolocationCoordinates;
   timestamp: number;
 }
 

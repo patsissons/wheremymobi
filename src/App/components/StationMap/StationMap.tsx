@@ -10,6 +10,7 @@ import {Loader} from 'components';
 import {Station, ValidStation} from 'models';
 import {gmapKey} from 'utilities/env';
 import {googleMapsAsync} from 'utilities/google';
+
 import {
   CustomButton,
   CustomControl,
@@ -26,7 +27,6 @@ import {
   RefreshImage,
   SlotImage,
 } from './images';
-
 import styles from './StationMap.module.scss';
 
 const defaultZoom = 13;
@@ -36,7 +36,7 @@ export interface Props {
   fetchedAt: moment.Moment;
   location: google.maps.LatLngLiteral;
   stations: Station[];
-  position: Position | undefined;
+  position: GeolocationPosition | undefined;
   updateStations(): void;
 }
 
@@ -185,35 +185,17 @@ export function StationMap({
       </CustomControl>
       <CustomControl bindingPosition="BOTTOM_CENTER">
         <CustomButton onClick={selectedNearestStation}>
-          {preferBikes ? (
-            <BikeImage className={styles.ButtonImage} />
-          ) : (
-            <SlotImage
-              className={styles.ButtonImage}
-              style={{fill: '#008ABF'}}
-            />
-          )}
+          {renderBikeSlotImage()}
         </CustomButton>
       </CustomControl>
       <CustomControl bindingPosition="RIGHT_TOP">
         <CustomButton onClick={() => setPreferBikes((value) => !value)}>
-          {preferBikes ? (
-            <BikeImage className={styles.ButtonImage} />
-          ) : (
-            <SlotImage
-              className={styles.ButtonImage}
-              style={{fill: '#008ABF'}}
-            />
-          )}
+          {renderBikeSlotImage()}
         </CustomButton>
       </CustomControl>
       <CustomControl bindingPosition="RIGHT_TOP">
         <CustomButton onClick={() => setShowLabels((value) => !value)}>
-          {showLabels ? (
-            <CircleMinus className={styles.ButtonImage} />
-          ) : (
-            <CirclePlus className={styles.ButtonImage} />
-          )}
+          {renderCircleImage()}
         </CustomButton>
       </CustomControl>
       {map && validStations.length > 0 && (
@@ -256,6 +238,24 @@ export function StationMap({
       )}
     </div>
   );
+
+  function renderBikeSlotImage() {
+    if (preferBikes) {
+      return <BikeImage className={styles.ButtonImage} />;
+    }
+
+    return (
+      <SlotImage className={styles.ButtonImage} style={{fill: '#008ABF'}} />
+    );
+  }
+
+  function renderCircleImage() {
+    if (showLabels) {
+      return <CircleMinus className={styles.ButtonImage} />;
+    }
+
+    return <CirclePlus className={styles.ButtonImage} />;
+  }
 }
 
 export function nearestStation(
@@ -306,13 +306,15 @@ function stationComparer(prev: Station, next: Station) {
   );
 }
 
-function latLngFromPosition({coords: {latitude, longitude}}: Position) {
+function latLngFromPosition({
+  coords: {latitude, longitude},
+}: GeolocationPosition) {
   const google = googleMapsAsync();
 
   return new google.maps.LatLng(latitude, longitude);
 }
 
-function gpsZoom(position: Position | undefined, max = maxZoom) {
+function gpsZoom(position: GeolocationPosition | undefined, max = maxZoom) {
   if (position) {
     const {
       coords: {accuracy},
@@ -325,7 +327,9 @@ function gpsZoom(position: Position | undefined, max = maxZoom) {
   return undefined;
 }
 
-function isValidPosition(position: Position | undefined): position is Position {
+function isValidPosition(
+  position: GeolocationPosition | undefined,
+): position is GeolocationPosition {
   return Boolean(
     position &&
       position.coords.latitude !== 0 &&

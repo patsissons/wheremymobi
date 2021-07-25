@@ -1,6 +1,3 @@
-import {StationSource, StationSourceResult} from './StationSource';
-import {SourceName} from './config';
-
-export type SourceName = SourceName;
-export type StationSourceResult = StationSourceResult;
-export {StationSource};
+export type {SourceName} from './config';
+export type {StationSourceResult} from './StationSource';
+export {StationSource} from './StationSource';

@@ -10,6 +10,7 @@ const mockGoogle: any = {
   maps: {},
 };
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export type google = typeof google;
 
 export function googleMapsAsync(allowMock = true): typeof google {
