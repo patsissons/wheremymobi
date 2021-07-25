@@ -1,20 +1,29 @@
-import React, {useCallback, useContext, useState, useEffect} from 'react';
-import MarkerClustererPlus, {Options} from '@google/markerclustererplus';
+import React, {
+  ComponentPropsWithoutRef,
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+} from 'react';
+import MarkerClustererPlus, {
+  MarkerClustererOptions,
+} from '@googlemaps/markerclustererplus';
 import {GoogleMapContext} from '@googlemap-react/core';
-import {Props} from '@shopify/useful-types';
 import {useGoogleNamespace} from 'utilities/google';
 
-type Context = Props<typeof GoogleMapContext.Provider>['value'];
+type Context = ComponentPropsWithoutRef<
+  typeof GoogleMapContext.Provider
+>['value'];
 type Action = Context['dispatch'] extends (action: infer T) => void ? T : never;
 
-const defaultOpts: Options = {
+const defaultOpts: MarkerClustererOptions = {
   averageCenter: true,
   gridSize: 90,
   maxZoom: 17,
   enableRetinaIcons: false,
 };
 
-export function useMarkerClusterer(opts: Options = {}) {
+export function useMarkerClusterer(opts: MarkerClustererOptions = {}) {
   const {dispatch, state} = useContext(GoogleMapContext);
   const [clusterer, setClusterer] = useState<MarkerClustererPlus>();
   const [context, setContext] = useState<Context>();

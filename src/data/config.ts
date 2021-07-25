@@ -1,5 +1,6 @@
 import {Station} from 'models';
 import {googleMapsAsync} from 'utilities/google';
+
 import {Smoove} from './transform';
 
 enum StationSourceType {
@@ -69,6 +70,8 @@ export function getConfigByLocation(location: google.maps.LatLngLiteral) {
     .sort((left, right) => left.distance - right.distance)[0].config;
 }
 
+// for a list of proxies,
+// see: https://gist.github.com/jimmywarting/ac1be6ea0297c16c477e17f8fbe51347
 export function getCorsUri(uri: string) {
   return `https://cors.bridged.cc/${uri}`;
 }

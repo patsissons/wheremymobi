@@ -3,11 +3,11 @@ import {createStation, StationData} from 'models';
 export interface SmooveStation {
   name: string;
   coordinates: string;
-  // eslint-disable-next-line babel/camelcase
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   total_slots: number;
-  // eslint-disable-next-line babel/camelcase
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   free_slots: number;
-  // eslint-disable-next-line babel/camelcase
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   avl_bikes: number;
   operative: boolean;
   style: string;

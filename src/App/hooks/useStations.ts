@@ -1,5 +1,6 @@
 import {useCallback, useDebugValue, useEffect, useMemo, useState} from 'react';
 import {SourceName, StationSource, StationSourceResult} from 'data';
+
 import {QueryParams} from './useQueryParams';
 
 interface UseStationsProps {
@@ -23,9 +24,8 @@ function getSourceName(params: QueryParams | undefined) {
 
 export function useStations({params}: UseStationsProps) {
   const {debug, sourceName} = getSourceName(params);
-  const [stationSourceResult, setStationSourceResult] = useState<
-    StationSourceResult
-  >();
+  const [stationSourceResult, setStationSourceResult] =
+    useState<StationSourceResult>();
   const source = useMemo(() => {
     if (sourceName) {
       return StationSource.create(sourceName, {debug});

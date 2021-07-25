@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Marker} from '@googlemap-react/core';
 import {googleMapsAsync} from 'utilities/google';
+
 import {
   MarkerLowImage,
   MarkerMidImage,

@@ -1,5 +1,6 @@
 import {useCallback, useDebugValue, useEffect, useState} from 'react';
 import moment from 'moment';
+
 import {QueryParams} from './useQueryParams';
 
 interface UsePositionProps {
@@ -13,8 +14,8 @@ const defaultOptions: PositionOptions = {
 
 export function usePosition({options}: UsePositionProps) {
   const [watchId, setWatchId] = useState<number>();
-  const [position, setPosition] = useState<Position>();
-  const [error, setError] = useState<PositionError>();
+  const [position, setPosition] = useState<GeolocationPosition>();
+  const [error, setError] = useState<GeolocationPositionError>();
   const updatePosition = useCallback(() => {
     if (typeof navigator !== 'undefined') {
       navigator.geolocation.getCurrentPosition(
