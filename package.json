@@ -79,7 +79,8 @@
     "lint:ts": "eslint . --ext .ts --ext .tsx --max-warnings 0 --format codeframe",
     "pretty": "prettier --write '**/*.{css,scss,js,json,md,ts,tsx,yml}'",
     "server": "serve -s build",
-    "validate": "tsc --noEmit"
+    "validate": "tsc --noEmit",
+    "prepare": "husky install"
   },
   "engines": {
     "node": ">=11.0.0"
