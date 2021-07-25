@@ -39,7 +39,7 @@ const configMap = new Map<SourceName, StationSourceConfig>([
       },
       name: 'Mobi Bike Vancouver',
       type: 'Smoove',
-      uri: 'http://vancouver-ca.smoove.pro/api-public/stations',
+      uri: 'https://vancouver-ca.smoove.pro/api-public/stations',
       cors: true,
     },
   ],
@@ -67,6 +67,10 @@ export function getConfigByLocation(location: google.maps.LatLngLiteral) {
       ),
     }))
     .sort((left, right) => left.distance - right.distance)[0].config;
+}
+
+export function getCorsUri(uri: string) {
+  return `https://cors.bridged.cc/${uri}`;
 }
 
 export type StationSourceTransform = (response: any) => Station[];
