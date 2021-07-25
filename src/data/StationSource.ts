@@ -4,6 +4,7 @@ import {Station} from 'models';
 import {
   getConfig,
   getConfigByLocation,
+  getCorsUri,
   mapTransform,
   SourceName,
   StationSourceConfig,
@@ -53,7 +54,7 @@ export class StationSource {
 
   async getJSON() {
     const uri = this.config.cors
-      ? `https://cors-anywhere.herokuapp.com/${this.config.uri}`
+      ? getCorsUri(this.config.uri)
       : this.config.uri;
     this.debug(`Fetching stations from '${uri}' ...`);
 

@@ -69,6 +69,10 @@ export function getConfigByLocation(location: google.maps.LatLngLiteral) {
     .sort((left, right) => left.distance - right.distance)[0].config;
 }
 
+export function getCorsUri(uri: string) {
+  return `https://cors.bridged.cc/${uri}`;
+}
+
 export type StationSourceTransform = (response: any) => Station[];
 
 export function mapTransform({type}: StationSourceConfig) {
