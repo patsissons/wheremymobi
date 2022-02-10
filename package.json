@@ -33,7 +33,7 @@
     "graphql-tag": "^2.0.0",
     "isomorphic-fetch": "^3.0.0",
     "moment": "^2.0.0",
-    "node-sass": "^6.0.0",
+    "node-sass": "^7.0.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-spinkit": "^3.0.0",
