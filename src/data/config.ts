@@ -1,5 +1,5 @@
-import {Station} from 'models';
-import {googleMapsAsync} from 'utilities/google';
+import {Station} from 'data/models';
+import {googleMapsAsync} from 'utils/google';
 
 import {Smoove} from './transform';
 
@@ -73,7 +73,7 @@ export function getConfigByLocation(location: google.maps.LatLngLiteral) {
 // for a list of proxies,
 // see: https://gist.github.com/jimmywarting/ac1be6ea0297c16c477e17f8fbe51347
 export function getCorsUri(uri: string) {
-  return `https://cors.bridged.cc/${uri}`;
+  return `/api/stations?uri=${uri}`;
 }
 
 export type StationSourceTransform = (response: any) => Station[];

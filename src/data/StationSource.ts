@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import moment from 'moment';
-import {Station} from 'models';
+import {Station} from 'data/models';
 
 import {
   getConfig,
@@ -83,7 +83,7 @@ export class StationSource {
         fetchedAt: moment(),
         stations,
       };
-    } catch (error) {
+    } catch (error: any) {
       this.debug(`Fetch failed: ${error.message || 'Unknown Error'}`, error);
 
       return {

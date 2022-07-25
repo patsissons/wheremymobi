@@ -1,32 +1,17 @@
 {
+  "extends": "@shopify/typescript-configs/application.json",
   "compilerOptions": {
-    "baseUrl": "src",
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "es2015",
-      "es2017",
-      "esnext"
-    ],
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "*": ["*", "packages/*", "src/*"]
+    },
     "allowJs": true,
-    "skipLibCheck": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "sourceMap": true,
-    "jsx": "react-jsx",
-    "noFallthroughCasesInSwitch": true
+    "jsx": "preserve",
+    "noFallthroughCasesInSwitch": true,
+    "incremental": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }
