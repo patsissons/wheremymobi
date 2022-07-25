@@ -1,6 +1,4 @@
 import React, {PropsWithChildren} from 'react';
-import {GoogleMapProvider} from '@googlemap-react/core';
-import {Loader} from 'components';
 
 import {Header} from './components';
 import styles from './App.module.scss';

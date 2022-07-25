@@ -1,6 +1,7 @@
 import React from 'react';
 import {Circle, Marker} from '@googlemap-react/core';
 import {useGoogleNamespace} from 'utils/google';
+import moment from 'moment';
 
 interface Props {
   color?: string;
@@ -41,6 +42,7 @@ export function GpsMarker({color = 'magenta', coords, timestamp}: Props) {
             scale: 10,
             strokeWeight: 1,
           },
+          title: moment(timestamp).format(),
           position,
           zIndex: google.maps.Marker.MAX_ZINDEX,
         }}
