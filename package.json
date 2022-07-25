@@ -1,140 +1,24 @@
 {
   "name": "wheremymobi",
-  "description": "Find mobi bikes in Vancouver, BC.",
-  "version": "1.1.0",
+  "version": "0.1.0",
   "private": true,
-  "author": {
-    "name": "Pat Sissons",
-    "email": "patricksissons@gmail.com",
-    "url": "https://github.com/patsissons"
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/patsissons/wheremymobi.git"
-  },
-  "bugs": {
-    "url": "https://github.com/patsissons/wheremymobi/issues"
-  },
-  "homepage": "https://wheremymobi.com",
-  "keywords": [
-    "mobi",
-    "bike"
-  ],
-  "license": "MIT",
   "dependencies": {
-    "@googlemaps/markerclustererplus": "^1.0.0",
-    "@googlemap-react/core": "^0.1.0",
-    "@shopify/react-graphql": "^7.0.0",
-    "@shopify/react-hooks": "^2.0.0",
-    "@shopify/react-i18n": "^6.0.0",
-    "apollo-server-express": "^3.0.0",
-    "classnames": "^2.0.0",
-    "graphql": "^14.5.0",
-    "graphql-tag": "^2.0.0",
-    "isomorphic-fetch": "^3.0.0",
-    "moment": "^2.0.0",
-    "node-sass": "^6.0.0",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-spinkit": "^3.0.0",
-    "scriptjs": "^2.0.0",
-    "typescript": "^4.0.0"
+    "next": "12.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@shopify/eslint-plugin": "^40.0.0",
-    "@shopify/react-testing": "^3.0.0",
-    "@types/classnames": "^2.0.0",
-    "@types/dotenv": "^8.0.0",
-    "@types/fs-extra": "^9.0.0",
-    "@types/googlemaps": "^3.0.0",
-    "@types/graphql": "^14.0.0",
-    "@types/isomorphic-fetch": "^0.0.35",
-    "@types/jest": "^26.0.0",
-    "@types/node": "^14.0.0",
-    "@types/react": "^16.8.0",
-    "@types/react-dom": "^16.8.0",
-    "@types/react-spinkit": "^3.0.0",
-    "del-cli": "^4.0.0",
-    "dotenv": "^10.0.0",
-    "eslint": "^7.0.0",
-    "eslint-stats": "^1.0.0",
-    "express": "^4.0.0",
-    "fs-extra": "^10.0.0",
-    "husky": "^7.0.0",
-    "ncp": "^2.0.0",
-    "prettier": "^2.0.0",
-    "pretty-quick": "^3.0.0",
-    "react-scripts": "^4.0.0",
-    "serve": "^12.0.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "clean": "del build docs .cache",
-    "deploy": "yarn clean && yarn build && ncp build docs",
-    "lint": "yarn lint:ts",
-    "lint:stats": "yarn lint:ts --format node_modules/eslint-stats/byError.js",
-    "lint:ts": "eslint . --ext .ts --ext .tsx --max-warnings 0 --format codeframe",
-    "pretty": "prettier --write '**/*.{css,scss,js,json,md,ts,tsx,yml}'",
-    "server": "serve -s build",
-    "validate": "tsc --noEmit",
-    "prepare": "husky install"
-  },
-  "engines": {
-    "node": ">=11.0.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:@shopify/typescript",
-      "plugin:@shopify/react",
-      "plugin:@shopify/jest",
-      "plugin:@shopify/prettier"
-    ],
-    "settings": {
-      "react": {
-        "version": "16.9"
-      }
-    },
-    "rules": {
-      "@shopify/jsx-no-hardcoded-content": "off"
-    },
-    "overrides": [
-      {
-        "parserOptions": {
-          "project": "./tsconfig.json"
-        },
-        "files": [
-          "*.ts",
-          "*.tsx"
-        ]
-      }
-    ]
-  },
-  "eslintIgnore": [
-    "/.cache",
-    "/build",
-    "/docs",
-    "/public",
-    "/src/react-app-env.d.ts",
-    "/src/serviceWorker.ts"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@types/node": "18.6.0",
+    "@types/react": "18.0.15",
+    "@types/react-dom": "18.0.6",
+    "eslint": "8.20.0",
+    "eslint-config-next": "12.2.3",
+    "typescript": "4.7.4"
   }
 }
