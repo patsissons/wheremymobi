@@ -1,0 +1,10 @@
+$buttonImageSize: 20px;
+
+.MapContainer {
+  flex: 1;
+}
+
+.ButtonImage {
+  width: $buttonImageSize;
+  height: $buttonImageSize;
+}

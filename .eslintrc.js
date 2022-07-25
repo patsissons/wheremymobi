@@ -13,6 +13,7 @@ module.exports = {
       rules: {
         // temporary overrides
         '@shopify/strict-component-boundaries': 'off',
+        '@shopify/jsx-no-hardcoded-content': 'off',
 
         // allow Record<K,V>
         '@typescript-eslint/consistent-indexed-object-style': [
@@ -69,4 +70,4 @@ module.exports = {
       },
     },
   ],
-}
+};

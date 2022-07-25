@@ -72,6 +72,8 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/react-spinkit": "^3.0.7",
+    "babel-plugin-inline-import-data-uri": "^1.0.1",
+    "babel-plugin-inline-react-svg": "^2.0.1",
     "eslint": "^8.20.0",
     "eslint-config-next": "^12.2.3",
     "eslint-stats": "^1.0.1",

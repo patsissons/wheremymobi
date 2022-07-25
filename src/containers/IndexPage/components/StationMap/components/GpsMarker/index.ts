@@ -1,0 +1,1 @@
+export {GpsMarker} from './GpsMarker';
