@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "conf": "yarn run conf:link && yarn run conf:env",
+    "conf:link": "test -f .vercel/project.json || vercel link",
+    "conf:env": "./scripts/setup-env.sh",
+    "conf:clean": "rm -rf .vercel .env*.local",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -19,6 +23,7 @@
     "@types/react-dom": "18.0.6",
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.3",
-    "typescript": "4.7.4"
+    "typescript": "4.7.4",
+    "vercel": "^27.2.0"
   }
 }
