@@ -1,31 +1,77 @@
 {
-	"name": "wheremymobi",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
-	},
-	"devDependencies": {
-		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/kit": "^1.5.0",
-		"@typescript-eslint/eslint-plugin": "^5.45.0",
-		"@typescript-eslint/parser": "^5.45.0",
-		"eslint": "^8.28.0",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-svelte": "^2.26.0",
-		"prettier": "^2.8.0",
-		"prettier-plugin-svelte": "^2.8.1",
-		"svelte": "^3.54.0",
-		"svelte-check": "^3.0.1",
-		"tslib": "^2.4.1",
-		"typescript": "^5.0.0",
-		"vite": "^4.3.0"
-	},
-	"type": "module"
+  "name": "wheremymobi",
+  "description": "Find mobi bikes in Vancouver, BC.",
+  "version": "2.0.0",
+  "private": true,
+  "engines": {
+    "node": "18"
+  },
+  "author": {
+    "name": "Pat Sissons",
+    "email": "patricksissons@gmail.com",
+    "url": "https://github.com/patsissons"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patsissons/wheremymobi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/patsissons/wheremymobi/issues"
+  },
+  "homepage": "https://wheremymobi.com",
+  "keywords": [
+    "mobi",
+    "bike"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "conf": "yarn run conf:link && yarn run conf:env",
+    "conf:link": "test -f .vercel/project.json || vercel link",
+    "conf:env": "./scripts/setup-env.sh",
+    "conf:clean": "rm -rf .vercel .env*.local",
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "lint:prettier": "prettier --plugin-search-dir . --check .",
+    "lint:style": "stylelint 'src/**/*.{css,scss,svelte}'",
+    "lint:es": "eslint .",
+    "lint": "yarn lint:prettier && yarn lint:style && yarn lint:es",
+    "format": "prettier --plugin-search-dir . --write .",
+    "validate": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "^2.0.0",
+    "@sveltejs/kit": "^1.5.0",
+    "@types/google.maps": "^3.53.2",
+    "@types/lodash": "^4.14.195",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "autoprefixer": "^10.4.14",
+    "daisyui": "^3.0.3",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-svelte": "^2.26.0",
+    "lodash": "^4.17.21",
+    "postcss": "^8.4.24",
+    "postcss-html": "^1.5.0",
+    "prettier": "^2.8.0",
+    "prettier-plugin-svelte": "^2.8.1",
+    "sass": "^1.62.1",
+    "stylelint": "^15.7.0",
+    "stylelint-config-recommended-scss": "^12.0.0",
+    "stylelint-config-standard": "^33.0.0",
+    "stylelint-config-tailwindcss": "^0.0.7",
+    "stylelint-order": "^6.0.3",
+    "stylelint-scss": "^5.0.0",
+    "svelte": "^3.54.0",
+    "svelte-check": "^3.0.1",
+    "tailwindcss": "^3.3.2",
+    "tslib": "^2.4.1",
+    "typescript": "^5.0.0",
+    "vercel": "^30.2.0",
+    "vite": "^4.3.0"
+  },
+  "type": "module"
 }

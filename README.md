@@ -1,20 +1,14 @@
-# create-svelte
+## Where My Mobi?
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Better visibility for tracking [mobi bike stations](https://wheremymobi.com/)
 
-## Creating a project
+## Data
 
-If you're seeing this, you've probably already done this step. Congrats!
+Data for [mobi bike stations](https://www.mobibikes.ca/en#the-map) sourced from [Smoove](https://vancouver-gbfs.smoove.pro/gbfs/2/en/station_status.json) via [GBFS](https://github.com/MobilityData/gbfs)
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## svelte
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
+### Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
@@ -25,7 +19,7 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Building
+### Building
 
 To create a production version of your app:
 
