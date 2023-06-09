@@ -1,6 +1,6 @@
 export const VehicleType = {
-  1: 'MANUAL',
+  1: 'PEDAL',
   2: 'ELECTRIC',
-  MANUAL: 1,
+  PEDAL: 1,
   ELECTRIC: 2,
 };

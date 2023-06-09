@@ -1,12 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
-	daisyui: {
-		themes: ['dark', 'light']
-	},
-	darkMode: 'class',
-	plugins: [require('daisyui')],
-	theme: {
-		extend: {}
-	}
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  theme: {
+    extend: {
+      colors: {
+        mobi: '#007fb3',
+      },
+      screens: {
+        xs: '400px',
+      },
+    },
+  },
 };

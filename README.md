@@ -4,7 +4,7 @@ Better visibility for tracking [mobi bike stations](https://wheremymobi.com/)
 
 ## Data
 
-Data for [mobi bike stations](https://www.mobibikes.ca/en#the-map) sourced from [Smoove](https://vancouver-gbfs.smoove.pro/gbfs/2/en/station_status.json) via [GBFS](https://github.com/MobilityData/gbfs)
+Data for [mobi bike stations](https://www.mobibikes.ca/en#the-map) sourced from [Smoove](https://vancouver-gbfs.smoove.pro/gbfs/2/en/station_status.json) via [GBFS](https://github.com/MobilityData/gbfs) (see [feeds](https://vancouver-gbfs.smoove.pro/gbfs/2/gbfs.json) for all available endpoints).
 
 ## svelte
 

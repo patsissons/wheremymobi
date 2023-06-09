@@ -1,8 +1,7 @@
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ data, url }) => {
+export const load: PageLoad = ({ url }) => {
   return {
-    ...data,
     debug: url.searchParams.has('debug'),
   };
 };

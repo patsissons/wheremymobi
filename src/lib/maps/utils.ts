@@ -1,11 +1,19 @@
+import { Loader } from '@googlemaps/js-api-loader';
 import type { Station } from '$lib/client';
 import { VehicleType } from '$lib/client/constants';
 import type { MapContext } from './types';
+import { GOOGLE_MAPS_API_KEY } from '$lib/utils/env';
+import { writable } from 'svelte/store';
+import { infoWindowId } from './constants';
 
 export async function createMap(container: HTMLElement): Promise<MapContext> {
-  const { Map } = (await google.maps.importLibrary(
-    'maps',
-  )) as google.maps.MapsLibrary;
+  const loader = new Loader({
+    apiKey: GOOGLE_MAPS_API_KEY,
+    version: 'weekly',
+  });
+
+  const { Map } = await loader.importLibrary('maps');
+
   const map = new Map(container, {
     center: {
       lat: 49.279627,
@@ -18,13 +26,22 @@ export async function createMap(container: HTMLElement): Promise<MapContext> {
   const bikeLayer = new google.maps.BicyclingLayer();
   bikeLayer.setMap(map);
 
-  const infoWindow = new google.maps.InfoWindow();
+  const infoWindow = new google.maps.InfoWindow({
+    content: `<div id="${infoWindowId}" />`,
+  });
+
+  const selectedStation = writable<Station | null>(null);
+
+  infoWindow.addListener('closeclick', () => {
+    selectedStation.set(null);
+  });
 
   return {
     container,
     map,
     markers: [],
     infoWindow,
+    selectedStation,
   };
 }
 
@@ -61,7 +78,7 @@ export function loadMarkers(context: MapContext, stations: Station[]) {
           labelOrigin: new google.maps.Point(8, 7),
         },
         label: {
-          text: `${station.num_bikes_available}|${station.capacity}`,
+          text: `${station.num_bikes_available}|${station.num_docks_available}`,
           color: '#f8fafc',
           fontFamily: 'monospace',
           fontSize: '1em',
@@ -72,14 +89,8 @@ export function loadMarkers(context: MapContext, stations: Station[]) {
       });
 
       marker.addListener('click', () => {
-        context.infoWindow.setContent(
-          `<pre class="text-black font-mono whitespace-pre-wrap">${JSON.stringify(
-            station,
-            null,
-            2,
-          )}</pre>`,
-        );
         context.infoWindow.open(context.map, marker);
+        context.selectedStation.set(station);
       });
 
       context.markers.push(marker);
