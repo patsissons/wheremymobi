@@ -12,6 +12,7 @@ specifiers:
   dayjs: ^1.11.8
   eslint: ^8.28.0
   eslint-config-prettier: ^8.5.0
+  eslint-plugin-prettier: ^4.2.1
   eslint-plugin-svelte: ^2.26.0
   lodash: ^4.17.21
   postcss: ^8.4.24
@@ -44,6 +45,7 @@ devDependencies:
   dayjs: 1.11.8
   eslint: 8.42.0
   eslint-config-prettier: 8.8.0_eslint@8.42.0
+  eslint-plugin-prettier: 4.2.1_vnriwwub2rhvoyn4ckagrc4lpi
   eslint-plugin-svelte: 2.30.0_3vji2slnup2yzxo42w6sbds3sy
   lodash: 4.17.21
   postcss: 8.4.24
@@ -4012,6 +4014,23 @@ packages:
       eslint: 8.42.0
     dev: true
 
+  /eslint-plugin-prettier/4.2.1_vnriwwub2rhvoyn4ckagrc4lpi:
+    resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      eslint: '>=7.28.0'
+      eslint-config-prettier: '*'
+      prettier: '>=2.0.0'
+    peerDependenciesMeta:
+      eslint-config-prettier:
+        optional: true
+    dependencies:
+      eslint: 8.42.0
+      eslint-config-prettier: 8.8.0_eslint@8.42.0
+      prettier: 2.8.8
+      prettier-linter-helpers: 1.0.0
+    dev: true
+
   /eslint-plugin-svelte/2.30.0_3vji2slnup2yzxo42w6sbds3sy:
     resolution: {integrity: sha512-2/qj0BJsfM0U2j4EjGb7iC/0nbUvXx1Gn78CdtyuXpi/rSomLPCPwnsZsloXMzlt6Xwe8LBlpRvZObSKEHLP5A==}
     engines: {node: ^14.17.0 || >=16.0.0}
@@ -4287,6 +4306,10 @@ packages:
 
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
+    dev: true
+
+  /fast-diff/1.3.0:
+    resolution: {integrity: sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==}
     dev: true
 
   /fast-glob/3.2.11:
@@ -6587,6 +6610,13 @@ packages:
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+    dev: true
+
+  /prettier-linter-helpers/1.0.0:
+    resolution: {integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      fast-diff: 1.3.0
     dev: true
 
   /prettier-plugin-svelte/2.10.1_blbg2s7pis747igzn3ilcyh5ou:
