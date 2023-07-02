@@ -2,7 +2,6 @@
   import { onDestroy, onMount } from 'svelte';
   import dayjs from 'dayjs';
   import type { MapContext } from '$lib/maps';
-  import { formatAge } from '$lib/utils/dayjs';
 
   export let mapContext: MapContext;
   export let color = 'magenta';
@@ -75,6 +74,7 @@
       lat: position.coords.latitude,
       lng: position.coords.longitude,
     };
+    const rotation = position.coords.heading ?? 0;
 
     circle.setCenter(location);
     circle.setRadius(position.coords.accuracy || 255);
@@ -85,7 +85,7 @@
       strokeColor: color,
       fillColor: color,
       fillOpacity: 1,
-      rotation: position.coords.heading ?? 0,
+      rotation,
       scale: 10,
       strokeWeight: 1,
       labelOrigin: new google.maps.Point(0, 2.6),
@@ -93,7 +93,7 @@
     marker.setTitle(
       `${dayjs(position.timestamp).toISOString()} / ${
         position.coords.accuracy
-      }m`,
+      }m / ${rotation.toFixed()}deg`,
     );
 
     circle.setMap(mapContext.map);
@@ -104,7 +104,7 @@
     if (!position) return;
 
     marker.setLabel({
-      text: '' + dayjs().diff(dayjs(position.timestamp), 'seconds'),
+      text: `${dayjs().diff(dayjs(position.timestamp), 'seconds')}`,
       color: 'white',
       fontFamily: 'monospace',
       fontSize: '1em',
