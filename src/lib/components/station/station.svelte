@@ -1,7 +1,6 @@
 <script lang="ts">
   import dayjs from 'dayjs';
-  import sortBy from 'lodash/orderBy';
-  // import thenBy from 'lodash/thenBy';
+  import orderBy from 'lodash/orderBy';
   import { type Station, VehicleType } from '$lib/client';
   import AgeCounter from '../age-counter.svelte';
   import Collapsible from '../collapsible.svelte';
@@ -10,7 +9,6 @@
   import Row from './row.svelte';
   import Bike from './bike.svelte';
   import { DirectionsIcon, GoogleMapsIcon, RefreshIcon } from '$lib/icons';
-  import orderBy from 'lodash/orderBy';
 
   export let station: Station;
   export let rounded = false;
