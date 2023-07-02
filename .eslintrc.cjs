@@ -4,12 +4,15 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:svelte/recommended',
-    'prettier',
+    'plugin:prettier/recommended',
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
+  ignorePatterns: ['*.js'],
   parserOptions: {
+    project: ['./tsconfig.json'],
     sourceType: 'module',
     ecmaVersion: 2020,
     extraFileExtensions: ['.svelte'],

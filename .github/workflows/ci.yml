@@ -1,0 +1,30 @@
+name: ci
+on: [push]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.npmrc'
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --silent
+      - name: Lint with Prettier
+        run: pnpm run lint:prettier
+      - name: Lint with Stylelint
+        run: pnpm run lint:style
+      - name: Check Svelte
+        run: pnpm run check
+      - name: Build  Site
+        run: pnpm run build
+      - name: Check TypeScript
+        run: pnpm run validate
+      - name: Lint with ESLint
+        # NOTE: we need to run eslint last because we want svelte tsconfig.json
+        #       to be built before running eslint.
+        run: pnpm run lint:es --debug

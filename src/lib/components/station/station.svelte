@@ -1,16 +1,15 @@
 <script lang="ts">
   import dayjs from 'dayjs';
-  import sortBy from 'lodash/orderBy';
-  // import thenBy from 'lodash/thenBy';
+  import orderBy from 'lodash/orderBy';
   import { type Station, VehicleType } from '$lib/client';
   import AgeCounter from '../age-counter.svelte';
   import Collapsible from '../collapsible.svelte';
   import JsonData from '../json-data.svelte';
+  import Link from '../link.svelte';
   import Badge from './badge.svelte';
   import Row from './row.svelte';
   import Bike from './bike.svelte';
   import { DirectionsIcon, GoogleMapsIcon, RefreshIcon } from '$lib/icons';
-  import orderBy from 'lodash/orderBy';
 
   export let station: Station;
   export let rounded = false;
@@ -79,29 +78,26 @@
 >
   <div class="flex flex-col items-center">
     <Row first>
-      <a href="/station/{station.station_id}">
+      <Link href="/station/{station.station_id}">
         <p class="text-center text-xl font-bold underline">
           {`Station #${station.station_id}: ${station.name}`}
         </p>
-      </a>
+      </Link>
       <div slot="right" class="flex items-center gap-1 p-1">
-        <a
+        <Link
           href="https://www.google.com/maps/place/{station.lat},{station.lon}"
-          rel="noopener noreferrer"
-          target="_blank"
-          aria-label="Open in Google Maps"
+          title="Open in Google Maps"
+          external
         >
           <GoogleMapsIcon size="2em" />
-        </a>
-        <a
-          class="text-xl"
+        </Link>
+        <Link
           href="https://www.google.com/maps/dir/?api=1&travelmode=bicycling&destination={station.lat},{station.lon}"
-          rel="noopener noreferrer"
-          target="_blank"
-          aria-label="Find directions in Google Maps"
+          title="Find directions in Google Maps"
+          external
         >
-          <DirectionsIcon />
-        </a>
+          <DirectionsIcon size="1.5em" />
+        </Link>
       </div>
     </Row>
     <Row>
