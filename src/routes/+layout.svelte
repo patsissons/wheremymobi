@@ -4,12 +4,14 @@
   import Metadata from './metadata.svelte';
   import Summary from './summary.svelte';
   import type { LayoutData } from './$types';
+  import { GithubIcon, TwitterIcon } from '$lib/icons';
+  import Link from '$lib/components/link.svelte';
 
   export let data: LayoutData;
 </script>
 
 <main class="fullscreen flex flex-col min-w-[320px]">
-  <section id="header" class="flex flex-col items-center gap-2 w-full bg-mobi">
+  <section id="header" class="w-full bg-mobi">
     <div class="flex items-center gap-2 w-full h-20">
       <div class="flex-1 w-full h-full">
         <div class="flex items-center justify-start h-full px-2">
@@ -41,6 +43,39 @@
   </section>
   <section id="content" class="w-full h-full">
     <slot />
+  </section>
+  <section id="footer" class="w-full bg-mobi">
+    <div
+      class="flex flex-col items-center justify-center gap-2 w-full font-mono text-xs px-4 py-2"
+    >
+      <p class="text-center">
+        Built with <Link href="https://kit.svelte.dev/" external>SvelteKit</Link
+        >
+        hosted on <Link href="https://vercel.com/" external>Vercel</Link>
+        using <Link href="https://github.com/MobilityData/gbfs" external
+          >GBFS</Link
+        >
+        <Link href="https://vancouver-gbfs.smoove.pro/gbfs/2/gbfs.json" external
+          >{'Smoove data'}</Link
+        >.
+      </p>
+      <div class="flex items-center gap-1 text-lg">
+        <Link
+          href="https://github.com/patsissons/wheremymobi"
+          title="Source code on GitHub"
+          external
+        >
+          <GithubIcon />
+        </Link>
+        <Link
+          href="https://twitter.com/wheremymobi"
+          title="@wheremymobi on Twitter"
+          external
+        >
+          <TwitterIcon />
+        </Link>
+      </div>
+    </div>
   </section>
 </main>
 
