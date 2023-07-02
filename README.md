@@ -1,48 +1,32 @@
 ## Where My Mobi?
 
-Better visibility for tracking [mobi bike stations](https://patsissons.github.io/wheremymobi/)
-
-## Mapping
-
-Google maps tooling for react provided by [`googlemap-react`](https://github.com/googlemap-react/googlemap-react).
+Better visibility for tracking [mobi bike stations](https://wheremymobi.com/)
 
 ## Data
 
-Data for [mobi bike stations](https://www.mobibikes.ca/en#the-map) sourced from [Smoove](http://vancouver-ca.smoove.pro/api-public/stations)
+Data for [mobi bike stations](https://www.mobibikes.ca/en#the-map) sourced from [Smoove](https://vancouver-gbfs.smoove.pro/gbfs/2/en/station_status.json) via [GBFS](https://github.com/MobilityData/gbfs) (see [feeds](https://vancouver-gbfs.smoove.pro/gbfs/2/gbfs.json) for all available endpoints).
 
-## nextjs
+## svelte
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Developing
 
-## Getting Started
-
-First, run the development server:
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Building
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+To create a production version of your app:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+npm run build
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+You can preview the production build with `npm run preview`.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

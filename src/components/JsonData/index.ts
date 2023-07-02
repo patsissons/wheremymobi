@@ -1,1 +1,0 @@
-export {JsonData} from './JsonData';
