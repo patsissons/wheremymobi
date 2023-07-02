@@ -1,7 +1,9 @@
 <script lang="ts">
   import dayjs from 'dayjs';
   import orderBy from 'lodash/orderBy';
+  import { onMount } from 'svelte';
   import { type Station, VehicleType } from '$lib/client';
+  import { DirectionsIcon, GoogleMapsIcon, RefreshIcon } from '$lib/icons';
   import AgeCounter from '../age-counter.svelte';
   import Collapsible from '../collapsible.svelte';
   import JsonData from '../json-data.svelte';
@@ -9,7 +11,6 @@
   import Badge from './badge.svelte';
   import Row from './row.svelte';
   import Bike from './bike.svelte';
-  import { DirectionsIcon, GoogleMapsIcon, RefreshIcon } from '$lib/icons';
 
   export let station: Station;
   export let rounded = false;
@@ -18,6 +19,9 @@
   let refreshing = false;
 
   $: counts = countBikes(station);
+  $: bikes = sortBikes(station);
+
+  onMount(handleRefresh);
 
   function countBikes(station: Station) {
     const pedal =
@@ -31,6 +35,17 @@
       )?.count ?? 0;
 
     return { pedal, electric };
+  }
+
+  function sortBikes(station: Station) {
+    return orderBy(
+      station.bikes,
+      [
+        (bike) => Number(bike.vehicle_type_id),
+        (bike) => Number(bike.last_reported),
+      ],
+      ['desc', 'desc'],
+    );
   }
 
   async function handleRefresh() {
@@ -58,17 +73,6 @@
     } finally {
       refreshing = false;
     }
-  }
-
-  function sortBikes() {
-    return orderBy(
-      station.bikes,
-      [
-        (bike) => Number(bike.vehicle_type_id),
-        (bike) => Number(bike.last_reported),
-      ],
-      ['desc', 'desc'],
-    );
   }
 </script>
 
@@ -163,7 +167,7 @@
           <p class="hidden md:block">Reserved</p>
           <p class="hidden md:block">Electric</p>
           <p class="hidden md:block">Last reported</p>
-          {#each sortBikes() as bike}
+          {#each bikes as bike}
             <Bike {bike} />
           {/each}
         </div>
