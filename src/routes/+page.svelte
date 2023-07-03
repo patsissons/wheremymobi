@@ -18,11 +18,15 @@
   let stationComponent: StationComponent | undefined;
   let mapContext: MapContext | undefined;
 
+  $: if (mapContext && data.stations) {
+    updateStations(mapContext, data.stations);
+  }
+
   onMount(async () => {
     if (!container) return;
 
     const context = await createMap(container);
-    loadMarkers(context, data.stations);
+    mapContext = context;
 
     context.selectedStation.subscribe((value) => {
       if (stationComponent) {
@@ -59,13 +63,18 @@
         });
       }
     });
+  });
 
-    mapContext = context;
+  function updateStations(
+    mapContext: MapContext,
+    stations: PageData['stations'],
+  ) {
+    loadMarkers(mapContext, stations);
 
     console.log(
       `loaded ${data.stations.length} stations and ${data.bikes.length} bikes`,
     );
-  });
+  }
 </script>
 
 <MetaTags />
