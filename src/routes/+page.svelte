@@ -8,14 +8,14 @@
   } from '$lib/maps';
   import type { PageData } from './$types';
   import JsonData from '$lib/components/json-data.svelte';
-  import Station from '$lib/components/station/station.svelte';
+  import StationComponent from '$lib/components/station/station.svelte';
   import GpsMarker from '$lib/components/gps-marker/gps-marker.svelte';
   import MetaTags from '$lib/components/meta-tags.svelte';
 
   export let data: PageData;
 
   let container: HTMLDivElement | undefined;
-  let station: Station | undefined;
+  let stationComponent: StationComponent | undefined;
   let mapContext: MapContext | undefined;
 
   onMount(async () => {
@@ -25,9 +25,9 @@
     loadMarkers(context, data.stations);
 
     context.selectedStation.subscribe((value) => {
-      if (station) {
-        station.$destroy();
-        station = undefined;
+      if (stationComponent) {
+        stationComponent.$destroy();
+        stationComponent = undefined;
       }
 
       if (!value) return;
@@ -50,7 +50,7 @@
       }
 
       function mountInfoWindow(target: HTMLElement) {
-        station = new Station({
+        stationComponent = new StationComponent({
           target,
           props: {
             station: selected,
