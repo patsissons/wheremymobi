@@ -7,6 +7,7 @@
   export let color = 'magenta';
 
   let position: GeolocationPosition | undefined;
+  let rotation = 0;
   let watchId: number | undefined;
   let timeout: NodeJS.Timeout | undefined;
 
@@ -74,7 +75,7 @@
       lat: position.coords.latitude,
       lng: position.coords.longitude,
     };
-    const rotation = position.coords.heading ?? 0;
+    rotation = position.coords.heading ?? rotation;
 
     circle.setCenter(location);
     circle.setRadius(position.coords.accuracy || 255);
