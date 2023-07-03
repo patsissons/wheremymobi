@@ -3,11 +3,12 @@
   import orderBy from 'lodash/orderBy';
   import { onMount } from 'svelte';
   import { type Station, VehicleType } from '$lib/client';
-  import { DirectionsIcon, GoogleMapsIcon, RefreshIcon } from '$lib/icons';
+  import { DirectionsIcon, GoogleMapsIcon } from '$lib/icons';
   import AgeCounter from '../age-counter.svelte';
   import Collapsible from '../collapsible.svelte';
   import JsonData from '../json-data.svelte';
   import Link from '../link.svelte';
+  import RefreshButton from '../refresh-button.svelte';
   import Badge from './badge.svelte';
   import Row from './row.svelte';
   import Bike from './bike.svelte';
@@ -141,15 +142,7 @@
       </div>
     </Row>
     <Row>
-      <button
-        class="bg-fuchsia-500 hover:bg-fuchsia-600 disabled:bg-slate-500 disabled:border-slate-800 px-2 py-1 rounded-md border border-fuchsia-800 leading-none shadow-lg flex items-center gap-1"
-        type="button"
-        disabled={refreshing}
-        on:click={handleRefresh}
-      >
-        <span>{refreshing ? 'Refreshing...' : 'Refresh'}</span>
-        <RefreshIcon size="2em" />
-      </button>
+      <RefreshButton {refreshing} on:click={handleRefresh} />
     </Row>
     <Row>
       <Collapsible>
