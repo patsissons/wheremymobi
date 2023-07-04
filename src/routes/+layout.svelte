@@ -6,8 +6,24 @@
   import type { LayoutData } from './$types';
   import { GithubIcon, TwitterIcon } from '$lib/icons';
   import Link from '$lib/components/link.svelte';
+  import { invalidateAll } from '$app/navigation';
+  import RefreshButton from '$lib/components/refresh-button.svelte';
 
   export let data: LayoutData;
+
+  let refreshing = false;
+
+  async function handleRefresh() {
+    try {
+      refreshing = true;
+
+      await invalidateAll();
+    } catch (error) {
+      console.log('Refresh error', error);
+    } finally {
+      refreshing = false;
+    }
+  }
 </script>
 
 <main class="fullscreen flex flex-col min-w-[320px]">
@@ -23,16 +39,18 @@
         </div>
       </div>
       <div class="flex items-center justify-center">
-        <p class="text-md xs:text-xl sm:text-3xl uppercase font-bold">
-          wheremy<a
-            class="underline"
-            href="https://www.mobibikes.ca/en#the-map"
-            target="_blank"
-            rel="noreferrer"
-          >
-            mobi
-          </a>
-        </p>
+        <div class="flex flex-col items-center gap-1">
+          <p class="text-md xs:text-xl sm:text-3xl uppercase font-bold">
+            wheremy<Link href="https://www.mobibikes.ca/en#the-map" external>
+              mobi
+            </Link>
+          </p>
+          <RefreshButton
+            class="text-sm"
+            {refreshing}
+            on:click={handleRefresh}
+          />
+        </div>
       </div>
       <div class="flex-1 w-full h-full">
         <div class="flex items-center justify-end h-full px-2">
