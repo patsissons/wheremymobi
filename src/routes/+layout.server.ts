@@ -8,5 +8,6 @@ export const load: LayoutServerLoad = async ({ fetch, url }) => {
   return {
     ...stations,
     beta: url.hostname.startsWith('beta'),
+    debug: url.searchParams.has('debug'),
   };
 };
