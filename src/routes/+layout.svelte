@@ -40,10 +40,23 @@
       </div>
       <div class="flex items-center justify-center">
         <div class="flex flex-col items-center gap-1">
-          <p class="text-md xs:text-xl sm:text-3xl uppercase font-bold">
-            wheremy<Link href="https://www.mobibikes.ca/en#the-map" external>
-              mobi
-            </Link>
+          <p
+            class="text-md xs:text-xl sm:text-3xl font-bold"
+            class:text-orange-300={data.beta}
+          >
+            <span class="uppercase">
+              wheremy<Link
+                class="[--link-color:currentcolor]"
+                href="https://www.mobibikes.ca/en#the-map"
+                title="Go to the official site"
+                external
+              >
+                mobi
+              </Link>
+            </span>
+            {#if data.beta}
+              <span>β</span>
+            {/if}
           </p>
           <RefreshButton
             class="text-sm"
@@ -91,6 +104,13 @@
           external
         >
           <TwitterIcon />
+        </Link>
+        <Link
+          href="https://{data.beta ? '' : 'beta.'}wheremymobi.com"
+          title="Go to the {data.beta ? 'non-' : ''}beta site"
+          plain
+        >
+          <span class:line-through={data.beta}>β</span>
         </Link>
       </div>
     </div>
