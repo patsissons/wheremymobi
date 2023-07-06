@@ -25,17 +25,34 @@
   onMount(handleRefresh);
 
   function countBikes(station: Station) {
-    const pedal =
-      station.vehicle_types_available.find(
-        ({ vehicle_type_id }) => Number(vehicle_type_id) === VehicleType.PEDAL,
-      )?.count ?? station.num_bikes_available;
-    const electric =
-      station.vehicle_types_available.find(
-        ({ vehicle_type_id }) =>
-          Number(vehicle_type_id) === VehicleType.ELECTRIC,
-      )?.count ?? 0;
+    return station.bikes.reduce(
+      (counts, bike) => {
+        if (bike.is_disabled) {
+          counts.disabled.total += 1;
 
-    return { pedal, electric };
+          if (Number(bike.vehicle_type_id) === VehicleType.ELECTRIC) {
+            counts.disabled.electric += 1;
+          } else {
+            counts.disabled.pedal += 1;
+          }
+        } else if (Number(bike.vehicle_type_id) === VehicleType.ELECTRIC) {
+          counts.electric += 1;
+        } else {
+          counts.pedal += 1;
+        }
+
+        return counts;
+      },
+      {
+        pedal: 0,
+        electric: 0,
+        disabled: {
+          total: 0,
+          pedal: 0,
+          electric: 0,
+        },
+      },
+    );
   }
 
   function sortBikes(station: Station) {
@@ -115,7 +132,16 @@
     </Row>
     <Row>
       <p class="text-center">
-        {`${counts.pedal} pedal + ${counts.electric} electric + ${station.num_docks_available} slots = ${station.capacity} total`}
+        <span>{counts.pedal} 🚲</span>
+        +
+        <span>{counts.electric} ⚡️</span>
+        {#if counts.disabled.total > 0}
+          +
+          <span>{counts.disabled.total} ❌</span>
+        {/if}
+        +
+        <span>{station.num_docks_available} ‖</span>
+        = {station.capacity}
       </p>
       <div slot="right" class:p-1={station.is_charging_station}>
         {#if station.is_charging_station}
@@ -126,12 +152,14 @@
         {/if}
       </div>
     </Row>
-    {#if station.num_bikes_disabled > 0}
+    {#if counts.disabled.total > 0}
       <Row>
-        <p class="text-yellow-400">
-          {`${station.num_bikes_disabled} disabled bike${
-            station.num_bikes_disabled > 1 ? 's' : ''
-          }`}
+        <p class="text-center text-red-300">
+          <span>{counts.disabled.pedal} 🚲</span>
+          +
+          <span>{counts.disabled.electric} ⚡️</span>
+          =
+          <span>{counts.disabled.total} ❌</span>
         </p>
       </Row>
     {/if}
