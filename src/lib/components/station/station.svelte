@@ -175,10 +175,7 @@
     </Row>
     <Row>
       <Collapsible>
-        <div
-          slot="header"
-          class="flex items-center justify-center gap-1 w-full"
-        >
+        <div slot="header" class="flex items-center justify-center w-full">
           <h2 class="text-xl font-semibold">{station.bikes.length} Bikes</h2>
         </div>
         <div
@@ -198,9 +195,14 @@
   </div>
   {#if debug}
     <Row>
-      <div class="w-full overflow-x-auto">
-        <JsonData data={station} />
-      </div>
+      <Collapsible>
+        <div slot="header" class="flex items-center justify-center w-full">
+          <h2 class="text-xl font-semibold">Station data</h2>
+        </div>
+        <div class="w-full overflow-x-auto">
+          <JsonData data={station} />
+        </div>
+      </Collapsible>
     </Row>
   {/if}
 </div>

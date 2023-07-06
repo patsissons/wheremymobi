@@ -7,7 +7,6 @@
     type MapContext,
   } from '$lib/maps';
   import type { PageData } from './$types';
-  import JsonData from '$lib/components/json-data.svelte';
   import StationComponent from '$lib/components/station/station.svelte';
   import GpsMarker from '$lib/components/gps-marker/gps-marker.svelte';
   import MetaTags from '$lib/components/meta-tags.svelte';
@@ -90,8 +89,4 @@
 </div>
 {#if mapContext}
   <GpsMarker {mapContext} />
-{/if}
-
-{#if data.debug}
-  <JsonData {data} />
 {/if}
