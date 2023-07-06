@@ -42,10 +42,11 @@
     return orderBy(
       station.bikes,
       [
-        (bike) => Number(bike.vehicle_type_id),
-        (bike) => Number(bike.last_reported),
+        ({ vehicle_type_id }) => Number(vehicle_type_id),
+        ({ is_disabled }) => is_disabled,
+        ({ last_reported }) => Number(last_reported),
       ],
-      ['desc', 'desc'],
+      ['desc', 'desc', 'desc'],
     );
   }
 
