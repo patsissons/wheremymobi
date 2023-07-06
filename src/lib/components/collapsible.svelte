@@ -1,10 +1,17 @@
 <script lang="ts">
-  import { CaretCollapsedIcon, CaretExpandedIcon } from '$lib/icons';
+  import { onMount } from 'svelte';
   import collapse from 'svelte-collapse';
+  import { CaretCollapsedIcon, CaretExpandedIcon } from '$lib/icons';
 
   export let expanded = false;
   export let duration = 0.2;
   export let easing = 'ease';
+
+  let mounted = false;
+
+  onMount(() => {
+    mounted = true;
+  });
 
   function handleToggleExpanded() {
     expanded = !expanded;
@@ -25,7 +32,10 @@
     {/if}
   </button>
 
-  <div use:collapse={{ open: expanded, duration, easing }}>
-    <slot />
-  </div>
+  <!-- use:collapse is having some FOUC issues, so we'll only render it after mounting -->
+  {#if mounted}
+    <div use:collapse={{ open: expanded, duration, easing }}>
+      <slot />
+    </div>
+  {/if}
 </div>
