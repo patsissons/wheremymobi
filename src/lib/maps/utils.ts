@@ -56,9 +56,12 @@ export function loadMarkers(context: MapContext, stations: Station[]) {
   stations
     .filter(({ valid }) => valid)
     .forEach((station) => {
-      const hasElectric = station.vehicle_types_available.some(
-        ({ count, vehicle_type_id }) =>
-          Number(vehicle_type_id) === VehicleType.ELECTRIC && count > 0,
+      const availableBikes = station.bikes.filter(
+        ({ is_disabled }) => !is_disabled,
+      );
+      const hasElectric = availableBikes.some(
+        ({ vehicle_type_id }) =>
+          Number(vehicle_type_id) === VehicleType.ELECTRIC,
       );
       const marker = new google.maps.Marker({
         map: context.map,
@@ -78,7 +81,7 @@ export function loadMarkers(context: MapContext, stations: Station[]) {
           labelOrigin: new google.maps.Point(8, 7),
         },
         label: {
-          text: `${station.num_bikes_available}|${station.num_docks_available}`,
+          text: `${availableBikes.length}|${station.num_docks_available}`,
           color: '#f8fafc',
           fontFamily: 'monospace',
           fontSize: '1em',
@@ -96,7 +99,7 @@ export function loadMarkers(context: MapContext, stations: Station[]) {
       context.markers.push(marker);
 
       function stationColor() {
-        const fraction = station.num_bikes_available / station.capacity;
+        const fraction = availableBikes.length / station.capacity;
 
         if (fraction > 0.5) return '#10b981';
         if (fraction > 0.25) return '#f97316';
