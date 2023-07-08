@@ -37,7 +37,7 @@ export async function fetchStations(
       fetchBikes(options),
     ]);
 
-    const stations = values(
+    const stations: Station[] = values(
       merge(
         keyBy(stationsInfo, 'station_id'),
         keyBy(stationsStatus, 'station_id'),
