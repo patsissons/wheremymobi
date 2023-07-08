@@ -45,6 +45,15 @@ export async function fetchStations(
       ),
     );
 
+    // if no bikes are at any particular station, they won't group above
+    // (i.e., we don't have an outer group operation), so instead we just run a
+    // sanity check and assign an empty array if empty.
+    stations.forEach((station: Station) => {
+      if (!station.bikes) {
+        station.bikes = [];
+      }
+    });
+
     return {
       stations,
       bikes,
