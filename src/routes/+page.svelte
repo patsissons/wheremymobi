@@ -4,10 +4,10 @@
     createMap,
     infoWindowId,
     loadMarkers,
+    updateMarkerForMotion,
     type MapContext,
   } from '$lib/maps';
   import type { PageData } from './$types';
-  import JsonData from '$lib/components/json-data.svelte';
   import StationComponent from '$lib/components/station/station.svelte';
   import GpsMarker from '$lib/components/gps-marker/gps-marker.svelte';
   import MetaTags from '$lib/components/meta-tags.svelte';
@@ -18,6 +18,14 @@
   let stationComponent: StationComponent | undefined;
   let mapContext: MapContext | undefined;
 
+  let inMotion = true;
+
+  $: if (mapContext) {
+    mapContext.markers.forEach((marker) => {
+      updateMarkerForMotion(marker, inMotion);
+    });
+  }
+
   $: if (mapContext && data.stations) {
     updateStations(mapContext, data.stations);
   }
@@ -27,6 +35,18 @@
 
     const context = await createMap(container);
     mapContext = context;
+
+    context.map.addListener('dragstart', () => {
+      inMotion = true;
+    });
+
+    context.map.addListener('zoom_changed', () => {
+      inMotion = true;
+    });
+
+    context.map.addListener('idle', () => {
+      inMotion = false;
+    });
 
     context.selectedStation.subscribe((value) => {
       if (stationComponent) {
@@ -90,8 +110,4 @@
 </div>
 {#if mapContext}
   <GpsMarker {mapContext} />
-{/if}
-
-{#if data.debug}
-  <JsonData {data} />
 {/if}

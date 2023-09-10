@@ -8,7 +8,7 @@
 </script>
 
 <button
-  class="bg-fuchsia-500 hover:bg-fuchsia-600 disabled:bg-slate-500 disabled:border-slate-800 px-2 py-1 rounded-md border border-fuchsia-800 leading-none shadow-lg flex items-center gap-1 {className}"
+  class="bg-fuchsia-500 hover:bg-fuchsia-600 disabled:bg-slate-500 disabled:border-slate-800 px-2 py-1 rounded-md border border-fuchsia-800 leading-none shadow-lg flex items-center justify-center gap-1 w-full {className}"
   type="button"
   disabled={refreshing}
   {...$$restProps}

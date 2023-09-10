@@ -1,13 +1,15 @@
 <script lang="ts">
+  import { invalidateAll } from '$app/navigation';
   import '$lib/styles/global.css';
   import '$lib/utils/dayjs';
+  import { GithubIcon, TwitterIcon } from '$lib/icons';
+  import Collapsible from '$lib/components/collapsible.svelte';
+  import JsonData from '$lib/components/json-data.svelte';
+  import Link from '$lib/components/link.svelte';
+  import RefreshButton from '$lib/components/refresh-button.svelte';
   import Metadata from './metadata.svelte';
   import Summary from './summary.svelte';
   import type { LayoutData } from './$types';
-  import { GithubIcon, TwitterIcon } from '$lib/icons';
-  import Link from '$lib/components/link.svelte';
-  import { invalidateAll } from '$app/navigation';
-  import RefreshButton from '$lib/components/refresh-button.svelte';
 
   export let data: LayoutData;
 
@@ -40,10 +42,23 @@
       </div>
       <div class="flex items-center justify-center">
         <div class="flex flex-col items-center gap-1">
-          <p class="text-md xs:text-xl sm:text-3xl uppercase font-bold">
-            wheremy<Link href="https://www.mobibikes.ca/en#the-map" external>
-              mobi
-            </Link>
+          <p
+            class="text-md xs:text-xl sm:text-3xl font-bold"
+            class:text-orange-300={data.beta}
+          >
+            <span class="uppercase">
+              wheremy<Link
+                class="[--link-color:currentcolor]"
+                href="https://www.mobibikes.ca/en#the-map"
+                title="Go to the official site"
+                external
+              >
+                mobi
+              </Link>
+            </span>
+            {#if data.beta}
+              <span>β</span>
+            {/if}
           </p>
           <RefreshButton
             class="text-sm"
@@ -59,7 +74,7 @@
       </div>
     </div>
   </section>
-  <section id="content" class="w-full h-full">
+  <section id="content" class="w-full flex-1">
     <slot />
   </section>
   <section id="footer" class="w-full bg-mobi">
@@ -92,7 +107,24 @@
         >
           <TwitterIcon />
         </Link>
+        <Link
+          href="https://{data.beta ? '' : 'beta.'}wheremymobi.com"
+          title="Go to the {data.beta ? 'non-' : ''}beta site"
+          plain
+        >
+          <span class:line-through={data.beta}>β</span>
+        </Link>
       </div>
+      {#if data.debug}
+        <Collapsible>
+          <div slot="header" class="flex items-center justify-center w-full">
+            <h2 class="text-xl font-semibold">Data</h2>
+          </div>
+          <div class="w-full overflow-x-auto">
+            <JsonData {data} />
+          </div>
+        </Collapsible>
+      {/if}
     </div>
   </section>
 </main>
