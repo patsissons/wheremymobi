@@ -81,7 +81,9 @@ export function loadMarkers(context: MapContext, stations: Station[]) {
           labelOrigin: new google.maps.Point(8, 7),
         },
         label: {
-          text: `${availableBikes.length}|${station.num_docks_available}`,
+          text: `${availableBikes.length}${
+            station.is_charging_station ? '⍭' : '|'
+          }${station.num_docks_available}`,
           color: '#f8fafc',
           fontFamily: 'monospace',
           fontSize: '1em',

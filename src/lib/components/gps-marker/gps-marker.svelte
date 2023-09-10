@@ -104,8 +104,11 @@
   function updateTimestamp() {
     if (!position) return;
 
+    const asOf = dayjs().diff(dayjs(position.timestamp), 'seconds');
+    if (asOf < 5) return;
+
     marker.setLabel({
-      text: `${dayjs().diff(dayjs(position.timestamp), 'seconds')}`,
+      text: `${asOf}`,
       color: 'white',
       fontFamily: 'monospace',
       fontSize: '1em',
