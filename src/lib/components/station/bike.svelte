@@ -7,7 +7,7 @@
 
   $: isElectric = Number(bike.vehicle_type_id) === VehicleType.ELECTRIC;
   $: range = isElectric ? (bike.current_range_meters ?? 0) / 1000 : undefined;
-  $: lowBattery = Boolean(range != null && range < 25);
+  $: lowBattery = Boolean(range != null && range < 2.5);
 </script>
 
 <p class="hidden md:block">{bike.bike_id}</p>
