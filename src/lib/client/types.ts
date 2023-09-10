@@ -34,6 +34,7 @@ export interface StationStatus {
 
 export interface Bike {
   bike_id: string;
+  current_range_meters?: number;
   is_disabled: boolean;
   is_reserved: boolean;
   last_reported: number;

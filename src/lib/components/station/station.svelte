@@ -59,8 +59,8 @@
     return orderBy(
       station.bikes,
       [
+        ({ is_disabled }) => !is_disabled,
         ({ vehicle_type_id }) => Number(vehicle_type_id),
-        ({ is_disabled }) => is_disabled,
         ({ last_reported }) => Number(last_reported),
       ],
       ['desc', 'desc', 'desc'],
@@ -179,7 +179,7 @@
           <h2 class="text-xl font-semibold">{station.bikes.length} Bikes</h2>
         </div>
         <div
-          class="grid grid-cols-[repeat(4,auto)] md:grid-cols-[1fr_repeat(4,auto)] justify-items-center gap-2 font-mono"
+          class="grid grid-cols-[repeat(4,auto)] md:grid-cols-[1fr_repeat(4,auto)] grid-rows-1 items-center justify-items-center gap-2 font-mono"
         >
           <p class="hidden md:block">Bike Id</p>
           <p class="hidden md:block">Disabled</p>
