@@ -4,6 +4,7 @@
     createMap,
     infoWindowId,
     loadMarkers,
+    updateMarkerForMotion,
     type MapContext,
   } from '$lib/maps';
   import type { PageData } from './$types';
@@ -21,7 +22,7 @@
 
   $: if (mapContext) {
     mapContext.markers.forEach((marker) => {
-      marker.setVisible(!inMotion);
+      updateMarkerForMotion(marker, inMotion);
     });
   }
 
