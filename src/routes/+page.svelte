@@ -17,6 +17,14 @@
   let stationComponent: StationComponent | undefined;
   let mapContext: MapContext | undefined;
 
+  let inMotion = true;
+
+  $: if (mapContext) {
+    mapContext.markers.forEach((marker) => {
+      marker.setVisible(!inMotion);
+    });
+  }
+
   $: if (mapContext && data.stations) {
     updateStations(mapContext, data.stations);
   }
@@ -26,6 +34,18 @@
 
     const context = await createMap(container);
     mapContext = context;
+
+    context.map.addListener('dragstart', () => {
+      inMotion = true;
+    });
+
+    context.map.addListener('zoom_changed', () => {
+      inMotion = true;
+    });
+
+    context.map.addListener('idle', () => {
+      inMotion = false;
+    });
 
     context.selectedStation.subscribe((value) => {
       if (stationComponent) {
