@@ -10,6 +10,7 @@ declare global {
 
   interface ImportMetaEnv {
     VITE_GOOGLE_MAPS_API_KEY: string;
+    VITE_ENABLE_SAMPLE_DATA: string;
   }
 }
 
