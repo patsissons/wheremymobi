@@ -4,7 +4,7 @@ import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import merge from 'lodash/merge';
 import values from 'lodash/values';
-import { isDevelopment } from '$lib/utils/env';
+import { enableSampleData } from '$lib/utils/env';
 import { fetchBikes, fetchStationsInfo, fetchStationsStatus } from './gbfs';
 import type { FetchOptions } from './json';
 import type { Bike, Metadata, Station } from './types';
@@ -66,10 +66,36 @@ export async function fetchStations(
       },
     };
   } catch (error) {
-    if (!isDevelopment) throw error;
+    if (enableSampleData) {
+      console.log('using sample stations');
+      return fetchSampleStations();
+    }
 
-    console.log('using sample stations');
-    return fetchSampleStations();
+    console.error('error fetching stations', error);
+
+    return {
+      stations: [],
+      bikes: [],
+      metadata: {
+        stationsInfo: {
+          last_updated: dayjs().unix(),
+          ttl: 0,
+          version: '2.3',
+        },
+        stationsStatus: {
+          last_updated: dayjs().unix(),
+          ttl: 0,
+          version: '2.3',
+        },
+        bikes: {
+          last_updated: dayjs().unix(),
+          ttl: 0,
+          version: '2.3',
+        },
+        source: 'gbfs',
+        timestamp: dayjs().unix() * 1000,
+      },
+    };
   }
 }
 
