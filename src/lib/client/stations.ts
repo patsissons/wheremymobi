@@ -8,6 +8,7 @@ import { enableSampleData } from '$lib/utils/env';
 import { fetchBikes, fetchStationsInfo, fetchStationsStatus } from './gbfs';
 import type { FetchOptions } from './json';
 import type { Bike, Metadata, Station } from './types';
+import * as sample from './sample';
 
 export type FetchStationsOptions = FetchOptions;
 
@@ -26,6 +27,11 @@ export interface FetchStationsResponse {
 export async function fetchStations(
   options?: FetchStationsOptions,
 ): Promise<FetchStationsResponse> {
+  if (enableSampleData) {
+    console.log('using sample stations');
+    return sample.fetchSampleStations();
+  }
+
   try {
     const [
       { stations: stationsInfo, metadata: stationsInfoMetadata },
@@ -37,11 +43,28 @@ export async function fetchStations(
       fetchBikes(options),
     ]);
 
+    const invalidStations = stationsInfo.filter((station) => !station.valid);
+    if (invalidStations.length > 0) {
+      console.warn(
+        `${invalidStations.length} invalid stations`,
+        invalidStations,
+      );
+    }
+
+    const stationIds = new Set(
+      stationsInfo.map((station) => station.station_id),
+    );
+    const bikesWithStation = bikes.filter((bike) =>
+      stationIds.has(bike.station_id),
+    );
+
     const stations: Station[] = values(
       merge(
         keyBy(stationsInfo, 'station_id'),
         keyBy(stationsStatus, 'station_id'),
-        mapValues(groupBy(bikes, 'station_id'), (bikes) => ({ bikes })),
+        mapValues(groupBy(bikesWithStation, 'station_id'), (bikes) => ({
+          bikes,
+        })),
       ),
     );
 
@@ -54,7 +77,7 @@ export async function fetchStations(
       }
     });
 
-    return {
+    const response = {
       stations,
       bikes,
       metadata: {
@@ -65,12 +88,12 @@ export async function fetchStations(
         timestamp: dayjs().unix() * 1000,
       },
     };
-  } catch (error) {
-    if (enableSampleData) {
-      console.log('using sample stations');
-      return fetchSampleStations();
-    }
 
+    // uncomment to update the sample data
+    // await sample.saveSampleStations(response);
+
+    return response;
+  } catch (error) {
     console.error('error fetching stations', error);
 
     return {
@@ -97,9 +120,4 @@ export async function fetchStations(
       },
     };
   }
-}
-
-async function fetchSampleStations(): Promise<FetchStationsResponse> {
-  const { default: sample } = await import('$lib/data/sample.json');
-  return sample as FetchStationsResponse;
 }

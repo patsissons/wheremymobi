@@ -10,6 +10,7 @@
   import Metadata from './metadata.svelte';
   import Summary from './summary.svelte';
   import type { LayoutData } from './$types';
+  import { config } from '$lib/config';
 
   export let data: LayoutData;
 
@@ -88,8 +89,8 @@
         using <Link href="https://github.com/MobilityData/gbfs" external
           >GBFS</Link
         >
-        <Link href="https://vancouver-gbfs.smoove.pro/gbfs/2/gbfs.json" external
-          >{'Smoove data'}</Link
+        <Link href="{config.dataSource.gbfs.baseUrl}/gbfs.json" external
+          >GBFS data</Link
         >.
       </p>
       <div class="flex items-center gap-1 text-lg">

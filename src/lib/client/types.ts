@@ -24,11 +24,11 @@ export interface StationStatus {
   is_returning: boolean;
   last_reported: number;
   num_bikes_available: number;
-  num_bikes_disabled: number;
+  num_bikes_disabled?: number;
   num_docks_available: number;
   station_id: string;
 
-  vehicle_docks_available: StationVehicleDocksAvailable[];
+  vehicle_docks_available?: StationVehicleDocksAvailable[];
   vehicle_types_available: StationVehicleTypesAvailable[];
 }
 
