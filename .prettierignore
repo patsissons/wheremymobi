@@ -14,3 +14,5 @@ yarn.lock
 
 /_ignore
 .vercel
+
+sample.json

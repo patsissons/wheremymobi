@@ -26,7 +26,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "conf": "yarn run conf:link && yarn run conf:env",
+    "conf": "pnpm run conf:link && pnpm run conf:env",
     "conf:link": "test -f .vercel/project.json || vercel link",
     "conf:env": "./scripts/setup-env.sh",
     "conf:clean": "rm -rf .vercel .env*.local",
@@ -38,7 +38,7 @@
     "lint:prettier": "prettier --plugin-search-dir . --check .",
     "lint:style": "stylelint 'src/**/*.{css,svelte}'",
     "lint:es": "eslint .",
-    "lint": "yarn lint:prettier && yarn lint:style && yarn lint:es",
+    "lint": "pnpm lint:prettier && pnpm lint:style && pnpm lint:es",
     "format": "prettier --plugin-search-dir . --write .",
     "validate": "tsc --noEmit"
   },

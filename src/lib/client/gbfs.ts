@@ -1,3 +1,4 @@
+import { config } from '$lib/config';
 import { fetchJson, type FetchOptions } from './json';
 import type {
   BikeResponse,
@@ -7,12 +8,9 @@ import type {
   StationStatusResponse,
 } from './types';
 
-const stationsStatusEndpoint =
-  'https://vancouver-gbfs.smoove.pro/gbfs/2/en/station_status.json';
-const stationsInfoEndpoint =
-  'https://vancouver-gbfs.smoove.pro/gbfs/2/en/station_information.json';
-const bikesEndpoint =
-  'https://vancouver-gbfs.smoove.pro/gbfs/2/en/free_bike_status.json';
+const stationsStatusEndpoint = `${config.dataSource.gbfs.baseUrl}/station_status.json`;
+const stationsInfoEndpoint = `${config.dataSource.gbfs.baseUrl}/station_information.json`;
+const bikesEndpoint = `${config.dataSource.gbfs.baseUrl}/free_bike_status.json`;
 
 class ResponseError<T = unknown> extends Error {
   constructor(message: string, public response: T) {
