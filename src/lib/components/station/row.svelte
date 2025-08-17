@@ -3,14 +3,14 @@
 </script>
 
 {#if !first}
-  <div class="w-full h-[1px] bg-white my-2" />
+  <div class="my-2 h-[1px] w-full bg-white"></div>
 {/if}
-<div class="flex flex-nowrap items-center w-full">
-  <div class="flex-1 flex justify-start">
+<div class="flex w-full flex-nowrap items-center">
+  <div class="flex flex-1 justify-start">
     <slot name="left" />
   </div>
   <slot />
-  <div class="flex-1 flex justify-end">
+  <div class="flex flex-1 justify-end">
     <slot name="right" />
   </div>
 </div>

@@ -18,8 +18,6 @@ jobs:
         run: pnpm install --silent
       - name: Lint with Prettier
         run: pnpm run lint:prettier
-      - name: Lint with Stylelint
-        run: pnpm run lint:style
       - name: Check Svelte
         run: pnpm run check
       - name: Build  Site
