@@ -29,11 +29,11 @@
   }
 </script>
 
-<main class="fullscreen flex flex-col min-w-[320px]">
+<main class="fullscreen flex min-w-[320px] flex-col">
   <section id="header" class="w-full bg-mobi">
-    <div class="flex items-center gap-2 w-full h-20">
-      <div class="flex-1 w-full h-full">
-        <div class="flex items-center justify-start h-full px-2">
+    <div class="flex h-20 w-full items-center gap-2">
+      <div class="h-full w-full flex-1">
+        <div class="flex h-full items-center justify-start px-2">
           <Summary
             stations={data.stations}
             bikes={data.bikes}
@@ -44,7 +44,7 @@
       <div class="flex items-center justify-center">
         <div class="flex flex-col items-center gap-1">
           <p
-            class="text-md xs:text-xl sm:text-3xl font-bold"
+            class="text-md xs:text-xl font-bold sm:text-3xl"
             class:text-orange-300={data.beta}
           >
             <span class="uppercase">
@@ -68,8 +68,8 @@
           />
         </div>
       </div>
-      <div class="flex-1 w-full h-full">
-        <div class="flex items-center justify-end h-full px-2">
+      <div class="h-full w-full flex-1">
+        <div class="flex h-full items-center justify-end px-2">
           <Metadata metadata={data.metadata} />
         </div>
       </div>
@@ -80,7 +80,7 @@
   </section>
   <section id="footer" class="w-full bg-mobi">
     <div
-      class="flex flex-col items-center justify-center gap-2 w-full font-mono text-xs px-4 py-2"
+      class="flex w-full flex-col items-center justify-center gap-2 px-4 py-2 font-mono text-xs"
     >
       <p class="text-center">
         Built with <Link href="https://kit.svelte.dev/" external>SvelteKit</Link
@@ -118,7 +118,7 @@
       </div>
       {#if data.debug}
         <Collapsible>
-          <div slot="header" class="flex items-center justify-center w-full">
+          <div slot="header" class="flex w-full items-center justify-center">
             <h2 class="text-xl font-semibold">Data</h2>
           </div>
           <div class="w-full overflow-x-auto">
@@ -130,7 +130,8 @@
   </section>
 </main>
 
-<style>
+<style lang="postcss">
+  @reference "tailwindcss";
   .fullscreen {
     height: 100dvh;
     width: 100dvw;

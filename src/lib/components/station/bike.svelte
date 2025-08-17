@@ -24,7 +24,7 @@
 <div class="w-full text-center">
   {#if isElectric}
     <div
-      class="flex items-center justify-between gap-1 px-2 w-full leading-none"
+      class="flex w-full items-center justify-between gap-1 px-2 leading-none"
     >
       {#if lowBattery}
         <span class="text-xs text-red-500">🪫</span>
@@ -38,7 +38,7 @@
       {/if}
     </div>
   {:else}
-    <span class="text-sm bg-white/40 px-2 pb-1 rounded-sm">🚲</span>
+    <span class="rounded-sm bg-white/40 px-2 pb-1 text-sm">🚲</span>
   {/if}
 </div>
 <p class="justify-self-end text-xs">

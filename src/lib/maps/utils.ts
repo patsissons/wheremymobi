@@ -1,10 +1,12 @@
-import { Loader } from '@googlemaps/js-api-loader';
+import * as gmaps from '@googlemaps/js-api-loader';
 import type { Station } from '$lib/client';
 import { VehicleType } from '$lib/client/constants';
 import type { MapContext } from './types';
 import { GOOGLE_MAPS_API_KEY } from '$lib/utils/env';
 import { writable } from 'svelte/store';
 import { infoWindowId } from './constants';
+
+const { Loader } = gmaps;
 
 export async function createMap(container: HTMLElement): Promise<MapContext> {
   const loader = new Loader({
@@ -61,6 +63,8 @@ export function updateMarkerForMotion(
   }
 
   const station = marker.get('station') as Station;
+  if (!station) return;
+
   const availableBikes = station.bikes.filter(
     ({ is_disabled }) => !is_disabled,
   );

@@ -13,7 +13,10 @@ const stationsInfoEndpoint = `${config.dataSource.gbfs.baseUrl}/station_informat
 const bikesEndpoint = `${config.dataSource.gbfs.baseUrl}/free_bike_status.json`;
 
 class ResponseError<T = unknown> extends Error {
-  constructor(message: string, public response: T) {
+  constructor(
+    message: string,
+    public response: T,
+  ) {
     super(message);
   }
 }

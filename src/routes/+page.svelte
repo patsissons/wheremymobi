@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { mount, onMount, unmount } from 'svelte';
   import {
     createMap,
     infoWindowId,
@@ -15,7 +15,7 @@
   export let data: PageData;
 
   let container: HTMLDivElement | undefined;
-  let stationComponent: StationComponent | undefined;
+  let stationComponent: ReturnType<typeof mount> | undefined;
   let mapContext: MapContext | undefined;
 
   let inMotion = true;
@@ -50,7 +50,7 @@
 
     context.selectedStation.subscribe((value) => {
       if (stationComponent) {
-        stationComponent.$destroy();
+        unmount(stationComponent);
         stationComponent = undefined;
       }
 
@@ -74,7 +74,7 @@
       }
 
       function mountInfoWindow(target: HTMLElement) {
-        stationComponent = new StationComponent({
+        stationComponent = mount(StationComponent, {
           target,
           props: {
             station: selected,
@@ -99,11 +99,11 @@
 
 <MetaTags />
 
-<div class="w-full h-full" bind:this={container}>
+<div class="h-full w-full" bind:this={container}>
   {#if !mapContext}
-    <div class="flex items-center justify-center w-full h-full">
+    <div class="flex h-full w-full items-center justify-center">
       <div class="animate-bounce">
-        <p class="text-3xl animate-pulse">Loading...</p>
+        <p class="animate-pulse text-3xl">Loading...</p>
       </div>
     </div>
   {/if}

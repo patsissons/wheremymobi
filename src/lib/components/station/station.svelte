@@ -96,7 +96,7 @@
 </script>
 
 <div
-  class="bg-mobi border border-white rounded-lg p-4"
+  class="rounded-lg border border-white bg-mobi p-4"
   class:rounded-xl={rounded}
 >
   <div class="flex flex-col items-center">
@@ -145,7 +145,7 @@
       </p>
       <div slot="right" class:p-1={station.is_charging_station}>
         {#if station.is_charging_station}
-          <p class="text-yellow-300 font-bold leading-none">
+          <p class="leading-none font-bold text-yellow-300">
             <span class="hidden md:inline">charging</span>
             <span>⚡️</span>
           </p>
@@ -175,18 +175,18 @@
     </Row>
     <Row>
       <Collapsible>
-        <div slot="header" class="flex items-center justify-center w-full">
+        <div slot="header" class="flex w-full items-center justify-center">
           <h2 class="text-xl font-semibold">{station.bikes.length} Bikes</h2>
         </div>
         <div
-          class="grid grid-cols-[repeat(4,auto)] md:grid-cols-[1fr_repeat(4,auto)] grid-rows-1 items-center justify-items-center gap-2 font-mono"
+          class="grid grid-cols-[repeat(4,auto)] grid-rows-1 items-center justify-items-center gap-2 font-mono md:grid-cols-[1fr_repeat(4,auto)]"
         >
           <p class="hidden md:block">Bike Id</p>
           <p class="hidden md:block">Disabled</p>
           <p class="hidden md:block">Reserved</p>
           <p class="hidden md:block">Electric</p>
           <p class="hidden md:block">Last reported</p>
-          {#each bikes as bike}
+          {#each bikes as bike (bike.bike_id)}
             <Bike {bike} />
           {/each}
         </div>
@@ -196,7 +196,7 @@
   {#if debug}
     <Row>
       <Collapsible>
-        <div slot="header" class="flex items-center justify-center w-full">
+        <div slot="header" class="flex w-full items-center justify-center">
           <h2 class="text-xl font-semibold">Station data</h2>
         </div>
         <div class="w-full overflow-x-auto">

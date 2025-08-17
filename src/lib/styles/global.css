@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-mobi: #007fb3;
+  --screen-xs: 400px;
+}
 
 @layer base {
   :root {

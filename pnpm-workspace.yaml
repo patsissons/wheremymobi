@@ -1,0 +1,6 @@
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - esbuild
+
+patchedDependencies:
+  svelte-collapse: patches/svelte-collapse.patch

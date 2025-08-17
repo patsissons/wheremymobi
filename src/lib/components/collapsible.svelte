@@ -18,10 +18,10 @@
   }
 </script>
 
-<div class="flex flex-col gap-2 w-full" aria-expanded={expanded}>
+<div class="flex w-full flex-col gap-2" aria-expanded={expanded}>
   <button
     type="button"
-    class="flex items-center gap-1 w-full bg-none"
+    class="flex w-full items-center gap-1 bg-none"
     on:click={handleToggleExpanded}
   >
     <slot name="header" />
