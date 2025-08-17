@@ -5,8 +5,9 @@
   "private": true,
   "engines": {
     "node": "^22",
-    "pnpm": "^9"
+    "pnpm": "^10"
   },
+  "packageManager": "pnpm@10.14.0",
   "author": {
     "name": "Pat Sissons",
     "email": "patricksissons@gmail.com",
