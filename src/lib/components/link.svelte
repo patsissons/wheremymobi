@@ -24,7 +24,8 @@
   <slot />
 </a>
 
-<style>
+<style lang="postcss">
+  @reference "tailwindcss";
   :root {
     --link-color: theme('colors.white');
     --link-color-hover: theme('colors.slate.200');

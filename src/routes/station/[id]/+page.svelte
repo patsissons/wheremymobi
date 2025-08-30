@@ -19,8 +19,8 @@
       <Station {station} {debug} rounded />
     </div>
   {:else}
-    <div class="flex items-center justify-center w-full h-full">
-      <p class="text-red-400 text-3xl font-bold">Station not found</p>
+    <div class="flex h-full w-full items-center justify-center">
+      <p class="text-3xl font-bold text-red-400">Station not found</p>
     </div>
   {/if}
 </div>
